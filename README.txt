@@ -13,7 +13,7 @@
 This project is granted under the zlib license.
 You can modify or redistribute it under the zlib conditions.
 
-If you're not praticed with those things,here's a pre-imposted game folder: http://hidemyass.com/files/VEgWM/
+If you're not praticed with these things,here's a pre-imposted game folder: http://hidemyass.com/files/VEgWM/
 Put this in the "games" folder
 
 README:
