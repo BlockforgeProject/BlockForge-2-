@@ -17,6 +17,8 @@ If you find this too difficult,here's a pre-imposted game folder: http://hidemya
 Extract and put "tomorrow" in the "games" folder.
 Path might be "/games/tomorrow/lulzpack/..."
 
+If you still have problems,Add a file named "depends.txt" and write into it "default".
+
 README:
 
 Installation:
