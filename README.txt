@@ -18,6 +18,23 @@ README:
 Installation:
 1-Download the pack from the repository
 2-Go on the minetest folder and open the "games" folder
-3-Create a new folder named "lulzpack"
-4-Put every repo file in the "lulzpack" folder
+3-Create a new folder named "lulzpack" or the name of the game you want
+4-Copy the "minetest_game" files on your game folder (lulzpack needs core mods)
+5-Put downloaded repo pack in a folder named lulzpack
+6-Put the "lulzpack" folder in yourgamefolder>mods
+7-Enjoy
+
+For example,i want to name my game "tomorrow"
+games:
+	#tomorrow
+		#mods
+			#default
+			#dye
+			...
+			#lulzpack
+		game.conf
+	#minetest_game
+		...
+	#minimal
+		...
 -LorenzoVulcan
