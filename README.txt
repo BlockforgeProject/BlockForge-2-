@@ -14,7 +14,8 @@ This project is granted under the zlib license.
 You can modify or redistribute it under the zlib conditions.
 
 If you find this too difficult,here's a pre-imposted game folder: http://hidemyass.com/files/VEgWM/
-Put this in the "games" folder
+Extract and put "tomorrow" in the "games" folder.
+Path might be "/games/tomorrow/lulzpack/..."
 
 README:
 
