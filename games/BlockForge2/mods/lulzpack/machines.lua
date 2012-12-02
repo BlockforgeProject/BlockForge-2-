@@ -25,6 +25,16 @@ minetest.register_node("lulzpack:quarry", {
 		  "quarry_side.png","quarry_side.png"},
     drop = 'lulzpack:quarry',
 	is_ground_content = false,
+	on_construct = function(pos)
+		local meta = minetest.env:get_meta(pos)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,3;]"..
+				"list[current_player;main;0,5;8,4;]")
+		meta:set_string("infotext", "Quarry")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+	end,
 	groups = {crumbly=2},
 	digs=1,
 })

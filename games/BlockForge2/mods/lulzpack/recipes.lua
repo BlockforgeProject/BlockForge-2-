@@ -20,7 +20,7 @@
 
 
 --RECIPES
-minetest.register_craft({
+minetest.register_craft({   
 	output = 'lulzpack:electroblock 1',
 	recipe = {
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},

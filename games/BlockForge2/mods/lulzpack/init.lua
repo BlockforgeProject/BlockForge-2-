@@ -21,6 +21,17 @@
 
 lulzpack = {}
 
+--Item-Dropping on node breaking
+--This just redefine the original function
+function minetest.handle_node_drops(pos, drops, digger)
+	if digger:get_inventory() then
+		local _, dropped_item
+		for _, dropped_item in ipairs(drops) do
+            minetest.env:add_item(pos,dropped_item)
+		end
+	end
+end 
+
 minetest.register_node("lulzpack:cold_dirt", {
 	description = "cold Dirt",
 	tiles ={"colddirt.png"},
@@ -214,7 +225,7 @@ minetest.register_tool("lulzpack:pick_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=2}
+			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=5.50}, uses=30, maxlevel=2}
 		}
 	},
 })
@@ -372,3 +383,7 @@ dofile(minetest.get_modpath("lulzpack") .. "/recipes.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/materials.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/lavablock.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/guns.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/abms.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/desertores.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/furnaces.lua")
+--dofile(minetest.get_modpath("lulzpack") .. "/inventory.lua")
