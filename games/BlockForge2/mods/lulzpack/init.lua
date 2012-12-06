@@ -70,6 +70,9 @@ minetest.register_node("lulzpack:lava_block", {
     paramtype="light",
     light_source = LIGHT_MAX-6,
 	legacy_mineral = false,
+    on_dig=function(pos,node)
+        minetest.env:add_node(pos, { name = "default:lava_source" } ); 
+    end, 
 	sounds = default.node_sound_stone_defaults(),
 })
 minetest.register_node("lulzpack:stone_with_lyra", {
@@ -144,6 +147,50 @@ minetest.register_craftitem("lulzpack:redyz_ingot", {
 	description = "Redyz Ingot",
 	inventory_image = "redyz_ingot.png",
 })
+--Glasses
+minetest.register_node("lulzpack:ironglass", {
+    tiles = {"iron_glass.png"},
+    description = "Iron glass",
+    drawtype = "glasslike",
+    sunlight_propagates = true,
+    is_ground_content = true,
+    paramtype = "light",
+    groups = {forceglass=1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("lulzpack:redyzglass", {
+    tiles = {"redyz_glass.png"},
+    description = "Redyz glass",
+    drawtype = "glasslike",
+    sunlight_propagates = true,
+    is_ground_content = true,
+    paramtype = "light",
+    groups = {forceglass=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("lulzpack:meseglass", {
+    tiles = {"mese_glass.png"},
+    description = "Mese glass",
+    drawtype = "glasslike",
+    sunlight_propagates = true,
+    is_ground_content = true,
+    paramtype = "light",
+    groups = {forceglass=3},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+--[[minetest.register_node("lulzpack:elementalglass", {
+    tiles = {"elemental_glass.png"},
+    description = "Elemental glass",
+    drawtype = "glasslike",
+    sunlight_propagates = true,
+    is_ground_content = true,    
+    paramtype = "light",
+    groups = {forceglass=4},
+	sounds = default.node_sound_glass_defaults(),
+}) WILL BE IMPLEMENTED ]]
 --Torches
 minetest.register_node("lulzpack:lyra_torch", {
 	description = "Lyra Torch",
@@ -211,7 +258,7 @@ minetest.register_tool("lulzpack:axe_lyra", {
 minetest.register_tool("lulzpack:shovel_lyra", {
 	description = "Lyra Shovel",
 	inventory_image = "lyra_shovel.png",
-	wield_image = "lyra_shovel.png^[transformR90",
+	wield_image = "lyra_shovel.png^[transformR45",
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
@@ -225,7 +272,8 @@ minetest.register_tool("lulzpack:pick_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=5.50}, uses=30, maxlevel=2}
+			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=5.50}, uses=30, maxlevel=4},
+            forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=4}
 		}
 	},
 })
@@ -299,6 +347,31 @@ minetest.register_craft({
 		{'lulzpack:lyra_ingot','lulzpack:lyra_ingot','lulzpack:lyra_ingot'},
 	}
 })
+--Glasses
+minetest.register_craft({
+	output = 'lulzpack:ironglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'default:steel_ingot', 'default:glass'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:redyzglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'lulzpack:redyz_ingot', 'default:glass'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:meseglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'default:mese', 'default:glass'},
+	}
+})
+	
 --Cooking recipes
 minetest.register_craft({
 	type = "cooking",
@@ -381,9 +454,7 @@ dofile(minetest.get_modpath("lulzpack") .. "/lamps.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/machines.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/recipes.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/materials.lua")
-dofile(minetest.get_modpath("lulzpack") .. "/lavablock.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/guns.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/abms.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/desertores.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/furnaces.lua")
---dofile(minetest.get_modpath("lulzpack") .. "/inventory.lua")
