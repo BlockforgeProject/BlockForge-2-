@@ -75,6 +75,14 @@ minetest.register_node("lulzpack:lava_block", {
     end, 
 	sounds = default.node_sound_stone_defaults(),
 })
+minetest.register_node("lulzpack:hotstone", {
+	description = "Hot Stone",
+	tiles ={"hotstone.png"},
+	is_ground_content = true,
+	groups = {cracky=4},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
 minetest.register_node("lulzpack:stone_with_lyra", {
 	description = "Lyra Ore",
 	tiles = {"default_stone.png^lyra_mineral.png"},
@@ -181,7 +189,7 @@ minetest.register_node("lulzpack:meseglass", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
---[[minetest.register_node("lulzpack:elementalglass", {
+minetest.register_node("lulzpack:elementalglass", {
     tiles = {"elemental_glass.png"},
     description = "Elemental glass",
     drawtype = "glasslike",
@@ -190,7 +198,7 @@ minetest.register_node("lulzpack:meseglass", {
     paramtype = "light",
     groups = {forceglass=4},
 	sounds = default.node_sound_glass_defaults(),
-}) WILL BE IMPLEMENTED ]]
+})
 --Torches
 minetest.register_node("lulzpack:lyra_torch", {
 	description = "Lyra Torch",
@@ -272,7 +280,7 @@ minetest.register_tool("lulzpack:pick_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=5.50}, uses=30, maxlevel=4},
+			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=7.50}, uses=30, maxlevel=4},
             forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=4}
 		}
 	},
@@ -364,6 +372,13 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'lulzpack:elementalglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'lulzpack:hotstone', 'default:glass'},
+	}
+})
 minetest.register_craft({
 	output = 'lulzpack:meseglass 3',
 	recipe = {

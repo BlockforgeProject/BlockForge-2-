@@ -16,17 +16,19 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
 
-local activatequarry = function( pos, node, puncher )
-	if node.name ~= 'lulzpack:quarry' then return end
+local activatequarry = function(pos, node, puncher)
+	--if node.name ~= 'lulzpack:quarry' then return end
 	local digs=1
+    local meta = minetest.env:get_meta(pos)
 	while(minetest.env:get_node({x=pos.x,y=pos.y-digs,z=pos.z}).name=='lulzpack:quarrydiggerpole') do
-		print(digs)
+		--print(digs)
 		digs=digs+1
 	end
-	if puncher:get_inventory():contains_item("main", "lulzpack:quarrydrill") then
-			puncher:get_inventory():remove_item("main", "lulzpack:quarrydrill")
+	if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
+			meta:get_inventory():remove_item("drill", "lulzpack:quarrydrill")
 			quarrypos = { x = pos.x, y = pos.y, z = pos.z }
 			quarrypos2 = { x = pos.x, y = pos.y - digs, z = pos.z }
+			quarrypos3 = { x = pos.x + 1, y = pos.y - digs, z = pos.z }
             ------------------------------
             nodepos = { x = pos.x, y = pos.y - digs, z = pos.z }
             nodepos2 = { x = pos.x - 1, y = pos.y - digs, z = pos.z }
@@ -58,7 +60,6 @@ local activatequarry = function( pos, node, puncher )
 	        local drop8 = minetest.get_node_drops(nodename8.name)
 	        local drop9 = minetest.get_node_drops(nodename9.name)
 			--DIGGING
-		    local meta = minetest.env:get_meta(pos)
             local inv = meta:get_inventory()
             for _, item1 in ipairs(drop1) do
             if nodename.name ~= 'air' then  inv:add_item("main", item1) end
@@ -101,4 +102,17 @@ local activatequarry = function( pos, node, puncher )
 	end
 end
 
-minetest.register_on_punchnode( activatequarry )
+local autoactivatequarry = function (pos)
+    local timer = minetest.env:get_node_timer(pos)
+    timer:start(1)
+    if timer:get_elapsed() == 0 then activatequarry(pos, node, puncher) end
+end
+
+minetest.register_abm ({
+        nodenames = {"lulzpack:quarry"},
+        interval = 0,
+        chance = 1,
+        action = autoactivatequarry, 
+})
+
+--minetest.register_on_punchnode( activatequarry )

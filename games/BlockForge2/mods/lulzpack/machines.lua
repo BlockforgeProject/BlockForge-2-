@@ -29,11 +29,15 @@ minetest.register_node("lulzpack:quarry", {
 		local meta = minetest.env:get_meta(pos)
 		meta:set_string("formspec",
 				"size[8,9]"..
-				"list[current_name;main;0,0;8,3;]"..
+				"list[current_name;main;0,0;8,2;]"..
+			    "list[current_name;drill;3,3;3,1;]"..
+                "label[1,3,drilltext]"..
+                "list[current_name;Drills]"..
 				"list[current_player;main;0,5;8,4;]")
 		meta:set_string("infotext", "Quarry")
 		local inv = meta:get_inventory()
-		inv:set_size("main", 8*4)
+		inv:set_size("main", 8*3)
+		inv:set_size("drill", 3)
 	end,
 	groups = {crumbly=2},
 	digs=1,
@@ -56,7 +60,6 @@ minetest.register_node("lulzpack:quarrydiggerpole", {
 
 
 minetest.register_node("lulzpack:raffinery", {
-    description = "Raffinery",
 	tiles = {"raffinery_top.png","bb_side.png",
 		  "bb_side.png","bb_side.png",
 		  "bb_side.png","bb_side.png"},

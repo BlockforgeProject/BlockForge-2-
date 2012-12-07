@@ -203,7 +203,7 @@ industrialfurnace_inactive_formspec =
 	"list[current_player;main;0,5;8,4;]"
 
 minetest.register_node("lulzpack:industrialfurnace", {
-	description = "Industiral Furnace",
+	description = "Industrial Furnace",
 	tiles = {"industrialfurnace_top.png", "industrialfurnace_bottom.png", "industrialfurnace_side.png",
 		"industrialfurnace_side.png", "industrialfurnace_side.png", "industrialfurnace_front.png"},
 	paramtype2 = "facedir",
