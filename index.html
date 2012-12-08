@@ -1,49 +1,50 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Blockforge-2- : Evolution and updated version of the BlockForge pack with more features" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Blockforge-2-</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/BlockforgeProject/BlockForge-2-">View on GitHub</a>
-
-          <h1 id="project_title">Blockforge-2-</h1>
-          <h2 id="project_tagline">Evolution and updated version of the BlockForge pack with more features</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/BlockforgeProject/BlockForge-2-/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/BlockforgeProject/BlockForge-2-/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to BlockForge 2# official site.</h3>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Blockforge-2- maintained by <a href="https://github.com/BlockforgeProject">BlockforgeProject</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+<head>
+<title>Minetest BlockForge Pack</title>
+<link rel="stylesheet" type="text/css" id="theme_css" href="./simple.gray.css" />
+<script type="text/javascript" src="./simple.base.js"></script>
+</head>
+<body onload="load();" onclick="bodyclick();" >
+<div id="loading">Loading...</div>
+<div id="content">
+<span class="text" id="moreprojects">
+More Awesomeness Projects at: <a target="_blank" href="http://forkforge.net">ForkForge.net</a>
+<br />
+More Developers Resources at: <a target="_blank" href="http://purelite.org">PurElite.org</a>
+</span>
+<span class="text" id="moreinfo">
+Italian Topic: <a target="_blank" href="http://forkforge.net/index.php?topic=582.msg1528;topicseen">Forum @ ForkForge.net</a>
+<br />
+English Topic: <a target="_blank" href="http://minetest.net/forum/viewtopic.php?pid=41803#p41803">Forum @ MineTest.net</a>
+</span>
+<span class="text" id="downloads">
+Git Repository: <a target="_blank" href="https://github.com/BlockforgeProject/BlockForge">Hosted On GitHub</a>
+<br />
+Direct Download: <a href="https://github.com/BlockforgeProject/BlockForge/zipball/master">DOWNLOAD NOW</a>
+</span>
+<span class="text" id="intro" style="opacity:100;display:block;">
+This is a part of an incomplete Minetest Industrial Mod, developed in LUA by <a href="http://purelite.org/team/LorenzoVulcan.html" target="_blank">LorenzoVulcan</a> for Minetest 0.4.1, this project is dead for various reason, so probably we will not release any update. <br />
+Actually, exists a C++ part with wires and new 3d models, too. But it isn't working yet...
+</span>
+<br />
+<br />
+<div id="musicmanager" onclick="musicmanagerclick();"></div>
+<iframe width="201" height="113" src="http://www.youtube.com/embed/4MzBQzt5ZP8" frameborder="0" allowfullscreen></iframe> <iframe width="201" height="113" src="http://www.youtube.com/embed/qwSybmvqINo" frameborder="0" allowfullscreen></iframe> <iframe width="201" height="113" src="http://www.youtube.com/embed/ycniWMUEISY" frameborder="0" allowfullscreen></iframe>
+<br />
+<button class="buttonbig green" onclick="this.focus()"  onblur="hide('downloads')" onmousedown="mclick()" onfocus="show('downloads')">DOWNLOADS</button> <button class="buttonbig orange" onclick="this.focus()"  onblur="hide('moreinfo')" onmousedown="mclick()" onfocus="show('moreinfo')">MORE Info</button> <button class="buttonbig orange" onclick="this.focus()"  onblur="hide('moreprojects')" onmousedown="mclick()" onfocus="show('moreprojects')">More Projects</button>
+</div>
+<div id="credits">SimplePonies&amp;Daleks Template by <a target="_blank" href="http://purelite.org/team/Ricky.html">Ricky @ ForkForge</a></div>
+<!-- dalek&pony -->
+<div id="dalek" style="margin:auto;width:700px;z-index:5;">
+<img src="./dalek.png"  alt="" style="margin-top:-90px;margin-left:-80px;"/> 
+<img src="./jack.png"  alt="" style="z-index:0;position:absolute;margin-top:-20px;margin-left:280px;"/> 
+</div>
+<audio autobuffer controls="controls" id="audio" loop="loop" preload="auto" style="display:none;" >
+    <source src="https://dl.dropbox.com/s/cxpvtwqzn64gky5/Keygen%20Music%20RELOADED.ogg" type="audio/ogg" />
+</audio> 
+<audio autobuffer controls="controls" id="click" preload="auto" style="display:none;">
+    <source src="click.ogg" type="audio/ogg" />
+</audio> 
+</body>
 </html>

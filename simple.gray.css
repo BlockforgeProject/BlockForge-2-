@@ -1,0 +1,153 @@
+@font-face{
+    font-family:'font';
+    src:url('./font.ttf') format('truetype');
+}
+*{
+     outline: none;
+}
+a{
+    transition: text-shadow 0.2s;
+    -moz-transition: text-shadow 0.2s;
+    -webkit-transition:  text-shadow 0.2s;
+    -o-transition:  text-shadow 0.2s;
+    color:#333333;
+    text-decoration:none;
+}
+a:hover{
+    transition: text-shadow 0.2s;
+    -moz-transition: text-shadow 0.2s;
+    -webkit-transition:  text-shadow 0.2s;
+    -o-transition:  text-shadow 0.2s; 
+    text-shadow: 0px 0px 2px #696B56;
+    color:#333333;
+    text-decoration:none;
+}
+body{
+    font-family:font;
+    background-color:#BEC0C4;
+    
+}
+#content{
+    color:#777777;
+    text-shadow: 0px 0px 2px #BFBFBF;
+    text-align:center;
+    margin:auto;
+    background-color:#E8E8E8;
+    border: 2px solid #BCBCBC;
+    width:700px;
+    min-height:10px;
+    margin-top:80px;
+    margin-bottom:5px;
+    border-radius: 20px; 
+    -moz-border-radius: 20px; 
+    -webkit-border-radius: 20px; 
+    padding:20px;
+    -webkit-box-shadow: 0px 0px 30px #E5E5E5;
+    -moz-box-shadow:    0px 0px 30px #E5E5E5;
+    box-shadow:         0px 0px 30px #E5E5E5;
+}
+.orange{
+border:1px solid #E8AA2E;
+background: #feccb1; /* Old browsers */
+background: -moz-linear-gradient(top, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feccb1), color-stop(50%,#f17432), color-stop(51%,#ea5507), color-stop(100%,#fb955e)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* IE10+ */
+background: linear-gradient(to bottom, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#fb955e',GradientType=0 ); /* IE6-9 */
+}
+.green{
+    border:1px solid #3ECC28;
+    background: #bfd255; /* Old browsers */
+background: -moz-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfd255), color-stop(50%,#8eb92a), color-stop(51%,#72aa00), color-stop(100%,#9ecb2d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* IE10+ */
+background: linear-gradient(to bottom, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+}
+
+#musicmanager{
+    z-index:200;
+    background-color:transparent;
+    height:113px;
+    width:700px;
+    position:absolute;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.buttonbig{
+    font-size:20px;
+    cursor:pointer;
+    border-radius: 7px; 
+    -moz-border-radius: 7px; 
+    -webkit-border-radius: 7px; 
+
+    width:200px;
+    height:50px;
+    margin:10px;
+}
+
+iframe{
+    margin:10px;
+}
+
+.text{
+    font-size:16px;
+    height:25px;
+    opacity:0;
+    display:none;
+    transition: opacity 0.7s;
+    -moz-transition: opacity 0.7s;
+    -webkit-transition:  opacity 0.7s;
+    -o-transition:  opacity 0.7s; 
+}
+
+#downloads{
+    z-index:2;
+}
+
+#moreinfo{
+    z-index:3;
+}
+
+#moreprojects{
+    z-index:4;
+}
+
+#intro{
+    z-index:1;
+}
+
+#loading{
+    color:#777777;
+    background-color:#E8E8E8;
+    font-size:40px;
+    text-align:center;
+    width:100%;
+    height:100;
+    position:fixed;
+    z-index:100;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+        transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -webkit-transition:  opacity 1s;
+    -o-transition:  opacity 1s; 
+}
+
+#credits{
+    margin:0;
+    padding:0;
+    font-size:12px;
+    color:#E5E5E5;
+    position:relative;
+    z-index:20;
+    width:100%;
+    text-align:center;    
+}
