@@ -109,7 +109,7 @@ end
 
 minetest.register_abm ({
         nodenames = {"lulzpack:quarry"},
-        interval = 0,
+        interval = 2,
         chance = 1,
         action = autoactivatequarry
 })
