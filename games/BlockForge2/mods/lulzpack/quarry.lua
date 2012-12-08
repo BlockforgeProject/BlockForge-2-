@@ -30,74 +30,69 @@ local activatequarry = function(pos, node, puncher)
 			quarrypos2 = { x = pos.x, y = pos.y - digs, z = pos.z }
 			quarrypos3 = { x = pos.x + 1, y = pos.y - digs, z = pos.z }
             ------------------------------
-            nodepos = { x = pos.x, y = pos.y - digs, z = pos.z }
-            nodepos2 = { x = pos.x - 1, y = pos.y - digs, z = pos.z }
-            nodepos3 = { x = pos.x, y = pos.y - digs, z = pos.z - 1 }
-            nodepos4 = { x = pos.x + 1, y = pos.y - digs, z = pos.z }
-            nodepos5 = { x = pos.x, y = pos.y - digs, z = pos.z + 1 }
-            nodepos6 = { x = pos.x + 1, y = pos.y - digs, z = pos.z + 1}
-            nodepos7 = { x = pos.x - 1, y = pos.y - digs, z = pos.z - 1}
-            nodepos8 = { x = pos.x + 1, y = pos.y - digs, z = pos.z - 1}
-            nodepos9 = { x = pos.x - 1, y = pos.y - digs, z = pos.z + 1}
+            quarryposs = {
+            {x = pos.x, y = pos.y - digs, z = pos.z },
+            {x = pos.x - 1, y = pos.y - digs, z = pos.z },
+            {x = pos.x, y = pos.y - digs, z = pos.z - 1 },
+            {x = pos.x + 1, y = pos.y - digs, z = pos.z },
+            {x = pos.x, y = pos.y - digs, z = pos.z + 1 },
+            {x = pos.x + 1, y = pos.y - digs, z = pos.z + 1},
+            {x = pos.x - 1, y = pos.y - digs, z = pos.z - 1},
+            {x = pos.x + 1, y = pos.y - digs, z = pos.z - 1},
+            {x = pos.x - 1, y = pos.y - digs, z = pos.z + 1}}
             ------------------------------
-			nodename = minetest.env:get_node(nodepos)
-			nodename2 = minetest.env:get_node(nodepos2)	
-			nodename3 = minetest.env:get_node(nodepos3)
-			nodename4 = minetest.env:get_node(nodepos4)	
-			nodename5 = minetest.env:get_node(nodepos5)
-			nodename6 = minetest.env:get_node(nodepos6)
-			nodename7 = minetest.env:get_node(nodepos7)
-			nodename8 = minetest.env:get_node(nodepos8)
-			nodename9 = minetest.env:get_node(nodepos9)
+            nodenames = {
+			minetest.env:get_node(quarryposs[1]),
+			minetest.env:get_node(quarryposs[2]),	
+			minetest.env:get_node(quarryposs[3]),
+			minetest.env:get_node(quarryposs[4]),	
+			minetest.env:get_node(quarryposs[5]),
+			minetest.env:get_node(quarryposs[6]),
+			minetest.env:get_node(quarryposs[7]),
+			minetest.env:get_node(quarryposs[8]),
+			minetest.env:get_node(quarryposs[9])}
 			--GETTING NODE AND GIVING
-	        local drop1 = minetest.get_node_drops(nodename.name)
-	        local drop2 = minetest.get_node_drops(nodename2.name)
-	        local drop3 = minetest.get_node_drops(nodename3.name)
-	        local drop4 = minetest.get_node_drops(nodename4.name)
-	        local drop5 = minetest.get_node_drops(nodename5.name)
-	        local drop6 = minetest.get_node_drops(nodename6.name)
-	        local drop7 = minetest.get_node_drops(nodename7.name)
-	        local drop8 = minetest.get_node_drops(nodename8.name)
-	        local drop9 = minetest.get_node_drops(nodename9.name)
+	        local drop1 = minetest.get_node_drops(nodenames[1].name)
+	        local drop2 = minetest.get_node_drops(nodenames[2].name)
+	        local drop3 = minetest.get_node_drops(nodenames[3].name)
+	        local drop4 = minetest.get_node_drops(nodenames[4].name)
+	        local drop5 = minetest.get_node_drops(nodenames[5].name)
+	        local drop6 = minetest.get_node_drops(nodenames[6].name)
+	        local drop7 = minetest.get_node_drops(nodenames[7].name)
+	        local drop8 = minetest.get_node_drops(nodenames[8].name)
+	        local drop9 = minetest.get_node_drops(nodenames[9].name)
 			--DIGGING
             local inv = meta:get_inventory()
             for _, item1 in ipairs(drop1) do
-            if nodename.name ~= 'air' then  inv:add_item("main", item1) end
+            if nodenames[1].name ~= 'air' then  inv:add_item("main", item1) end
             end
             for _, item2 in ipairs(drop2) do
-            if nodename2.name  ~= 'air' then  inv:add_item("main", item2) end
+            if nodenames[2].name  ~= 'air' then  inv:add_item("main", item2) end
             end
             for _, item3 in ipairs(drop3) do
-            if nodename3.name  ~= 'air' then  inv:add_item("main", item3) end
+            if nodenames[3].name  ~= 'air' then  inv:add_item("main", item3) end
             end
             for _, item4 in ipairs(drop4) do
-            if nodename4.name  ~= 'air' then  inv:add_item("main", item4) end
+            if nodenames[4].name  ~= 'air' then  inv:add_item("main", item4) end
             end
             for _, item5 in ipairs(drop5) do
-            if nodename5.name  ~= 'air' then  inv:add_item("main", item5) end
+            if nodenames[5].name  ~= 'air' then  inv:add_item("main", item5) end
             end
             for _, item6 in ipairs(drop6) do
-            if nodename6.name  ~= 'air' then  inv:add_item("main", item6) end
+            if nodenames[6].name  ~= 'air' then  inv:add_item("main", item6) end
             end
             for _, item7 in ipairs(drop7) do
-            if nodename7.name  ~= 'air' then  inv:add_item("main", item7) end
+            if nodenames[7].name  ~= 'air' then  inv:add_item("main", item7) end
             end
             for _, item8 in ipairs(drop8) do
-            if nodename8.name  ~= 'air' then  inv:add_item("main", item8) end
+            if nodenames[8].name  ~= 'air' then  inv:add_item("nodenames[1]main", item8) end
             end
             for _, item9 in ipairs(drop9) do
-            if nodename9.name  ~= 'air' then  inv:add_item("main", item9) end
+            if nodenames[9].name  ~= 'air' then  inv:add_item("main", item9) end
             end
 			--minetest.env:remove_node( quarrypos )
-			minetest.env:dig_node( nodepos )
-			minetest.env:dig_node( nodepos2 )
-			minetest.env:dig_node( nodepos3 )
-			minetest.env:dig_node( nodepos4 )
-			minetest.env:dig_node( nodepos5 )
-			minetest.env:dig_node( nodepos6 )
-			minetest.env:dig_node( nodepos7 )
-			minetest.env:dig_node( nodepos8 )
-			minetest.env:dig_node( nodepos9 )
+            for i=1, 9 do
+			quarry_mine(quarryposs[i]) end
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )
 	end
 end
@@ -108,11 +103,15 @@ local autoactivatequarry = function (pos)
     if timer:get_elapsed() == 0 then activatequarry(pos, node, puncher) end
 end
 
+function quarry_mine(pos)
+     minetest.env:dig_node(pos)
+end
+
 minetest.register_abm ({
         nodenames = {"lulzpack:quarry"},
         interval = 0,
         chance = 1,
-        action = autoactivatequarry, 
+        action = autoactivatequarry
 })
 
 --minetest.register_on_punchnode( activatequarry )
