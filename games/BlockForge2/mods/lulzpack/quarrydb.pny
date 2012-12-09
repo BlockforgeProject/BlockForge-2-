@@ -1,9 +1,0 @@
--- Persistent Data
-local multiRefObjects = {
-
-} -- multiRefObjects
-local obj1 = {
-	["q-100-60"] = 2;
-	["q-98-65"] = 18;
-}
-return obj1
