@@ -38,9 +38,15 @@ minetest.register_node("lulzpack:quarry", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*3)
 		inv:set_size("drill", 3)
+        quarry_pos["q"..pos.x.."-"..pos.z] =1
 	end,
 	groups = {crumbly=2},
-	digs=1,
+    digs=1,
+    on_dig = function(pos) 
+    quarry_pos["q"..pos.x.."-"..pos.z]=nil
+    minetest.env:remove_node(pos)
+    minetest.env:add_item(pos, {name="lulzpack:quarry"})
+    end
 })
 
 minetest.register_node("lulzpack:quarrydiggerpole", {

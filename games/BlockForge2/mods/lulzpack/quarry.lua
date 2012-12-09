@@ -15,15 +15,16 @@
 --
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
+dofile(minetest.get_modpath("lulzpack") .. "/persistence.lua")
+
+quarry_pos = {}
+quarry_pos = persistence.load(minetest.get_modpath("lulzpack") .. "/quarrydb.pny")
+if quarry_pos==nil then quarry_pos={} end
 
 local activatequarry = function(pos, node, puncher)
 	--if node.name ~= 'lulzpack:quarry' then return end
-	local digs=1
-    local meta = minetest.env:get_meta(pos)
-	while(minetest.env:get_node({x=pos.x,y=pos.y-digs,z=pos.z}).name=='lulzpack:quarrydiggerpole') do
-		--print(digs)
-		digs=digs+1
-	end
+	local meta = minetest.env:get_meta(pos)
+    local digs=quarry_pos["q"..pos.x.."-"..pos.z]
 	if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
 			meta:get_inventory():remove_item("drill", "lulzpack:quarrydrill")
 			quarrypos = { x = pos.x, y = pos.y, z = pos.z }
@@ -93,14 +94,9 @@ local activatequarry = function(pos, node, puncher)
 			--minetest.env:remove_node( quarrypos )
             for i=1, 9 do
 			quarry_mine(quarryposs[i]) end
+            quarry_pos["q"..pos.x.."-"..pos.z]=quarry_pos["q"..pos.x.."-"..pos.z]+1
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )
 	end
-end
-
-local autoactivatequarry = function (pos)
-    local timer = minetest.env:get_node_timer(pos)
-    timer:start(1)
-    if timer:get_elapsed() == 0 then activatequarry(pos, node, puncher) end
 end
 
 function quarry_mine(pos)
@@ -111,7 +107,8 @@ minetest.register_abm ({
         nodenames = {"lulzpack:quarry"},
         interval = 2,
         chance = 1,
-        action = autoactivatequarry
+        action = activatequarry
 })
 
---minetest.register_on_punchnode( activatequarry )
+minetest.register_on_shutdown(function()
+persistence.store(minetest.get_modpath("lulzpack") .. "/quarrydb.pny",quarry_pos) end)
