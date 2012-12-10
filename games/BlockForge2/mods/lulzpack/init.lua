@@ -19,19 +19,6 @@
 
 --Main file of the LulzPack.Such a casual name.
 
-lulzpack = {}
-
---Item-Dropping on node breaking
---This just redefine the original function
-function minetest.handle_node_drops(pos, drops, digger)
-	if digger:get_inventory() then
-		local _, dropped_item
-		for _, dropped_item in ipairs(drops) do
-            minetest.env:add_item(pos,dropped_item)
-		end
-	end
-end 
-
 minetest.register_node("lulzpack:cold_dirt", {
 	description = "cold Dirt",
 	tiles ={"colddirt.png"},
@@ -474,3 +461,4 @@ dofile(minetest.get_modpath("lulzpack") .. "/abms.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/desertores.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/furnaces.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/time2pwn.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/drop.lua")

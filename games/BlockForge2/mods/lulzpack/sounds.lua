@@ -16,4 +16,11 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
 
---WORK IN PROGRESS
+function sound_pickup(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name="", gain=1.0}
+	table.dug = table.dug or
+			{name="pickup", gain=1.0}
+	return table
+end
