@@ -129,7 +129,7 @@ minetest.register_entity("__builtin:item", {
                                         if item~=nil and hitter~=nil then
                                             hitter:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring)) 
                                             item:remove()
-                                            minetest.sound_play({name="pickup",gain=1.0},sound_pickup)
+                                            minetest.sound_play({name="pickup",gain=0.2},sound_pickup)
                                         end end, {item,hitter})                    
                 end
             end
