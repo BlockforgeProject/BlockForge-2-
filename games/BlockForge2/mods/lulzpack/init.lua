@@ -446,7 +446,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 end)
 
 minetest.register_on_generated(function(minp, maxp, seed)
-	generate_ore("lulzpack:stone_with_celis", "default:stone", minp, maxp, seed+6, 1/24/24/12, 6,32, -31000, -320)
+	generate_ore("lulzpack:stone_with_celis", "default:stone", minp, maxp, seed+6, 1/24/24/12, 6, 64, -31000, -120)
 end)
 
 dofile(minetest.get_modpath("lulzpack") .. "/items.lua")
