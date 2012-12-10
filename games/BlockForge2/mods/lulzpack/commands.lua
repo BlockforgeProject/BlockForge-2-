@@ -16,11 +16,4 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
 
-minetest.register_chatcommand("getpos", {
-	description = "Getting your position",
-	privs = {shout=true},
-	func = function(name, param)
-        p={x=pos.x,y=pos.y,z=pos.z}
-		minetest.chat_send_player(name,"Your position: X=" .. p.x .. " | Y=" .. p.y .. " | Z=" .. p.z)
-	end,
-})
+--Actually empty
