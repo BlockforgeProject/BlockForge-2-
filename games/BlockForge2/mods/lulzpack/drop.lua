@@ -18,7 +18,19 @@
 
 --Item-Dropping on node breaking
 --This just redefine the original function
+
+function default_nodedrop(pos, drops, digger)
+	-- Add dropped items to object's inventory
+	if digger:get_inventory() then
+		local _, dropped_item
+		for _, dropped_item in ipairs(drops) do
+			digger:get_inventory():add_item("main", dropped_item)
+		end
+	end
+end
+
 function minetest.handle_node_drops(pos, drops, digger)
+    if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(pos, drops, digger) end
 	if digger:get_inventory() then
 		local _, dropped_item
 		for _, dropped_item in ipairs(drops) do
