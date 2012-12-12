@@ -86,6 +86,25 @@ minetest.register_node("lulzpack:macerator", {
 	groups = {crumbly=2},
 })
 
+--[[oilwell_fix={ -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
+
+minetest.register_node("lulzpack:oilwell", {
+    description = "Oil Well",
+    drawtype="nodebox",
+	tiles = {"oil_well.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	groups = {crumbly=2},
+    selection_box = {
+        type = "fixed",
+        fixed = oilwell_fix
+    },
+	node_box = {
+        type = "fixed",
+        fixed = oilwell_fix
+    }, 
+})]]
+
 dofile(minetest.get_modpath("lulzpack") .. "/quarry.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/raffinery.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/macerator.lua")

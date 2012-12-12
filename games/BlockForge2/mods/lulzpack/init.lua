@@ -62,6 +62,17 @@ minetest.register_node("lulzpack:lava_block", {
     end, 
 	sounds = default.node_sound_stone_defaults(),
 })
+minetest.register_node("lulzpack:water_block", {
+	description = "Solidified Lava",
+	tiles ={"water_block.png"},
+	is_ground_content = true,
+	groups = {cracky=1},
+	legacy_mineral = false,
+    on_dig=function(pos,node)
+        minetest.env:add_node(pos, { name = "default:water_source" } ); 
+    end, 
+	sounds = default.node_sound_stone_defaults(),
+})
 minetest.register_node("lulzpack:hotstone", {
 	description = "Hot Stone",
 	tiles ={"hotstone.png"},
@@ -462,3 +473,4 @@ dofile(minetest.get_modpath("lulzpack") .. "/desertores.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/furnaces.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/time2pwn.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/drop.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/wires.lua")

@@ -22,12 +22,20 @@ quarry_pos = persistence.load(minetest.get_modpath("lulzpack") .. "/quarrydb.pny
 if quarry_pos==nil then quarry_pos={} end
 
 local activatequarry = function(pos, node, puncher)
-	--if node.name ~= 'lulzpack:quarry' then return end
-	local meta = minetest.env:get_meta(pos)
-    local digs=quarry_pos["q"..pos.x.."-"..pos.z]
-	if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
+local meta = minetest.env:get_meta(pos)
+local digs=quarry_pos["q"..pos.x.."-"..pos.z]
+if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
+    --Checking for energy
+    gen_pos={x=pos.x,y=pos.y+1,z=pos.z}
+    local genmeta=minetest.env:get_meta(gen_pos)
+    energy=genmeta:get_int("energy")
+    --minetest.chat_send_all(energy)
+    --minetest.chat_send_all(genname.name)
+    if energy >= 50 then
 			meta:get_inventory():remove_item("drill", "lulzpack:quarrydrill")
-			quarrypos = { x = pos.x, y = pos.y, z = pos.z }
+            genmeta:set_int("energy",genmeta:get_int("energy")-50)
+            MILLGENupdate_formspec(gen_pos)            
+            quarrypos = { x = pos.x, y = pos.y, z = pos.z }
 			quarrypos2 = { x = pos.x, y = pos.y - digs, z = pos.z }
 			quarrypos3 = { x = pos.x + 1, y = pos.y - digs, z = pos.z }
             ------------------------------
@@ -96,7 +104,8 @@ local activatequarry = function(pos, node, puncher)
 			quarry_mine(quarryposs[i]) end
             quarry_pos["q"..pos.x.."-"..pos.z]=quarry_pos["q"..pos.x.."-"..pos.z]+1
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )
-	end
+	    end
+    end
 end
 
 function quarry_mine(pos)
