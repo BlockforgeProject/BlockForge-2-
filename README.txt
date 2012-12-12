@@ -22,7 +22,7 @@
  3. Enjoy
 
 # Warning
-This mods overwrite some core mods and builin mods.If you want to deactivate the corehack,put "lulzpack_deactivate_corehack = true" in your minetest.conf (you can find this file in the root folder).
+This mods overwrite some core mods and builin mods.If you want to deactivate the corehack,put "lulzpack_deactivate_corehack = true" in your minetest.conf (you can find this file in the root folder) and don't install the "builtin" folder in this repository.
 
                                                 
                                                 -LorenzoVulcan-
