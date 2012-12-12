@@ -21,6 +21,9 @@
  2. Put all contents of the cloned directory in your minetest root folder
  3. Enjoy
 
+# Warning
+This mods overwrite some core mods and builin mods.If you want to deactivate the corehack,put "lulzpack_deactivate_corehack = true" in your minetest.conf (you can find this file in the root folder).
+
                                                 
                                                 -LorenzoVulcan-
 
