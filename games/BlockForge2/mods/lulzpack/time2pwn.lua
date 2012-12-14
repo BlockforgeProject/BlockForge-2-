@@ -7,7 +7,7 @@
 --                                        (_____|
 --
 -- ######################################################################
---     		               LULZPACK | BLOCKFORGE 2#
+--    		               LULZPACK | BLOCKFORGE 2#
 -- ######################################################################
 --
 --
@@ -19,7 +19,7 @@ pwned=function(player, drops)
      pos=player:getpos()
      itempos={x=pos.x,y=pos.y+1,z=pos.z}
      local inv=player:get_inventory()
-     for i=1,32 do
+     for i=1,inv:get_size("main") do
         local item=inv:get_stack("main", i)
         count=item:get_count()
         if count <= 99 then
