@@ -23,7 +23,7 @@ if quarry_pos==nil then quarry_pos={} end
 
 local activatequarry = function(pos, node, puncher)
 local meta = minetest.env:get_meta(pos)
-local digs=quarry_pos["q"..pos.x.."-"..pos.z]
+local digs=quarry_pos["q"..pos.x.."-"..pos.z] if digs==nil then return end
 if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
     --Checking for energy
     gen_pos={x=pos.x,y=pos.y+1,z=pos.z}
