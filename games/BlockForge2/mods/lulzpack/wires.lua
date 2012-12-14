@@ -32,11 +32,6 @@ minetest.register_node("lulzpack:mill_gen", {
 		local inv = meta:get_inventory()
         inv:set_size("fuel",3)
 	end,
-    on_punch= function(pos)
-        local genmeta=minetest.env:get_meta(pos)
-        energy=genmeta:get_int("energy")
-        minetest.chat_send_all(energy)
-    end,
 	groups = {cracky=3}
 })
 
