@@ -40,7 +40,7 @@ minetest.register_node("lulzpack:quarry", {
 		inv:set_size("drill", 3)
         quarry_pos["q"..pos.x.."-"..pos.z] =1
 	end,
-	groups = {crumbly=2},
+	groups = {cracky=2},
     digs=1,
     on_dig = function(pos) 
     quarry_pos["q"..pos.x.."-"..pos.z]=nil
@@ -71,7 +71,7 @@ minetest.register_node("lulzpack:raffinery", {
 		  "bb_side.png","bb_side.png"},
 	description = "Refinery",
 	is_ground_content = false,
-	groups = {crumbly=2},
+	groups = {cracky=2},
 })
 
 minetest.register_node("lulzpack:macerator", {
@@ -83,7 +83,7 @@ minetest.register_node("lulzpack:macerator", {
 
 	minetest.inventorycube("macerator_top.png"),
 	is_ground_content = false,
-	groups = {crumbly=2},
+	groups = {cracky=2},
 })
 
 --[[oilwell_fix={ -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
