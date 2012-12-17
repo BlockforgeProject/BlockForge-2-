@@ -417,6 +417,12 @@ minetest.register_craft({
 	output = "lulzpack:redyz_ingot",
 	recipe = "lulzpack:redyz_lump",
 })
+
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:celis_ingot",
+	recipe = "lulzpack:celis_lump",
+})
 --Ore Generations
 
 local function generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume, chunk_size, ore_per_chunk, height_min, height_max)
