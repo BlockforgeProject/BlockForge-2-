@@ -383,7 +383,7 @@ minetest.register_craft({
 	recipe = {
 		{'lulzpack:industrial_iron', 'lulzpack:celis_ingot', 'lulzpack:industrial_iron'},
 		{'lulzpack:celis_ingot', 'lulzpack:electrofurnace', 'lulzpack:celis_ingot'},
-		{'lulzpack:industrial_iron', 'llulzpack:celis_ingot', 'lulzpack:industrial_iron'},
+		{'lulzpack:industrial_iron', 'lulzpack:celis_ingot', 'lulzpack:industrial_iron'},
 	}
 })
 
