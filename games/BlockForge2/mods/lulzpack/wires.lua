@@ -39,7 +39,7 @@ minetest.register_craft({
 	output = 'lulzpack:mill_gen',
 	recipe = {
 		{'default:steel_ingot','default:steel_ingot','default:steel_ingot'},
-		{'lulzpack:industrial_iron','lulzpack:int_battery','lulzpack:industrial_iron'},
+		{'lulzpack:industrial_iron','lulzpack:intbattery','lulzpack:industrial_iron'},
 		{'lulzpack:industrial_iron','lulzpack:controlpanel','lulzpack:industrial_iron'},
 	}
 })
