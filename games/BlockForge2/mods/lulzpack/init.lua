@@ -369,6 +369,24 @@ minetest.register_craft({
 		{'lulzpack:celis_ingot','lulzpack:celis_ingot','lulzpack:celis_ingot'},
 	}
 })
+minetest.register_craft({
+	output = 'lulzpack:celis_ingot 9',
+	recipe = {
+		{'lulzpack:celis_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:lyra_ingot 9',
+	recipe = {
+		{'lulzpack:lyra_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:redyz_ingot 9',
+	recipe = {
+		{'lulzpack:redyz_block'},
+	}
+})
 --Glasses
 minetest.register_craft({
 	output = 'lulzpack:ironglass 3',
