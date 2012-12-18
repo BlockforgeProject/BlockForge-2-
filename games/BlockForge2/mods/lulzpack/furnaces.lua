@@ -229,7 +229,7 @@ minetest.register_node("lulzpack:industrialfurnace", {
 		elseif not inv:is_empty("src") then
 			return false
 		end
-		return trueg
+		return true
 	end,
 })
 
