@@ -49,7 +49,7 @@ minetest.register_craft({
 
 
 minetest.register_craft({
-	output = 'lulzpack:electrodrill 1',
+	output = 'lulzpack:electrodrill 3',
 	recipe = {
 		{'', 'lulzpack:industrial_iron', ''},
 		{'lulzpack:industrial_iron', '', 'lulzpack:industrial_iron'},
