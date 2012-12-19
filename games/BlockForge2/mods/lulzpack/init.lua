@@ -283,6 +283,18 @@ minetest.register_tool("lulzpack:pick_lyra", {
 		}
 	},
 })
+
+minetest.register_tool("lulzpack:pick_hybrid", {
+	description = "Hybrid Pickaxe",
+	inventory_image = "hybrid_pick.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60, [4]=5.50}, uses=40, maxlevel=4},
+            forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=4}
+		}
+	},
+})
 --Craftings
 minetest.register_craft({
 	output = 'lulzpack:raw_stone 2',
@@ -303,6 +315,14 @@ minetest.register_craft({
 		{'lulzpack:lyra_ingot', 'lulzpack:lyra_ingot', 'lulzpack:lyra_ingot'},
 		{'', 'default:stick', ''},
 		{'', 'default:stick', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:pick_hybrid 1',
+	recipe = {
+		{'lulzpack:lyra_ingot', 'lulzpack:celis_ingot', 'lulzpack:lyra_ingot'},
+		{'lulzpack:celis_ingot', 'default:steel_ingot', 'lulzpack:celis_ingot'},
+		{'', 'default:steel_ingot', ''},
 	}
 })
 minetest.register_craft({

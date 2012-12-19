@@ -119,14 +119,14 @@ minetest.register_entity("__builtin:item", {
         if self.itemstring ~= '' then
             local items= minetest.env:get_objects_inside_radius(self.object:getpos(), 3)
             for _,item in ipairs(items) do
-                if not item:is_player() and item:get_luaentity() and item:get_luaentity() ~= nil and  item:get_luaentity().name == "__builtin:item" then       
+                if not item:is_player() and item:get_luaentity() and item:get_luaentity() ~= nil and item:get_luaentity().name == "__builtin:item" then       
                     local pp=hitter:getpos()
                     local ip=item:getpos()
                     item:setvelocity({x=(pp.x-ip.x),y=(pp.y-ip.y),z=(pp.z-ip.z)})
                     minetest.after(0.2, function(args)
                                         item=args[1]
                                         hitter=args[2]
-                                        if item~=nil and hitter~=nil and item:get_luaentity()~=nil then
+                                        if item~=nil and hitter~=nil and item:get_luaentity().itemstring~=nil then
                                             hitter:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring)) 
                                             item:remove()
                                             minetest.sound_play({name="pickup",gain=0.2},sound_pickup)
