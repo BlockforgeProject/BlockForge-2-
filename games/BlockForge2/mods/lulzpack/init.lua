@@ -244,7 +244,7 @@ minetest.register_tool("lulzpack:sword_celis", {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[1]=1.70, [2]=0.80, [3]=0.20}, uses=30, maxlevel=2},
+			fleshy={times={[1]=2.70, [2]=1.20, [3]=0.60}, uses=30, maxlevel=2},
 			snappy={times={[2]=0.50, [3]=0.30}, uses=50, maxlevel=1},
 			choppy={times={[3]=0.70}, uses=50, maxlevel=0}
 		}
