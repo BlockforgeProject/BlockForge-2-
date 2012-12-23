@@ -24,7 +24,7 @@ minetest.register_node("lulzpack:obsidian", {
 	light_source = LIGHT_MAX-5,
 	tiles ={"obsidian.png"},
 	is_ground_content = true,
-	groups = {cracky=4},--Only breakable by Lyra Pickaxe
+	groups = {obs=1},--Only breakable by Lyra Pickaxe
 	drop = 'lulzpack:raw_obsidian',
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
@@ -41,9 +41,9 @@ minetest.register_node("lulzpack:raw_obsidian", {
 })
 
 minetest.register_craft({
-	type = "cooking",
 	output = "lulzpack:obsidian",
-	recipe = "lulzpack:raw_obsidian",
+	recipe = {{"lulzpack:raw_obsidian","lulzpack:raw_obsidian"},
+             {"lulzpack:raw_obsidian","lulzpack:raw_obsidian"},}
 })
 
 

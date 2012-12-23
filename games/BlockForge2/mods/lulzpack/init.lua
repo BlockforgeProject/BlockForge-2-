@@ -278,8 +278,9 @@ minetest.register_tool("lulzpack:pick_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80, [4]=7.50}, uses=30, maxlevel=4},
-            forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=4}
+			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=4},
+            forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=4},
+            obs={times={[1]=2.50},uses=25,maxlevel=1}
 		}
 	},
 })
@@ -534,3 +535,4 @@ dofile(minetest.get_modpath("lulzpack") .. "/furnaces.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/time2pwn.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/drop.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/wires.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/smithery.lua")
