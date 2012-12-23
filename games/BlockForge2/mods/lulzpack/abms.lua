@@ -55,7 +55,7 @@ lavacobble = function(pos)
               if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
               or minetest.env:get_node({x=pos.x+dist,y=pos.y,z=pos.z}).name == abmnode 
               or minetest.env:get_node({x=pos.x,y=pos.y,z=pos.z+dist}).name == abmnode then 
-              minetest.env:add_node(pos, {name="default:cobble"}) end
+              minetest.env:add_node(pos, {name="lulzpack:raw_obsidian"}) end
         end
     end
 end
