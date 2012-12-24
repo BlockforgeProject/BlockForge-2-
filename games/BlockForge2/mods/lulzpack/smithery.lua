@@ -149,3 +149,12 @@ minetest.register_abm({
     interval=4.0,
     chance=1,
     action=smithery, })
+    
+minetest.register_craft({
+    output = 'lulzpack:smithery',
+    recipe = {
+            {'lulzpack:lava_block','lulzpack:industrial_iron','lulzpack:lava_block'},
+            {'lulzpack:lava_block','','lulzpack:lava_block'},
+            {'lulzpack:lava_block','lulzpack:celis_ingot','lulzpack:lava_block'},
+    }
+})
