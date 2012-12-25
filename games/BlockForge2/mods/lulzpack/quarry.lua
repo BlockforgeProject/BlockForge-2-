@@ -94,14 +94,30 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
             if nodenames[7].name  ~= 'air' then  inv:add_item("main", item7) end
             end
             for _, item8 in ipairs(drop8) do
-            if nodenames[8].name  ~= 'air' then  inv:add_item("nodenames[1]main", item8) end
+            if nodenames[8].name  ~= 'air' then  inv:add_item("main", item8) end
             end
             for _, item9 in ipairs(drop9) do
             if nodenames[9].name  ~= 'air' then  inv:add_item("main", item9) end
             end
 			--minetest.env:remove_node( quarrypos )
             for i=1, 9 do
-			quarry_mine(quarryposs[i]) end
+            --if minetest.setting_get("lulzpack_deactivate_lockedchest_own") then return quarry_mine(quarryposs[i]) end
+                if nodenames[i].name == 'default:chest_locked' or nodenames[i].name == 'default:chest' then
+                    local chest_meta = minetest.env:get_meta(quarryposs[i])
+                    local chest_inv = chest_meta:get_inventory()
+                    local meta = minetest.env:get_meta(pos)
+                    local inv = meta:get_inventory()
+                    for i=1,chest_inv:get_size("main") do
+                        local item=chest_inv:get_stack("main",i)
+                        count=item:get_count()
+                        if count <= 99 then
+                            for i=1,count do
+                            inv:add_item("main",item:get_name()) end
+                       end  
+                    end    
+                end  
+			    quarry_mine(quarryposs[i])           
+            end
             quarry_pos["q"..pos.x.."-"..pos.z]=quarry_pos["q"..pos.x.."-"..pos.z]+1
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )
 	    end
@@ -109,7 +125,8 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
 end
 
 function quarry_mine(pos)
-     minetest.env:dig_node(pos)
+     --minetest.env:dig_node(pos)
+       minetest.env:set_node(pos, {name='air'})
 end
 
 minetest.register_abm ({
