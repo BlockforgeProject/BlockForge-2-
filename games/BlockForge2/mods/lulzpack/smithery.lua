@@ -65,62 +65,66 @@ minetest.register_node("lulzpack:smithery", {
         fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
     }
 })
-
-minetest.register_node("lulzpack:meltedcelis_flowing", {
-	description = "Flowing Melted Celis",
-	inventory_image = minetest.inventorycube("meltedcelis.png"),
+function registerLiquid(name,nodename,texturename,viscosity,damage,light)
+minetest.register_node("lulzpack:"..name.."_flowing", {
+	description = "Flowing"..nodename.."",
+	inventory_image = minetest.inventorycube(""..texturename..".png"),
 	drawtype = "flowingliquid",
-	tiles = {"default_lava.png"},
 	special_tiles = {
 		{
-			image="meltedcelis_flowing_animated.png",
+			image=""..texturename.."_flowing_animated.png",
 			backface_culling=false,
 			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
 		},
 		{
-			image="meltedcelis_flowing_animated.png",
+			image=""..texturename.."_flowing_animated.png",
 			backface_culling=true,
 			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
 		},
 	},
 	paramtype = "light",
-	light_source = LIGHT_MAX-5,
+	light_source = light,
 	walkable = false,
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
 	liquidtype = "flowing",
-	liquid_alternative_flowing = "lulzpack:meltedcelis_flowing",
-	liquid_alternative_source = "lulzpack:meltedcelis_source",
-	liquid_viscosity = 120,
-	damage_per_second = 10,
+	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
+	liquid_alternative_source = "lulzpack:"..name.."_source",
+	liquid_viscosity = viscosity,
+	damage_per_second = damage,
 	post_effect_color = {a=192, r=130, g=64, b=0},
 	groups = {liquid=2, hot=3, igniter=1, not_in_creative_inventory=1},
 })
 
-minetest.register_node("lulzpack:meltedcelis_source", {
-	description = "Melted Celis Source",
-	inventory_image = minetest.inventorycube("meltedcelis.png"),
+minetest.register_node("lulzpack:"..name.."_source", {
+	description = ""..nodename.." Source",
+	inventory_image = minetest.inventorycube(""..texturename..".png"),
 	drawtype = "liquid",
 	tiles = {
-		{name="meltedcelis_source_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
+		{name=""..texturename.."_source_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
 	},
 	paramtype = "light",
-	light_source = 1,
+	light_source = light,
 	walkable = false,
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
 	liquidtype = "source",
-	liquid_alternative_flowing = "lulzpack:meltedcelis_flowing",
-	liquid_alternative_source = "lulzpack:meltedcelis_source",
-	liquid_viscosity = 180,
-	damage_per_second = 10,
+	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
+	liquid_alternative_source = "lulzpack:"..name.."_source",
+	liquid_viscosity = viscosity,
+	damage_per_second = damage,
 	post_effect_color = {a=192, r=255, g=64, b=0},
 	groups = {liquid=2, hot=3, igniter=1},
 })
-
+end
+--Liquids
+registerLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
+registerLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
+--Buckets
 bucket.register_liquid("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:bucket_meltedcelis","bucket_meltedcelis.png")
+bucket.register_liquid("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:bucket_meltedlyra","bucket_meltedlyra.png")
 
 
 
@@ -138,8 +142,12 @@ end
 
 smithery = function(pos,node)
     if minetest.env:get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "default:lava_source" then 
+        --RECIPES
         addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:celis_block", "lulzpack:bucket_meltedcelis", "bucket:bucket_empty", "case")
-        random=math.random(1,math.random(10,math.random(12,15)))
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:lyra_block", "lulzpack:bucket_meltedlyra", "bucket:bucket_empty", "case")
+        --CONSUMING THE LAVA
+        random=math.random(1,12)
+        print (random)
         if random >= math.random(9,12) then minetest.env:remove_node({x=pos.x,y=pos.y-1,z=pos.z}) end
     end
 end
@@ -149,7 +157,18 @@ minetest.register_abm({
     interval=4.0,
     chance=1,
     action=smithery, })
-    
+
+
+
+--[[minetest.register_craft({
+	output = 'lulzpack:smithery',
+	recipe = {
+            {'lulzpack:lava_block','lulzpack:industrial_iron','lulzpack:lava_block'},
+            {'lulzpack:lava_block','','lulzpack:lava_block'},
+            {'lulzpack:lava_block','lulzpack:celis_ingot','lulzpack:lava_block'},
+	}
+})]]
+        
 minetest.register_craft({
     output = 'lulzpack:smithery',
     recipe = {

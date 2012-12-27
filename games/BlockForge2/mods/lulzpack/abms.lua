@@ -24,8 +24,19 @@ minetest.register_node("lulzpack:obsidian", {
 	light_source = LIGHT_MAX-5,
 	tiles ={"obsidian.png"},
 	is_ground_content = true,
-	groups = {obs=1},--Only breakable by Lyra Pickaxe
+	groups = {obs=1},
 	drop = 'lulzpack:raw_obsidian',
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lulzpack:celis_obsidian", {
+	description = "Obsidian",
+	light_source = LIGHT_MAX+5,
+	tiles ={"celis_obsidian.png"},
+	is_ground_content = true,
+	groups = {obs=2},
+	drop = 'lulzpack:obsidian',
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -40,10 +51,19 @@ minetest.register_node("lulzpack:raw_obsidian", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+--Recipes
 minetest.register_craft({
 	output = "lulzpack:obsidian",
 	recipe = {{"lulzpack:raw_obsidian","lulzpack:raw_obsidian"},
              {"lulzpack:raw_obsidian","lulzpack:raw_obsidian"},}
+})
+minetest.register_craft({
+	output = "lulzpack:celis_obsidian 6",
+	recipe = {
+             {"lulzpack:bucket_meltedcelis","lulzpack:raw_obsidian","lulzpack:bucket_meltedcelis"},
+             {"","lulzpack:raw_obsidian",""},
+             {"","lulzpack:raw_obsidian",""},
+            }
 })
 
 

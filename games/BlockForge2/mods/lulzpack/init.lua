@@ -18,6 +18,7 @@
 
 
 --Main file of the LulzPack.Such a casual name.
+lulzpack = {}
 
 minetest.register_node("lulzpack:cold_dirt", {
 	description = "cold Dirt",
@@ -291,8 +292,9 @@ minetest.register_tool("lulzpack:pick_hybrid", {
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
-			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60, [4]=5.50}, uses=40, maxlevel=4},
-            forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=4}
+			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60}, uses=40, maxlevel=4},
+            forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=4},
+            obs={times={[1]=2.00,[2]=7.50},uses=25,maxlevel=2}
 		}
 	},
 })
@@ -536,3 +538,4 @@ dofile(minetest.get_modpath("lulzpack") .. "/time2pwn.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/drop.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/wires.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/smithery.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/craftingtables.lua")

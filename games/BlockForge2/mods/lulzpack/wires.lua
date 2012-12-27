@@ -18,7 +18,7 @@
 
 minetest.register_node("lulzpack:mill_gen", {
     description = "Mill Generator",
-	tiles = {"quarry_side.png"},
+	tiles = {{name="millgen_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0}},"quarry_side.png"},
 	is_ground_content = false,
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
