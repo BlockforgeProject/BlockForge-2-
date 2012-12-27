@@ -31,7 +31,7 @@ minetest.register_node("lulzpack:obsidian", {
 })
 
 minetest.register_node("lulzpack:celis_obsidian", {
-	description = "Obsidian",
+	description = "Celis Obsidian",
 	light_source = LIGHT_MAX+5,
 	tiles ={"celis_obsidian.png"},
 	is_ground_content = true,
@@ -60,9 +60,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "lulzpack:celis_obsidian 6",
 	recipe = {
-             {"lulzpack:bucket_meltedcelis","lulzpack:raw_obsidian","lulzpack:bucket_meltedcelis"},
-             {"","lulzpack:raw_obsidian",""},
-             {"","lulzpack:raw_obsidian",""},
+             {"lulzpack:bucket_meltedcelis","lulzpack:obsidian","lulzpack:bucket_meltedcelis"},
+             {"","lulzpack:obsidian",""},
+             {"","lulzpack:obsidian",""},
             }
 })
 
