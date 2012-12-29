@@ -154,6 +154,11 @@ minetest.register_craftitem("lulzpack:redyz_ingot", {
 	description = "Redyz Ingot",
 	inventory_image = "redyz_ingot.png",
 })
+------------------------------------------------------------------------
+minetest.register_craftitem("lulzpack:iron_plate", {
+	description = "Iron Plate",
+	inventory_image = "ironplate.png",
+})
 --Glasses
 minetest.register_node("lulzpack:ironglass", {
     tiles = {"iron_glass.png"},
@@ -408,6 +413,18 @@ minetest.register_craft({
 	output = 'lulzpack:redyz_ingot 9',
 	recipe = {
 		{'lulzpack:redyz_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:iron_plate 6',
+	recipe = {
+		{'lulzpack:bucket_meltediron'},
+	}
+})
+minetest.register_craft({
+	output = 'default:steel_ingot 3',
+	recipe = {
+		{'lulzpack:iron_plate','','lulzpack:iron_plate'},
 	}
 })
 --Glasses

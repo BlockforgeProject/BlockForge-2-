@@ -122,9 +122,11 @@ end
 --Liquids
 registerLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
 registerLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
+registerLiquid("meltediron","Melted Iron","meltediron",160,4,3)
 --Buckets
 bucket.register_liquid("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:bucket_meltedcelis","bucket_meltedcelis.png")
 bucket.register_liquid("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:bucket_meltedlyra","bucket_meltedlyra.png")
+bucket.register_liquid("lulzpack:meltediron_source","lulzpack:meltediron_flowing","lulzpack:bucket_meltediron","bucket_meltediron.png")
 
 
 
@@ -145,6 +147,7 @@ smithery = function(pos,node)
         --RECIPES
         addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:celis_block", "lulzpack:bucket_meltedcelis", "bucket:bucket_empty", "case")
         addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:lyra_block", "lulzpack:bucket_meltedlyra", "bucket:bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "default:steelblock", "lulzpack:bucket_meltediron", "bucket:bucket_empty", "case")
         --CONSUMING THE LAVA
         random=math.random(1,12)
         print (random)
