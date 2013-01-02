@@ -44,16 +44,6 @@ minetest.register_craft({
 	}
 })
 
-function add_gen_fuel(pos, node, invname, nodename, varname, given_energy, replacing_item)
-    local meta = minetest.env:get_meta(pos)
-    local inv = meta:get_inventory()
-    if meta:get_inventory():contains_item(invname, nodename) then
-        energy=meta:get_int(varname)
-        meta:set_int(varname,energy+given_energy)
-        meta:get_inventory():remove_item(invname, nodename)
-        meta:get_inventory():add_item(invname, replacing_item) end
-end
-
 function MILLGENupdate_formspec(pos)
 		local meta = minetest.env:get_meta(pos)
 		meta:set_string("formspec",
@@ -71,6 +61,9 @@ mill_gen_energy = function(pos, node)
         add_gen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", math.random(20,35), nil)
         add_gen_fuel(pos, node, "fuel", "bucket:bucket_lava", "energy", math.random(80,100), "bucket:bucket_empty")
         add_gen_fuel(pos, node, "fuel", "bucket:bucket_water", "energy", math.random(20,30), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltedcelis", "energy", math.random(200,300), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltedlyra", "energy", math.random(120,150), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltediron", "energy", math.random(110,130), "bucket:bucket_empty")
         MILLGENupdate_formspec(pos)
 end
 

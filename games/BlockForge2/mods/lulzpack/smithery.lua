@@ -65,60 +65,7 @@ minetest.register_node("lulzpack:smithery", {
         fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
     }
 })
-function registerLiquid(name,nodename,texturename,viscosity,damage,light)
-minetest.register_node("lulzpack:"..name.."_flowing", {
-	description = "Flowing"..nodename.."",
-	inventory_image = minetest.inventorycube(""..texturename..".png"),
-	drawtype = "flowingliquid",
-	special_tiles = {
-		{
-			image=""..texturename.."_flowing_animated.png",
-			backface_culling=false,
-			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
-		},
-		{
-			image=""..texturename.."_flowing_animated.png",
-			backface_culling=true,
-			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
-		},
-	},
-	paramtype = "light",
-	light_source = light,
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	liquidtype = "flowing",
-	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
-	liquid_alternative_source = "lulzpack:"..name.."_source",
-	liquid_viscosity = viscosity,
-	damage_per_second = damage,
-	post_effect_color = {a=192, r=130, g=64, b=0},
-	groups = {liquid=2, hot=3, igniter=1, not_in_creative_inventory=1},
-})
 
-minetest.register_node("lulzpack:"..name.."_source", {
-	description = ""..nodename.." Source",
-	inventory_image = minetest.inventorycube(""..texturename..".png"),
-	drawtype = "liquid",
-	tiles = {
-		{name=""..texturename.."_source_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
-	},
-	paramtype = "light",
-	light_source = light,
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	liquidtype = "source",
-	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
-	liquid_alternative_source = "lulzpack:"..name.."_source",
-	liquid_viscosity = viscosity,
-	damage_per_second = damage,
-	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2, hot=3, igniter=1},
-})
-end
 --Liquids
 registerLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
 registerLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
@@ -128,20 +75,6 @@ bucket.register_liquid("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowi
 bucket.register_liquid("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:bucket_meltedlyra","bucket_meltedlyra.png")
 bucket.register_liquid("lulzpack:meltediron_source","lulzpack:meltediron_flowing","lulzpack:bucket_meltediron","bucket_meltediron.png")
 
-
-
-function addSmitheryRecipe(pos, node, srcinv_name, destinv_name, source, result, case, caseinv_name)
-    local meta=minetest.env:get_meta(pos)
-    local inv=meta:get_inventory()
-    if inv:contains_item(srcinv_name, source) then
-        if inv:contains_item(caseinv_name, case) then
-            inv:remove_item(srcinv_name, source)
-            inv:remove_item(caseinv_name, case)
-            inv:add_item(destinv_name, result)
-        end
-    end
-end
-
 smithery = function(pos,node)
     if minetest.env:get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "default:lava_source" then 
         --RECIPES
@@ -150,7 +83,6 @@ smithery = function(pos,node)
         addSmitheryRecipe(pos, node, "src", "dst", "default:steelblock", "lulzpack:bucket_meltediron", "bucket:bucket_empty", "case")
         --CONSUMING THE LAVA
         random=math.random(1,12)
-        print (random)
         if random >= math.random(9,12) then minetest.env:remove_node({x=pos.x,y=pos.y-1,z=pos.z}) end
     end
 end
