@@ -17,13 +17,25 @@ minetest.register_tool("lulzpack:chainsaw_celis", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=0.50, [2]=0.20, [3]=0.05}, uses=70, maxlevel=1},
+			choppy={times={[1]=0.50, [2]=0.20, [3]=0.10}, uses=70, maxlevel=1},
 			fleshy={times={[1]=0.30, [2]=0.20, [3]=0.08}, uses=60, maxlevel=1},
 			snappy={times={[1]=0.05, [2]=0.02, [3]=0.01}, uses=60, maxlevel=1}
 		}
 	},
 })
 
+minetest.register_tool("lulzpack:chainsaw_nyon", {
+	description = "Nyon Chainsaw",
+	inventory_image = "nyon_chainsaw.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=0.30, [2]=0.10, [3]=0.05}, uses=100, maxlevel=1},
+			fleshy={times={[1]=0.50, [2]=0.30, [3]=0.15}, uses=80, maxlevel=1},
+			snappy={times={[1]=0.02, [2]=0.01, [3]=0.01}, uses=60, maxlevel=1}
+		}
+	},
+})
 --Craftings
 
 minetest.register_craft({
@@ -44,4 +56,12 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'lulzpack:chainsaw_nyon',
+	recipe = {
+		{'lulzpack:industrial_iron', 'lulzpack:industrial_iron', 'lulzpack:iron_plate'},
+		{'lulzpack:industrial_iron', 'lulzpack:nyon_block', 'lulzpack:iron_plate'},
+		{'', 'lulzpack:iron_plate', 'lulzpack:intbattery'},
+	}
+})
 
