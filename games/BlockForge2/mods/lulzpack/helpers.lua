@@ -190,3 +190,45 @@ minetest.register_craft({
 })
 
 end
+--Modified version of the bucket helper
+lulzLiquids={}
+function registerObsBucket(source, flowing, itemname, inventory_image, graphicname)
+	lulzLiquids[source] = {
+		source = source,
+		flowing = flowing,
+		itemname = itemname,
+	}
+	lulzLiquids[flowing] = lulzLiquids[source]
+
+	if itemname ~= nil then
+		minetest.register_craftitem(itemname, {
+			inventory_image = inventory_image,
+			stack_max = 1,
+			liquids_pointable = true,
+            description = graphicname,
+			on_use = function(itemstack, user, pointed_thing)
+				-- Must be pointing to node
+				if pointed_thing.type ~= "node" then
+					return
+				end
+				-- Check if pointing to a buildable node
+				n = minetest.env:get_node(pointed_thing.under)
+				if minetest.registered_nodes[n.name].buildable_to then
+					-- buildable; replace the node
+					minetest.env:add_node(pointed_thing.under, {name=source})
+				else
+					-- not buildable to; place the liquid above
+					-- check if the node above can be replaced
+					n = minetest.env:get_node(pointed_thing.above)
+					if minetest.registered_nodes[n.name].buildable_to then
+						minetest.env:add_node(pointed_thing.above,{name=source})
+					else
+						-- do not remove the bucket with the liquid
+						return
+					end
+				end
+				return {name="lulzpack:obsidian_bucket_empty"}
+			end
+		})
+	end
+end

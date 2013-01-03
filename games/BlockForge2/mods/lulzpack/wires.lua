@@ -61,9 +61,9 @@ mill_gen_energy = function(pos, node)
         add_gen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", math.random(20,35), nil)
         add_gen_fuel(pos, node, "fuel", "bucket:bucket_lava", "energy", math.random(80,100), "bucket:bucket_empty")
         add_gen_fuel(pos, node, "fuel", "bucket:bucket_water", "energy", math.random(20,30), "bucket:bucket_empty")
-        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltedcelis", "energy", math.random(200,300), "bucket:bucket_empty")
-        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltedlyra", "energy", math.random(120,150), "bucket:bucket_empty")
-        add_gen_fuel(pos, node, "fuel", "lulzpack:bucket_meltediron", "energy", math.random(110,130), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:obsidian_bucket_meltedcelis", "energy", math.random(200,300), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:obsidian_bucket_meltedlyra", "energy", math.random(120,150), "bucket:bucket_empty")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:obsidian_bucket_meltediron", "energy", math.random(110,130), "bucket:bucket_empty")
         MILLGENupdate_formspec(pos)
 end
 

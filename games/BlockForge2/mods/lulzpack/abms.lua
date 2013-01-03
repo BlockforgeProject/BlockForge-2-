@@ -60,8 +60,15 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "lulzpack:celis_obsidian 6",
 	recipe = {
-             {"lulzpack:bucket_meltedcelis","lulzpack:obsidian","lulzpack:bucket_meltedcelis"},
+             {"lulzpack:obsidian_bucket_meltedcelis","lulzpack:obsidian","lulzpack:obsidian_bucket_meltedcelis"},
              {"","lulzpack:obsidian",""},
+             {"","lulzpack:obsidian",""},
+            }
+})
+minetest.register_craft({
+	output = "lulzpack:obsidian_bucket_empty",
+	recipe = {
+             {"lulzpack:obsidian","","lulzpack:obsidian"},
              {"","lulzpack:obsidian",""},
             }
 })

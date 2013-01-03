@@ -65,22 +65,41 @@ minetest.register_node("lulzpack:smithery", {
         fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
     }
 })
-
+--Obsidian Bucket
+minetest.register_craftitem("lulzpack:obsidian_bucket_empty", {
+	description = "Empty Obsidian Bucket",
+	inventory_image = "obsidian_bucket_empty.png",
+	stack_max = 1,
+	liquids_pointable = true,
+	on_use = function(itemstack, user, pointed_thing)
+		-- Must be pointing to node
+		if pointed_thing.type ~= "node" then
+			return
+		end
+		-- Check if pointing to a liquid source
+		n = minetest.env:get_node(pointed_thing.under)
+		liquiddef = lulzLiquids[n.name]
+		if liquiddef ~= nil and liquiddef.source == n.name and liquiddef.itemname ~= nil then
+			minetest.env:add_node(pointed_thing.under, {name="air"})
+			return {name=liquiddef.itemname}
+		end
+	end,
+})
 --Liquids
 registerLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
 registerLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
 registerLiquid("meltediron","Melted Iron","meltediron",160,4,3)
 --Buckets
-bucket.register_liquid("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:bucket_meltedcelis","bucket_meltedcelis.png")
-bucket.register_liquid("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:bucket_meltedlyra","bucket_meltedlyra.png")
-bucket.register_liquid("lulzpack:meltediron_source","lulzpack:meltediron_flowing","lulzpack:bucket_meltediron","bucket_meltediron.png")
+registerObsBucket("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:obsidian_bucket_meltedcelis","obsidian_bucket_meltedcelis.png","Melted Celis Obsidian Bucket")
+registerObsBucket("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:obsidian_bucket_meltedlyra","obsidian_bucket_meltedlyra.png","Melted Lyra Obsidian Bucket")
+registerObsBucket("lulzpack:meltediron_source","lulzpack:meltediron_flowing","lulzpack:obsidian_bucket_meltediron","obsidian_bucket_meltediron.png","Melted Iron Obsidian Bucket")
 
 smithery = function(pos,node)
     if minetest.env:get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "default:lava_source" then 
         --RECIPES
-        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:celis_block", "lulzpack:bucket_meltedcelis", "bucket:bucket_empty", "case")
-        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:lyra_block", "lulzpack:bucket_meltedlyra", "bucket:bucket_empty", "case")
-        addSmitheryRecipe(pos, node, "src", "dst", "default:steelblock", "lulzpack:bucket_meltediron", "bucket:bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:celis_block", "lulzpack:obsidian_bucket_meltedcelis", "lulzpack:obsidian_bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:lyra_block", "lulzpack:obsidian_bucket_meltedlyra", "lulzpack:obsidian_bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "default:steelblock", "lulzpack:obsidian_bucket_meltediron", "lulzpack:obsidian_bucket_empty", "case")
         --CONSUMING THE LAVA
         random=math.random(1,12)
         if random >= math.random(9,12) then minetest.env:remove_node({x=pos.x,y=pos.y-1,z=pos.z}) end
@@ -92,7 +111,6 @@ minetest.register_abm({
     interval=4.0,
     chance=1,
     action=smithery, })
-
 
 
 --[[minetest.register_craft({

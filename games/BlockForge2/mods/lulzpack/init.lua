@@ -420,7 +420,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'lulzpack:iron_plate 6',
 	recipe = {
-		{'lulzpack:bucket_meltediron'},
+		{'lulzpack:obsidian_bucket_meltediron'},
 	}
 })
 minetest.register_craft({
@@ -519,3 +519,4 @@ include("smithery")
 --include("craftingtables")
 include("recharger")
 include("electrotools")
+include("explosives")
