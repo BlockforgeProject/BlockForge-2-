@@ -161,6 +161,11 @@ minetest.register_craftitem("lulzpack:iron_plate", {
 	description = "Iron Plate",
 	inventory_image = "ironplate.png",
 })
+------------------------------------------------------------------------
+minetest.register_craftitem("lulzpack:obsidian_plate", {
+	description = "Obsidian Plate",
+	inventory_image = "obsidianplate.png",
+})
 --Glasses
 minetest.register_node("lulzpack:ironglass", {
     tiles = {"iron_glass.png"},
@@ -239,7 +244,7 @@ minetest.register_tool("lulzpack:sword_lyra", {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[1]=2.00, [2]=1.00, [3]=0.40}, uses=30, maxlevel=2},
+			fleshy={times={[1]=2.00, [2]=1.00, [3]=0.40}, uses=30, maxlevel=1},
 			snappy={times={[2]=0.65, [3]=0.35}, uses=50, maxlevel=1},
 			choppy={times={[3]=0.80}, uses=50, maxlevel=0}
 		}
@@ -252,7 +257,7 @@ minetest.register_tool("lulzpack:sword_celis", {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[1]=2.70, [2]=1.20, [3]=0.60}, uses=30, maxlevel=2},
+			fleshy={times={[1]=2.70, [2]=1.20, [3]=0.60}, uses=30, maxlevel=1},
 			snappy={times={[2]=0.50, [3]=0.30}, uses=50, maxlevel=1},
 			choppy={times={[3]=0.70}, uses=50, maxlevel=0}
 		}
@@ -264,7 +269,7 @@ minetest.register_tool("lulzpack:axe_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=2.30, [2]=1.50, [3]=1.00}, uses=30, maxlevel=2},
+			choppy={times={[1]=2.30, [2]=1.50, [3]=1.00}, uses=30, maxlevel=1},
 			fleshy={times={[2]=0.80, [3]=0.60}, uses=40, maxlevel=1}
 		}
 	},
@@ -276,7 +281,7 @@ minetest.register_tool("lulzpack:shovel_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			crumbly={times={[1]=1.30, [2]=0.60, [3]=0.70}, uses=30, maxlevel=2}
+			crumbly={times={[1]=1.30, [2]=0.60, [3]=0.70}, uses=30, maxlevel=1}
 		}
 	},
 })
@@ -286,8 +291,8 @@ minetest.register_tool("lulzpack:pick_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=4},
-            forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=4},
+			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=1},
+            forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=1},
             obs={times={[1]=2.50},uses=25,maxlevel=1}
 		}
 	},

@@ -22,6 +22,7 @@ minetest.register_craft({
 })
 
 register_lulzpack_ore("cryoas","Cryoas")
+--registerTools("cryoas","lulzpack:cryoas_ingot",1.20,1)
 
 minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("lulzpack:desertstone_with_redyz", "default:desert_stone", minp, maxp, seed+6, 1/24/24/24, 12,256, -300, 300)
