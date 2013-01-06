@@ -80,7 +80,23 @@ minetest.register_node("lulzpack:hotstone", {
 	description = "Hot Stone",
 	tiles ={"hotstone.png"},
 	is_ground_content = true,
-	groups = {cracky=4},
+	groups = {hotstone=1},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lulzpack:dintled_steelblock", {
+	description = "Dintled Steel Block",
+	tiles ={"dintled_steelblock.png"},
+	is_ground_content = true,
+	groups = {dintled=1},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lulzpack:dintled_celisblock", {
+	description = "Dintled Celis Block",
+	tiles ={"dintled_celisblock.png"},
+	is_ground_content = true,
+	groups = {dintled=2},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -166,6 +182,7 @@ minetest.register_craftitem("lulzpack:obsidian_plate", {
 	description = "Obsidian Plate",
 	inventory_image = "obsidianplate.png",
 })
+
 --Glasses
 minetest.register_node("lulzpack:ironglass", {
     tiles = {"iron_glass.png"},
@@ -293,7 +310,8 @@ minetest.register_tool("lulzpack:pick_lyra", {
 		groupcaps={
 			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=1},
             forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=1},
-            obs={times={[1]=2.50},uses=25,maxlevel=1}
+            obs={times={[1]=2.50},uses=25,maxlevel=1},
+            hotstone={times={[1]=5.00},uses=10,maxlevel=1},
 		}
 	},
 })
@@ -304,9 +322,11 @@ minetest.register_tool("lulzpack:pick_hybrid", {
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
-			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60}, uses=40, maxlevel=4},
-            forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=4},
-            obs={times={[1]=2.00,[2]=7.50},uses=25,maxlevel=2}
+			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60}, uses=40, maxlevel=1},
+            forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=1},
+            obs={times={[1]=2.00,[2]=7.50},uses=25,maxlevel=1},
+            hotstone={times={[1]=4.00},uses=20,maxlevel=1},
+            dintled={times={[1]=7.00,[2]=10.00},uses=15,maxlevel=1},
 		}
 	},
 })
@@ -465,7 +485,22 @@ minetest.register_craft({
 		{'default:glass', 'default:mese', 'default:glass'},
 	}
 })
+
+minetest.register_craft({
+	output = 'lulzpack:dintled_steelblock 2',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltediron', 'lulzpack:hotstone'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:dintled_celisblock 2',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltedcelis', 'lulzpack:hotstone'},
+	}
+})
 	
+
 --Cooking recipes
 minetest.register_craft({
 	type = "cooking",
