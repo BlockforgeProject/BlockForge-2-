@@ -22,7 +22,27 @@ minetest.register_craft({
 })
 
 register_lulzpack_ore("cryoas","Cryoas")
---registerTools("cryoas","lulzpack:cryoas_ingot",1.20,1)
+registerTools("cryoas","lulzpack:cryoas_ingot","Cryoas",
+{
+	fleshy={times={[1]=2.30, [2]=1.30, [3]=0.80}, uses=30, maxlevel=1},
+	snappy={times={[2]=0.95, [3]=0.75}, uses=50, maxlevel=1},
+	choppy={times={[3]=1.20}, uses=50, maxlevel=0}
+},
+--
+{
+	choppy={times={[1]=2.50, [2]=1.70, [3]=1.30}, uses=30, maxlevel=1},
+	fleshy={times={[2]=1.10, [3]=0.80}, uses=40, maxlevel=1}
+},
+--
+{
+	crumbly={times={[1]=1.50, [2]=0.8w0, [3]=0.70}, uses=30, maxlevel=1}
+},
+--
+{
+	cracky={times={[1]=4.00, [2]=1.50, [3]=1.00}, uses=30, maxlevel=1},
+}
+--
+)
 
 minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("lulzpack:desertstone_with_redyz", "default:desert_stone", minp, maxp, seed+6, 1/24/24/24, 12,256, -300, 300)

@@ -66,7 +66,7 @@ minetest.register_node("lulzpack:lava_block", {
 	sounds = default.node_sound_stone_defaults(),
 })
 minetest.register_node("lulzpack:water_block", {
-	description = "Solidified Lava",
+	description = "Solidified Water",
 	tiles ={"water_block.png"},
 	is_ground_content = true,
 	groups = {cracky=1},
@@ -548,7 +548,7 @@ include("lamps")
 include("machines")
 include("recipes")
 include("materials")
---include("guns") Guns are actually bugged,i'll fix them later
+--include("guns") --Guns are actually bugged,i'll fix them later
 include("abms")
 include("desertores")
 include("furnaces")

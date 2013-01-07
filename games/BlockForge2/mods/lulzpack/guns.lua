@@ -48,7 +48,13 @@ BUL1_ENT.on_step = function(self, deltat)
 	if self.timer>0.4 then
 		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)
 		for k, obj in pairs(objs) do
-			obj:set_hp(obj:get_hp()-BUL1_DAMAGE)
+			obj:punch(obj, 1.0, {
+            full_punch_interval=1.0,
+            groupcaps = {
+                fleshy={times={[1]=BUL1_DAMAGE/3,[2]=BUL1_DAMAGE/2,[3]=BUL1_DAMAGE}},
+                snappy={times={[1]=BUL1_DAMAGE/3,[2]=BUL1_DAMAGE/2,[3]=BUL1_DAMAGE}}
+                } 
+            })
 			if obj:get_entity_name() ~= "lulzpack:bul1_ent" then
 				if obj:get_hp()<=0 then
 					obj:remove()
@@ -57,15 +63,6 @@ BUL1_ENT.on_step = function(self, deltat)
 			end
 		end
 	end
-
-	--[[Become item when hitting a node
-	if self.lastpos.x~=nil then --If there is no lastpos for some reason
-		if node.name ~= "air" then
-			minetest.env:add_item(self.lastpos, 'gunmod:usedbullet1 1')
-			self.object:remove()
-		end
-	end
-	self.lastpos={x=pos.x, y=pos.y, z=pos.z} -- Set lastpos-->Item will be added at last pos outside the node ]]--
 end
 
 BUL2_ENT.on_step = function(self, deltat)

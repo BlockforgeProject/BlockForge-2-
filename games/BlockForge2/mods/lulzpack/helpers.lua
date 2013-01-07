@@ -190,8 +190,8 @@ minetest.register_craft({
 })
 
 end
---[[Tools registration helper
-function registerTools(toolname, itemname, graphicname, constant, usesconstant)
+--Tools registration helper
+function registerTools(toolname, itemname, graphicname, swordgroups, axegroups, shovelgroups, pickgroups)
 
 minetest.register_tool("lulzpack:sword_"..toolname.."", {
 	description = ""..graphicname.." Sword",
@@ -199,11 +199,7 @@ minetest.register_tool("lulzpack:sword_"..toolname.."", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps={
-			fleshy={times={[1]=2.00*constant, [2]=1.00*constant, [3]=0.50*constant}, uses=50, maxlevel=1},
-			snappy={times={[1]=2.00*constant, [2]=1.00*constant, [3]=0.50*constant, uses=50, maxlevel=1},
-			choppy={[1]=1.70*constant, [2]=0.80*constant, [3]=0.30*constant}, uses=40, maxlevel=1}
-		}
+		groupcaps=swordgroups
 	}
 })
 
@@ -212,10 +208,7 @@ minetest.register_tool("lulzpack:axe_"..toolname.."", {
 	inventory_image = ""..toolname.."_axe.png",
 	tool_capabilities = {
 		max_drop_level=1,
-		groupcaps={
-			choppy={times={[1]=2.00*constant, [2]=1.50*constant, [3]=1.00*constant}, uses=30, maxlevel=1},
-			fleshy={times={[1]=2.00*constant, [2]=1.50*constant, [3]=1.00*constant}, uses=40, maxlevel=1}
-		}
+		groupcaps=axegroups
 	},
 })
 
@@ -225,9 +218,7 @@ minetest.register_tool("lulzpack:shovel_"..toolname.."", {
 	wield_image = ""..toolname.."_shovel.png^[transformR45",
 	tool_capabilities = {
 		max_drop_level=1,
-		groupcaps={
-			crumbly={times={[1]=1.30*constant, [2]=0.60*constant, [3]=0.70*constant}, uses=30, maxlevel=1}
-		}
+		groupcaps=shovelgroups
 	},
 })
 
@@ -236,9 +227,7 @@ minetest.register_tool("lulzpack:pick_"..toolname.."", {
 	inventory_image = ""..toolname.."_pick.png",
 	tool_capabilities = {
 		max_drop_level=1,
-		groupcaps={
-			cracky={times={[1]=3.50*constant, [2]=1.40*constant, [3]=0.80*constant}, uses=30, maxlevel=1},
-		}
+		groupcaps=pickgroups
 	},
 })
 
@@ -277,7 +266,7 @@ minetest.register_craft({
 		{'', 'default:stick', ''},
 	}
 })
-end]]
+end
 --Modified version of the bucket helper for obsidian buckets
 lulzLiquids={}
 function registerObsBucket(source, flowing, itemname, inventory_image, graphicname)
