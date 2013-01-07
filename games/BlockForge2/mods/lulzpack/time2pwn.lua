@@ -19,12 +19,16 @@ pwned=function(player, drops)
      pos=player:getpos()
      itempos={x=pos.x,y=pos.y+1,z=pos.z}
      local inv=player:get_inventory()
+     items={}
      for i=1,inv:get_size("main") do
         local item=inv:get_stack("main", i)
+        items[i]=item
+    end
+        for i=1,32 do
+        local item=items[i]
         count=item:get_count()
         if count <= 99 then
-            for i=1,count do
-                minetest.env:add_item(itempos,item:get_name()) end
+            minetest.env:add_item(itempos,''..item:get_name()..' '..count..'')
             inv:set_stack("main", i, nil)
             for i=1,9 do inv:set_stack("craft", i,nil) end
             inv:set_stack("craftpreview", 1,nil)
