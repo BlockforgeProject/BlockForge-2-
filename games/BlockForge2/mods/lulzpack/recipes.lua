@@ -86,6 +86,16 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'lulzpack:simple_miner',
+	recipe = {
+		{'', 'lulzpack:electrodrill', '' },
+		{'lulzpack:electrodrill', 'lulzpack:electroblock', 'lulzpack:electrodrill'},
+		{'', 'lulzpack:nyon_block', ''},
+
+	}
+})
+
+minetest.register_craft({
 	output = 'lulzpack:intbattery 1',
 	recipe = {
 		{'lulzpack:industrial_iron', 'lulzpack:industrial_iron', 'lulzpack:industrial_iron'},

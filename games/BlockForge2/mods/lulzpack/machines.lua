@@ -15,8 +15,7 @@
 --
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
-
-
+dofile(minetest.get_modpath("lulzpack") .. "/persistence.lua")
 
 minetest.register_node("lulzpack:quarry", {
     description = "Quarry",
@@ -86,6 +85,36 @@ minetest.register_node("lulzpack:macerator", {
 	groups = {cracky=2},
 })
 
+minetest.register_node("lulzpack:simple_miner", {
+    description = "Simple Miner",
+	tiles = {"simpleminer_top.png","quarry_side.png",
+		  "quarry_side.png","quarry_side.png",
+		  "quarry_side.png","quarry_side.png"},
+	on_construct = function(pos)
+		local meta = minetest.env:get_meta(pos)
+        meta:set_int("energy",0)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,1;]"..
+			    "list[current_name;fuels;3,3;3,1;]"..
+                "label[1,3,fuelstext]"..
+                "list[current_name;Energy="..meta:get_int("energy").."]"..
+				"list[current_player;main;0,5;8,4;]")
+		meta:set_string("infotext", "Simple Miner")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8)
+		inv:set_size("fuels", 3)
+        simpleminer_pos["q"..pos.x.."-"..pos.z] =1
+	end,
+	groups = {cracky=2},
+    digs=1,
+    on_dig = function(pos) 
+    simpleminer_pos["q"..pos.x.."-"..pos.z]=nil
+    minetest.env:remove_node(pos)
+    minetest.env:add_item(pos, {name="lulzpack:simple_miner"})
+    end
+})
+
 --[[oilwell_fix={ -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
 
 minetest.register_node("lulzpack:oilwell", {
@@ -105,6 +134,7 @@ minetest.register_node("lulzpack:oilwell", {
     }, 
 })]]
 
+dofile(minetest.get_modpath("lulzpack") .. "/simpleminer.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/quarry.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/raffinery.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/macerator.lua")

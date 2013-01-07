@@ -56,7 +56,6 @@ minetest.register_node("lulzpack:"..name.."_source", {
 })
 end
 --Smithery Recipe helper
-
 function addSmitheryRecipe(pos, node, srcinv_name, destinv_name, source, result, case, caseinv_name)
     local meta=minetest.env:get_meta(pos)
     local inv=meta:get_inventory()
@@ -78,6 +77,28 @@ function add_gen_fuel(pos, node, invname, nodename, varname, given_energy, repla
         meta:set_int(varname,energy+given_energy)
         meta:get_inventory():remove_item(invname, nodename)
         meta:get_inventory():add_item(invname, replacing_item) end
+end
+
+--Simple Miner fuel helper
+function add_simpleminer_fuel(pos, node, invname, nodename, varname, given_energy, replacing_item)
+    local meta = minetest.env:get_meta(pos)
+    local inv = meta:get_inventory()
+    if meta:get_inventory():contains_item(invname, nodename) then
+        energy=meta:get_int(varname)
+        meta:set_int(varname,energy+given_energy)
+        meta:get_inventory():remove_item(invname, nodename)
+        meta:get_inventory():add_item(invname, replacing_item) end
+end
+--Simple Miner formspec Update
+function SIMPLEMINERupdate_formspec(pos)
+		local meta = minetest.env:get_meta(pos)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,1;]"..
+			    "list[current_name;fuels;3,3;3,1;]"..
+                "label[1,3,fuelstext]"..
+                "list[current_name;Energy="..meta:get_int("energy").."]"..
+				"list[current_player;main;0,5;8,4;]")
 end
 
 --Recharger Item

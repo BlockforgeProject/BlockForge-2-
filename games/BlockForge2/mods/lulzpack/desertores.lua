@@ -35,7 +35,7 @@ registerTools("cryoas","lulzpack:cryoas_ingot","Cryoas",
 },
 --
 {
-	crumbly={times={[1]=1.50, [2]=0.8w0, [3]=0.70}, uses=30, maxlevel=1}
+	crumbly={times={[1]=1.50, [2]=0.80, [3]=0.70}, uses=30, maxlevel=1}
 },
 --
 {

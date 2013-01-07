@@ -15,13 +15,13 @@
 --
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
-dofile(minetest.get_modpath("lulzpack") .. "/persistence.lua")
+
 
 quarry_pos = {}
 quarry_pos = persistence.load(minetest.get_modpath("lulzpack") .. "/quarrydb.pny")
 if quarry_pos==nil then quarry_pos={} end
 
-local activatequarry = function(pos, node, puncher)
+local activatequarry = function(pos, node)
 local meta = minetest.env:get_meta(pos)
 local digs=quarry_pos["q"..pos.x.."-"..pos.z] if digs==nil then return end
 if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
