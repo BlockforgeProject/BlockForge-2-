@@ -22,13 +22,14 @@ pwned=function(player, drops)
      items={}
      for i=1,inv:get_size("main") do
         local item=inv:get_stack("main", i)
-        items[i]=item
     end
         for i=1,32 do
-        local item=items[i]
-        count=item:get_count()
+        item=items[i]
+        item_stack=ItemStack(item)
+        wear=item_stack:get_wear()
+        count=item_stack:get_count()
         if count <= 99 then
-            minetest.env:add_item(itempos,''..item:get_name()..' '..count..'')
+            minetest.env:add_item(itempos,""..item_stack:get_name().." "..count.." ")
             inv:set_stack("main", i, nil)
             for i=1,9 do inv:set_stack("craft", i,nil) end
             inv:set_stack("craftpreview", 1,nil)

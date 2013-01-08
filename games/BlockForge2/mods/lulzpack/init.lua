@@ -322,7 +322,7 @@ minetest.register_tool("lulzpack:pick_hybrid", {
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
-			cracky={times={[1]=1.00, [2]=0.60, [3]=0.20}, uses=60, maxlevel=1},
+			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60}, uses=40, maxlevel=3},
             forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=1},
             obs={times={[1]=2.00,[2]=7.50},uses=25,maxlevel=1},
             hotstone={times={[1]=4.00},uses=20,maxlevel=1},

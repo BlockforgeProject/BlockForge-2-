@@ -4,9 +4,9 @@ minetest.register_tool("lulzpack:chainsaw_lyra", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=0.80, [2]=0.50, [3]=0.20}, uses=80, maxlevel=1},
+			choppy={times={[1]=0.80, [2]=0.50, [3]=0.20}, uses=150, maxlevel=1},
 			fleshy={times={[1]=0.40, [2]=0.60, [3]=0.40}, uses=60, maxlevel=1},
-			snappy={times={[1]=0.10, [2]=0.05, [3]=0.02}, uses=60, maxlevel=1}
+			snappy={times={[1]=0.10, [2]=0.05, [3]=0.02}, uses=150, maxlevel=1}
 		}
 	},
 })
@@ -17,9 +17,9 @@ minetest.register_tool("lulzpack:chainsaw_celis", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=0.50, [2]=0.20, [3]=0.10}, uses=70, maxlevel=1},
+			choppy={times={[1]=0.50, [2]=0.20, [3]=0.10}, uses=170, maxlevel=1},
 			fleshy={times={[1]=0.30, [2]=0.20, [3]=0.08}, uses=60, maxlevel=1},
-			snappy={times={[1]=0.05, [2]=0.02, [3]=0.01}, uses=60, maxlevel=1}
+			snappy={times={[1]=0.05, [2]=0.02, [3]=0.01}, uses=170, maxlevel=1}
 		}
 	},
 })
@@ -30,9 +30,9 @@ minetest.register_tool("lulzpack:chainsaw_nyon", {
 	tool_capabilities = {
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=0.30, [2]=0.10, [3]=0.05}, uses=100, maxlevel=1},
+			choppy={times={[1]=0.30, [2]=0.10, [3]=0.05}, uses=210, maxlevel=1},
 			fleshy={times={[1]=0.50, [2]=0.30, [3]=0.15}, uses=80, maxlevel=1},
-			snappy={times={[1]=0.02, [2]=0.01, [3]=0.01}, uses=60, maxlevel=1}
+			snappy={times={[1]=0.02, [2]=0.01, [3]=0.01}, uses=210, maxlevel=1}
 		}
 	},
 })

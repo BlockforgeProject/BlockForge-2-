@@ -111,11 +111,11 @@ function add_recharger_item(pos,itemname,energy_per_second)
     for i=1,4 do
         local item_stack=ItemStack(inv:get_stack("items", i))
         if item_stack:get_name() == itemname then
-            if gen_energy >= energy_per_second then
+            if gen_energy >= energy_per_second/10 then
             if item_stack:get_wear() > 0 then
                 item_stack:add_wear(-energy_per_second)
                 inv:set_stack("items",i,item_stack)
-                gen_meta:set_int("energy",gen_energy-energy_per_second)
+                gen_meta:set_int("energy",gen_energy-energy_per_second/10)
                 end
             end
         end    
