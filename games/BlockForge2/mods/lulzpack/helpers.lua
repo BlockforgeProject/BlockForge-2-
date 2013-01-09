@@ -103,7 +103,7 @@ end
 
 --Recharger Item
 --Big thanks to PilzAdam and Jordach for helping me with this ;)
-function add_recharger_item(pos,itemname,energy_per_second)
+function add_recharger_item(pos,itemname,energy_per_second,energy_per_second_from_gen)
     local gen_meta = minetest.env:get_meta({x=pos.x,y=pos.y-1,z=pos.z})
     local gen_energy= gen_meta:get_int("energy")
     local meta = minetest.env:get_meta(pos)
@@ -111,11 +111,11 @@ function add_recharger_item(pos,itemname,energy_per_second)
     for i=1,4 do
         local item_stack=ItemStack(inv:get_stack("items", i))
         if item_stack:get_name() == itemname then
-            if gen_energy >= energy_per_second/10 then
+            if gen_energy >= energy_per_second_from_gen then
             if item_stack:get_wear() > 0 then
                 item_stack:add_wear(-energy_per_second)
                 inv:set_stack("items",i,item_stack)
-                gen_meta:set_int("energy",gen_energy-energy_per_second/10)
+                gen_meta:set_int("energy",gen_energy-energy_per_second_from_gen)
                 end
             end
         end    

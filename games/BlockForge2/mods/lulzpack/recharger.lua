@@ -24,9 +24,10 @@ minetest.register_craft({
 })
 
 function recharger_recharging(pos, node)
-    add_recharger_item(pos,"lulzpack:chainsaw_lyra",1000)
-    add_recharger_item(pos,"lulzpack:chainsaw_celis",800)
-    add_recharger_item(pos,"lulzpack:chainsaw_nyon",500)
+    add_recharger_item(pos,"lulzpack:chainsaw_lyra",1000,100)
+    add_recharger_item(pos,"lulzpack:chainsaw_celis",800,80)
+    add_recharger_item(pos,"lulzpack:chainsaw_nyon",500,50)
+    add_recharger_item(pos,"lulzpack:electro_fns",5000,20)
 end
 
 minetest.register_abm {
