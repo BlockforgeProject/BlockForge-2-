@@ -72,32 +72,35 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
 	        local drop9 = minetest.get_node_drops(nodenames[9].name)
 			--DIGGING
             local inv = meta:get_inventory()
+            local chestposs={x=pos.x,y=pos.y+2,z=pos.z}
+            local chest_meta=minetest.env:get_meta(chestposs)
+            local chest_inv=chest_meta:get_inventory()
             for _, item1 in ipairs(drop1) do
-            if nodenames[1].name ~= 'air' then  inv:add_item("main", item1) end
+            if nodenames[1].name ~= 'air' then if check_for_chest then chest_inv:add_item("main",item1) else inv:add_item("main", item1) end end
             end
             for _, item2 in ipairs(drop2) do
-            if nodenames[2].name  ~= 'air' then  inv:add_item("main", item2) end
+            if nodenames[2].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item2) else inv:add_item("main", item2) end end
             end
             for _, item3 in ipairs(drop3) do
-            if nodenames[3].name  ~= 'air' then  inv:add_item("main", item3) end
+            if nodenames[3].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item3) else inv:add_item("main", item3) end end
             end
             for _, item4 in ipairs(drop4) do
-            if nodenames[4].name  ~= 'air' then  inv:add_item("main", item4) end
+            if nodenames[4].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item4) else inv:add_item("main", item4) end end
             end
             for _, item5 in ipairs(drop5) do
-            if nodenames[5].name  ~= 'air' then  inv:add_item("main", item5) end
+            if nodenames[5].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item5) else inv:add_item("main", item5) end end
             end
             for _, item6 in ipairs(drop6) do
-            if nodenames[6].name  ~= 'air' then  inv:add_item("main", item6) end
+            if nodenames[6].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item6) else inv:add_item("main", item6) end end
             end
             for _, item7 in ipairs(drop7) do
-            if nodenames[7].name  ~= 'air' then  inv:add_item("main", item7) end
+            if nodenames[7].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item7) else inv:add_item("main", item7) end end
             end
             for _, item8 in ipairs(drop8) do
-            if nodenames[8].name  ~= 'air' then  inv:add_item("main", item8) end
+            if nodenames[8].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item8) else inv:add_item("main", item8) end end
             end
             for _, item9 in ipairs(drop9) do
-            if nodenames[9].name  ~= 'air' then  inv:add_item("main", item9) end
+            if nodenames[9].name  ~= 'air' then if check_for_chest then chest_inv:add_item("main",item9) else inv:add_item("main", item9) end end
             end
 			--minetest.env:remove_node( quarrypos )
             for i=1, 9 do
@@ -107,12 +110,18 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
                     local chest_inv = chest_meta:get_inventory()
                     local meta = minetest.env:get_meta(pos)
                     local inv = meta:get_inventory()
+                    --
+                    local inv_chestposs={x=pos.x,y=pos.y+2,z=pos.z}
+                    local inv_chest_meta=minetest.env:get_meta(inv_chestposs)
+                    local inv_chest_inv=inv_chest_meta:get_inventory()
+                    --
                     for i=1,chest_inv:get_size("main") do
                         local item=chest_inv:get_stack("main",i)
                         count=item:get_count()
                         if count <= 99 then
-                            for i=1,count do
-                            inv:add_item("main",item:get_name()) end
+                            for i=1,count do 
+                            if check_for_chest then inv_chest_inv:add_item("main",item:get_name()) else
+                            inv:add_item("main",item:get_name()) end end
                        end  
                     end    
                 end  
@@ -127,6 +136,12 @@ end
 function quarry_mine(pos)
      --minetest.env:dig_node(pos)
        minetest.env:set_node(pos, {name='air'})
+end
+
+function check_for_chest(pos)
+local chestpos={x=pos.x,y=pos.y+2,z=pos.z}
+    if chestpos:get_node().name == "default:chest" then return true
+    else return false end
 end
 
 minetest.register_abm ({

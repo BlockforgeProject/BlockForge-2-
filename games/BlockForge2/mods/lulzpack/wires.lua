@@ -74,8 +74,8 @@ minetest.register_abm {
     action = mill_gen_energy,
 } 
 
---WIP
---[[iron_wire_fix = { -0.5, -0.469, -0.5 , 0.5, -0.47, 0.5 }
+--[[WIP
+iron_wire_fix = { -0.5, -0.469, -0.5 , 0.5, -0.47, 0.5 }
 
 minetest.register_node("lulzpack:iron_wire", {
     drawtype="nodebox",
@@ -120,19 +120,19 @@ energy = function(pos, node)
     local meta1 = minetest.env:get_meta(pos1)
     local meta2 = minetest.env:get_meta(pos2)
     local meta3 = minetest.env:get_meta(pos3)
-    local meta4 = minetest.env:get_meta(pos4)    
+    local meta4 = minetest.env:get_meta(pos4)   
+    local ID = meta:get_int("ID") 
     if meta:get_int("energized") == 1 then
-    local ID = meta:get_int("ID")
     if meta:get_int("ID") == 0 and meta:get_int("wire") ~= 1 then
     if meta1:get_int("ID") <= ID then meta1:set_int("ID",ID+1) meta1:set_int("energized",1) end
     if meta2:get_int("ID") <= ID then meta2:set_int("ID",ID+1) meta2:set_int("energized",1) end
     if meta3:get_int("ID") <= ID then meta3:set_int("ID",ID+1) meta3:set_int("energized",1) end
     if meta4:get_int("ID") <= ID then meta4:set_int("ID",ID+1) meta4:set_int("energized",1) end
-    else  
-    if meta1:get_int("ID") < ID then meta1:set_int("ID",ID+1) meta1:set_int("energized",1) end
-    if meta2:get_int("ID") < ID then meta2:set_int("ID",ID+1) meta2:set_int("energized",1) end
-    if meta3:get_int("ID") < ID then meta3:set_int("ID",ID+1) meta3:set_int("energized",1) end
-    if meta4:get_int("ID") < ID then meta4:set_int("ID",ID+1) meta4:set_int("energized",1) end
+    elseif meta:get_int("wire") == 1 then
+    if meta1:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
+    if meta2:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
+    if meta3:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
+    if meta4:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
     end
     end
 end 
@@ -149,9 +149,9 @@ unenergy = function(pos, node)
     local meta2 = minetest.env:get_meta(pos2)
     local meta3 = minetest.env:get_meta(pos3)
     local meta4 = minetest.env:get_meta(pos4)    
-    if meta1:get_int("ID") < meta:get_int("ID") and meta2:get_int("ID") < meta1:get_int("ID") and meta3:get_int("ID") < meta1:get_int("ID") and meta4:get_int("ID") < meta1:get_int("ID") then
+    --if meta1:get_int("energized") < meta:get_int("ID") and meta2:get_int("ID") < meta:get_int("ID") and meta3:get_int("ID") < meta:get_int("ID") and meta4:get_int("ID") < meta:get_int("ID") then
     --meta1:get_int("wire") == 1 or meta2:get_int("wire") == 1 or meta3:get_int("wire") == 1 or meta4:get_int("wire") == 1 then
-    meta:set_int("energized",0) end
+    --meta:set_int("energized",0) end
 end
 
 

@@ -24,7 +24,7 @@ minetest.register_craft({
 	output = 'lulzpack:electroblock 1',
 	recipe = {
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
-		{'lulzpack:industrial_iron', 'lulzpack:industrial_iron', 'lulzpack:industrial_iron'},
+		{'lulzpack:industrial_iron', 'lulzpack:basic_ai', 'lulzpack:industrial_iron'},
 		{'default:steel_ingot', 'lulzpack:industrial_iron', 'default:steel_ingot'},
 	}
 })
