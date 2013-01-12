@@ -1,7 +1,78 @@
 --Functions and helpers
+--Refinery helpers
+function registerRefRecNodeToItem(source,result,energy_needed,genmeta,nodepos,nodedrop)
+    if minetest.env:get_node(nodepos).name == source then
+        if energy >= energy_needed then
+		minetest.env:remove_node(nodepos)
+		minetest.env:add_item(nodedrop, result) 
+        genmeta:set_int("energy",genmeta:get_int("energy")-energy_needed) 
+        MILLGENupdate_formspec(gen_pos) end end
+end
+function registerRefRecNodeToNode(source,result,energy_needed,genmeta,nodepos)
+    if minetest.env:get_node(nodepos).name == source then
+        if energy >= energy_needed then
+		minetest.env:remove_node(nodepos)
+		minetest.env:set_node(nodepos, {name=result}) 
+        genmeta:set_int("energy",genmeta:get_int("energy")-energy_needed) 
+        MILLGENupdate_formspec(gen_pos) end end
+end
+--Liquid registration helpers
+function registerSimpleLiquid(name,nodename,texturename,viscosity,damage,light,groupssource,groupsflowing)
+minetest.register_node("lulzpack:"..name.."_flowing", {
+	description = "Flowing"..nodename.."",
+	--inventory_image = minetest.inventorycube(""..texturename..".png"),
+	drawtype = "flowingliquid",
+	special_tiles = {
+		{
+			image=""..texturename.."_flowing_animated.png",
+			backface_culling=false,
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
+		},
+		{
+			image=""..texturename.."_flowing_animated.png",
+			backface_culling=true,
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.3}
+		},
+	},
+	paramtype = "light",
+	light_source = light,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	liquidtype = "flowing",
+	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
+	liquid_alternative_source = "lulzpack:"..name.."_source",
+	liquid_viscosity = viscosity,
+	damage_per_second = damage,
+	post_effect_color = {a=192, r=130, g=64, b=0},
+	groups = groupssource,
+})
 
---Liquid registration helper
-function registerLiquid(name,nodename,texturename,viscosity,damage,light)
+minetest.register_node("lulzpack:"..name.."_source", {
+	description = ""..nodename.." Source",
+	--inventory_image = minetest.inventorycube(""..texturename..".png"),
+	drawtype = "liquid",
+	tiles = {
+		{name=""..texturename.."_source_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
+	},
+	paramtype = "light",
+	light_source = light,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	liquidtype = "source",
+	liquid_alternative_flowing = "lulzpack:"..name.."_flowing",
+	liquid_alternative_source = "lulzpack:"..name.."_source",
+	liquid_viscosity = viscosity,
+	damage_per_second = damage,
+	post_effect_color = {a=192, r=255, g=64, b=0},
+	groups = groupsflowing,
+})
+end
+-----------------------------------------------------------------------------------------------
+function registerHotLiquid(name,nodename,texturename,viscosity,damage,light)
 minetest.register_node("lulzpack:"..name.."_flowing", {
 	description = "Flowing"..nodename.."",
 	inventory_image = minetest.inventorycube(""..texturename..".png"),

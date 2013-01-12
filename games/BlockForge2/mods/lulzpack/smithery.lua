@@ -86,9 +86,9 @@ minetest.register_craftitem("lulzpack:obsidian_bucket_empty", {
 	end,
 })
 --Liquids
-registerLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
-registerLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
-registerLiquid("meltediron","Melted Iron","meltediron",160,4,3)
+registerHotLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
+registerHotLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
+registerHotLiquid("meltediron","Melted Iron","meltediron",160,4,3)
 --Buckets
 registerObsBucket("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:obsidian_bucket_meltedcelis","obsidian_bucket_meltedcelis.png","Melted Celis Obsidian Bucket")
 registerObsBucket("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:obsidian_bucket_meltedlyra","obsidian_bucket_meltedlyra.png","Melted Lyra Obsidian Bucket")

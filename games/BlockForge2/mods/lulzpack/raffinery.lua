@@ -42,18 +42,9 @@ local activateraffinery = function( pos, node)
             energy=genmeta:get_int("energy")
 			nodepos = { x = pos.x, y = pos.y-1, z = pos.z }
 			nodedrop = { x = pos.x, y = pos.y+2, z = pos.z }
-			if minetest.env:get_node(nodepos).name == 'default:lava_source' then
-                if energy >= 20 then
-				minetest.env:remove_node(nodepos)
-				minetest.env:add_item(nodedrop, 'lulzpack:lava_block') 
-                genmeta:set_int("energy",genmeta:get_int("energy")-20) 
-                MILLGENupdate_formspec(gen_pos) end end
-			if minetest.env:get_node(nodepos).name == 'default:water_source' then
-                if energy >= 10 then
-				minetest.env:remove_node(nodepos)
-				minetest.env:add_item(nodedrop, 'lulzpack:water_block') 
-                genmeta:set_int("energy",genmeta:get_int("energy")-10) 
-                MILLGENupdate_formspec(gen_pos) end end
+            registerRefRecNodeToItem('default:lava_source','lulzpack:lava_block',20,genmeta,nodepos,nodedrop)
+            registerRefRecNodeToItem('default:water_source','lulzpack:water_block',10,genmeta,nodepos,nodedrop)
+            registerRefRecNodeToNode('lulzpack:oil_source','lulzpack:gasoline_source',120,genmeta,nodepos)
             --Modules
             if minetest.env:get_node(nodepos).name == 'lulzpack:raffinery_mod1' then
             mod1pos1={x=pos.x+1,y=pos.y-1,z=pos.z}
