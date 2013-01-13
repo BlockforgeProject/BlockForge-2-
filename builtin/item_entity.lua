@@ -8,14 +8,6 @@ function minetest.spawn_item(pos, item)
 	return obj
 end
 
-function sound_pickup(table)
-	table = table or {}
-	table.footstep = table.footstep or
-			{name="pickup", pos=pos,gain=1.0,max_hear_distance=2*12}
-	default.node_sound_defaults(table)
-	return table
-end
-
 minetest.register_entity("__builtin:item", {
 	initial_properties = {
 		hp_max = 1,
