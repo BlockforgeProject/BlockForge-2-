@@ -67,7 +67,7 @@ minetest.register_entity("__builtin:item", {
 	get_staticdata = function(self)
 		--return self.itemstring
 		return minetest.serialize({
-			itemstring = self.itemstring,,max_hear_distance=2*12
+			itemstring = self.itemstring,
 			always_collect = self.always_collect,
 		})
 	end,
