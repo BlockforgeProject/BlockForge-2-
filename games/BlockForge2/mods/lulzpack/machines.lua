@@ -181,7 +181,7 @@ minetest.register_node("lulzpack:oilwell", {
 
 dofile(minetest.get_modpath("lulzpack") .. "/simpleminer.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/minimalmining.lua")
---dofile(minetest.get_modpath("lulzpack") .. "/quarry.lua")
+dofile(minetest.get_modpath("lulzpack") .. "/quarry.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/raffinery.lua")
 dofile(minetest.get_modpath("lulzpack") .. "/macerator.lua")
 
