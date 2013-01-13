@@ -21,6 +21,7 @@
 local function include(filename) dofile(minetest.get_modpath("lulzpack") .."/"..filename ..".lua") end
 
 include("helpers") --Including Helpers
+include("config") --Including Configurations
 
 minetest.register_node("lulzpack:cold_dirt", {
 	description = "cold Dirt",

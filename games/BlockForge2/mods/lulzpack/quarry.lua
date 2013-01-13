@@ -89,6 +89,7 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
                     end
                 end                    
             --end
+            if enable_lockedchest_pwn == true then
             for i=1, 9 do
                 if nodenames[i].name == 'default:chest_locked' or nodenames[i].name == 'default:chest' then
                     local chest_meta = minetest.env:get_meta(quarryposs[i])
@@ -110,6 +111,7 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
                     end    
                 end 
 			    quarry_mine(quarryposs[i])           
+            end
             end
             quarry_pos["q"..pos.x.."-"..pos.z]=quarry_pos["q"..pos.x.."-"..pos.z]+1
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )

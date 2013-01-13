@@ -16,8 +16,8 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions.
 
---Item-Dropping on node breaking
---This just redefine the original function
+function execIfProtected(pos,func,args)
+end
 
 function default_nodedrop(pos, drops, digger)
 	-- Add dropped items to object's inventory
@@ -26,6 +26,13 @@ function default_nodedrop(pos, drops, digger)
 		for _, dropped_item in ipairs(drops) do
 			digger:get_inventory():add_item("main", dropped_item)
 		end
+        if enable_firewallmod == true then
+            execIfProtected(pos,function(args)
+                for _, dropped_item in ipairs(drops) do
+                    digger:get_inventory():remove_item("main",dropped_item)
+                end
+            end,args)
+        end
 	end
 end
 
@@ -35,7 +42,7 @@ args.pos=pos
 args.drops=drops
 args.digger=digger
 execIfUnprotected(pos,function(args)
-    if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(args.pos, args.drops, args.digger) end
+    if enable_corehack == false then return default_nodedrop(args.pos, args.drops, args.digger) end
         if args.digger:get_inventory() then
                 local _, dropped_item
                 for _, dropped_item in ipairs(drops) do
