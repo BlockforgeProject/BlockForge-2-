@@ -11,7 +11,7 @@ end
 function sound_pickup(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name="pickup", gain=1.0,max_hear_distance=2*12}
+			{name="pickup", pos=pos,gain=1.0,max_hear_distance=2*12}
 	default.node_sound_defaults(table)
 	return table
 end
@@ -129,7 +129,7 @@ minetest.register_entity("__builtin:item", {
                                         if item~=nil and hitter~=nil and item:get_luaentity().itemstring~=nil then
                                             hitter:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring)) 
                                             item:remove()
-                                            minetest.sound_play({name="pickup",gain=0.2,max_hear_distance=2*12},sound_pickup)
+                                            minetest.sound_play({name="pickup",pos=pos,gain=0.2,max_hear_distance=2*12},sound_pickup)
                                         end end, {item,hitter})                    
                 end
             end
