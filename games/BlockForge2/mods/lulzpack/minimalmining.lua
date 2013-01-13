@@ -74,7 +74,7 @@ end
 
 minetest.register_abm ({
         nodenames = {"lulzpack:minimal_mining"},
-        interval = 4,
+        interval = 2,
         chance = 1,
         action = activateminimalminingmachine
 })

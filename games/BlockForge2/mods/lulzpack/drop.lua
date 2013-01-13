@@ -29,7 +29,11 @@ function default_nodedrop(pos, drops, digger)
 	end
 end
 
+function checkProtection(pos)
+end
+
 function minetest.handle_node_drops(pos, drops, digger)
+    if checkProtection(pos) then return end --Compatibility with "firewall" mod
     if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(pos, drops, digger) end
 	if digger:get_inventory() then
 		local _, dropped_item

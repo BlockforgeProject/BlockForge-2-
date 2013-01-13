@@ -137,3 +137,4 @@ minetest.register_abm ({
 
 minetest.register_on_shutdown(function()
 persistence.store(minetest.get_modpath("lulzpack") .. "/quarrydb.pny",quarry_pos) end)
+
