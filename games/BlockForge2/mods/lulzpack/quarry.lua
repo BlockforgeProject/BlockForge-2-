@@ -114,7 +114,8 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
             quarry_pos["q"..pos.x.."-"..pos.z]=quarry_pos["q"..pos.x.."-"..pos.z]+1
 			minetest.env:add_node( quarrypos2, { name='lulzpack:quarrydiggerpole' } )
 	    end
-    end
+	end
+end
 
 function quarry_mine(pos)
      --minetest.env:dig_node(pos)
