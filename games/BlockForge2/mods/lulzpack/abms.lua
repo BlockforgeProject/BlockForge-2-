@@ -83,7 +83,7 @@ minetest.register_craft({
 --GROUPS
 
 lavacobble = function(pos)
-    for _, abmnode in ipairs({"default:water_source","default:water_flowing"}) do
+    for _, abmnode in ipairs({"default:water_source","default:water_flowing","lulzpack:water_block"}) do
         for dist=-1,1 do
               if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
               or minetest.env:get_node({x=pos.x+dist,y=pos.y,z=pos.z}).name == abmnode 
@@ -94,7 +94,7 @@ lavacobble = function(pos)
 end
 
 lavaobs = function(pos)
-    for _, abmnode in ipairs({"default:water_source","default:water_flowing"}) do
+    for _, abmnode in ipairs({"default:water_source","default:water_flowing","lulzpack:water_block"}) do
         for dist=-1,1 do
               if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
               or minetest.env:get_node({x=pos.x+dist,y=pos.y,z=pos.z}).name == abmnode 

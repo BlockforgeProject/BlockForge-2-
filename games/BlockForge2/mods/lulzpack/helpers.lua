@@ -172,6 +172,19 @@ function SIMPLEMINERupdate_formspec(pos)
 				"list[current_player;main;0,5;8,4;]")
 end
 
+--Minimal Mining machine formspec Update
+function MINIMALMININGupdate_formspec(pos)
+		local meta = minetest.env:get_meta(pos)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,1;]"..
+                --"button[3,2;3,1;start;Start]"..
+			    "list[current_name;fuels;3,3;3,1;]"..
+                "label[1,3,fuelstext]"..
+                "list[current_name;Energy="..meta:get_int("energy").."]"..
+				"list[current_player;main;0,5;8,4;]")
+end
+
 --Recharger Item
 --Big thanks to PilzAdam and Jordach for helping me with this ;)
 function add_recharger_item(pos,itemname,energy_per_second,energy_per_second_from_gen)
