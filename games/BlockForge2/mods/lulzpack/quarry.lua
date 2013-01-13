@@ -88,7 +88,7 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
                         end
                     end
                 end                    
-            end
+            --end
             for i=1, 9 do
                 if nodenames[i].name == 'default:chest_locked' or nodenames[i].name == 'default:chest' then
                     local chest_meta = minetest.env:get_meta(quarryposs[i])
