@@ -33,6 +33,9 @@ function checkProtection(pos)
 end
 
 function minetest.handle_node_drops(pos, drops, digger)
+args.pos=pos
+args.drops=drops
+args.digger=digger
 minetest.after(1 ,function(args)
     if checkProtection(pos) then return end --Compatibility with "firewall" mod
     if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(pos, drops, digger) end
