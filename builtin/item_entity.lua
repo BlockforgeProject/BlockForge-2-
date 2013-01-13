@@ -11,7 +11,7 @@ end
 function sound_pickup(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name="pickup", gain=1.0}
+			{name="pickup", gain=1.0,max_hear_distance=2*12}
 	default.node_sound_defaults(table)
 	return table
 end
@@ -67,7 +67,7 @@ minetest.register_entity("__builtin:item", {
 	get_staticdata = function(self)
 		--return self.itemstring
 		return minetest.serialize({
-			itemstring = self.itemstring,
+			itemstring = self.itemstring,,max_hear_distance=2*12
 			always_collect = self.always_collect,
 		})
 	end,

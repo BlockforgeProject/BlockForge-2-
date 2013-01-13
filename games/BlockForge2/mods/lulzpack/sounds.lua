@@ -21,6 +21,6 @@ function sound_pickup(table)
 	table.footstep = table.footstep or
 			{name="", gain=1.0}
 	table.dug = table.dug or
-			{name="pickup", gain=1.0}
+			{name="pickup", gain=1.0,max_hear_distance=2*12}
 	return table
 end
