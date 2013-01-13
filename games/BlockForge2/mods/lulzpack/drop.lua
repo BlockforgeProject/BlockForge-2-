@@ -29,19 +29,26 @@ function default_nodedrop(pos, drops, digger)
 	end
 end
 
-function checkProtection(pos)
+function minetest.handle_node_drops(pos, drops, digger)
+local args={}
+args.pos=pos
+args.drops=drops
+args.digger=digger
+execIfUnprotected(pos,function(args)
+    if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(args.pos, args.drops, args.digger) end
+        if args.digger:get_inventory() then
+                local _, dropped_item
+                for _, dropped_item in ipairs(drops) do
+            minetest.env:add_item(args.pos,dropped_item)
+                end
+        end
+end,args)
 end
 
-function minetest.handle_node_drops(pos, drops, digger)
-    if checkProtection(pos) then return end --Compatibility with "firewall" mod
-    if minetest.setting_get("lulzpack_deactivate_corehack") then return default_nodedrop(pos, drops, digger) end
-	if digger:get_inventory() then
-		local _, dropped_item
-		for _, dropped_item in ipairs(drops) do
-            minetest.env:add_item(pos,dropped_item)
-		end
-	end
-end 
+
+function execIfUnprotected(pos,func,args)
+    func(args)
+end
 
 --[[minetest.register_globalstep(function(dtime)
     for _,player in ipairs(minetest.get_connected_players()) do
