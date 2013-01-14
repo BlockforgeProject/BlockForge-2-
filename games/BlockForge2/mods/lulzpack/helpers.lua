@@ -244,6 +244,19 @@ function generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume, chunk_
 end
 
 --Ore Registration Helper
+function setLightOnOre(name,graphicname,light)
+
+minetest.register_node("lulzpack:stone_with_"..name.."", {
+	description = ""..graphicname.." Ore",
+	tiles = {"default_stone.png^"..name.."_mineral.png"},
+	is_ground_content = true,
+    light_source = light,
+	groups = {cracky=2},
+	drop = 'lulzpack:'..name..'_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+end
 function register_lulzpack_ore(name,graphicname)
 
 minetest.register_node("lulzpack:stone_with_"..name.."", {
