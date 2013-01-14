@@ -1,2 +1,3 @@
 enable_corehack=true
 enable_lockedchest_pwn=true
+enable_time2pwn=true
