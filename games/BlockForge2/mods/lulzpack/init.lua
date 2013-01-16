@@ -178,6 +178,10 @@ minetest.register_craftitem("lulzpack:iron_plate", {
 	description = "Iron Plate",
 	inventory_image = "ironplate.png",
 })
+minetest.register_craftitem("lulzpack:hybrid_plate", {
+	description = "Hybrid Plate",
+	inventory_image = "hybridplate.png",
+})
 ------------------------------------------------------------------------
 minetest.register_craftitem("lulzpack:obsidian_plate", {
 	description = "Obsidian Plate",
@@ -354,10 +358,10 @@ minetest.register_craft({
 	}
 })
 minetest.register_craft({
-	output = 'lulzpack:pick_hybrid 1',
+	output = 'lulzpack:pick_hybrid',
 	recipe = {
-		{'lulzpack:lyra_ingot', 'lulzpack:celis_ingot', 'lulzpack:lyra_ingot'},
-		{'lulzpack:celis_ingot', 'default:steel_ingot', 'lulzpack:celis_ingot'},
+		{'lulzpack:hybrid_plate', 'lulzpack:hybrid_plate', 'lulzpack:hybrid_plate'},
+		{'', 'default:steel_ingot', ''},
 		{'', 'default:steel_ingot', ''},
 	}
 })
@@ -447,6 +451,12 @@ minetest.register_craft({
 	output = 'lulzpack:iron_plate 6',
 	recipe = {
 		{'lulzpack:obsidian_bucket_meltediron'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:hybrid_plate 6',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltediron','lulzpack:obsidian_bucket_meltedcelis'},
 	}
 })
 minetest.register_craft({
