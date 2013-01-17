@@ -35,12 +35,37 @@ minetest.register_node("lulzpack:mill_gen", {
 	groups = {cracky=3}
 })
 
+minetest.register_node("lulzpack:water_mill", {
+    description = "Water Mill",
+	tiles = {{name="watermill_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},"electrofurnace_side.png"},
+    drawtype="nodebox",
+    light_source=10,
+	groups = {cracky=2},
+	selection_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5},
+    },
+	node_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
+    }
+})
+
 minetest.register_craft({
 	output = 'lulzpack:mill_gen',
 	recipe = {
 		{'default:steel_ingot','default:steel_ingot','default:steel_ingot'},
 		{'lulzpack:industrial_iron','lulzpack:intbattery','lulzpack:industrial_iron'},
 		{'lulzpack:industrial_iron','lulzpack:controlpanel','lulzpack:industrial_iron'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:water_mill',
+	recipe = {
+		{'','lulzpack:industrial_iron',''},
+		{'lulzpack:industrial_iron','lulzpack:redyz_ingot','lulzpack:industrial_iron'},
+		{'','lulzpack:industrial_iron',''},
 	}
 })
 
@@ -69,12 +94,30 @@ mill_gen_energy = function(pos, node)
         MILLGENupdate_formspec(pos)
 end
 
+water_mill_energy = function(pos, node)
+    local mach_pos={x=pos.x,y=pos.y-1,z=pos.z}
+    local water_pos={x=pos.x,y=pos.y+1,z=pos.z}
+    if minetest.env:get_node(water_pos).name == 'default:water_source' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(3,7))
+    end end
+    if minetest.env:get_node(water_pos).name == 'default:water_flowing' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(10,15))
+    end end
+end
+
 minetest.register_abm {
     nodenames = {"lulzpack:mill_gen"},
     interval = 4,
     chance = 1,
     action = mill_gen_energy,
 } 
+
+minetest.register_abm {
+    nodenames = {"lulzpack:water_mill"},
+    interval = 2,
+    chance = 1,
+    action = water_mill_energy,
+}
 
 --[[WIP
 iron_wire_fix = { -0.5, -0.469, -0.5 , 0.5, -0.47, 0.5 }
