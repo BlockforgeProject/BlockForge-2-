@@ -251,7 +251,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = 'lulzpack:bul1 8',
+    output = 'lulzpack:rocket1 5',
     recipe = {
     {'','lulzpack:redyz_ingot',''},
     {'lulzpack:iron_plate','default:coal_lump','lulzpack:iron_plate'},
