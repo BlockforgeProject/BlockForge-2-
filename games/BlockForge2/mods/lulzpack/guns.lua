@@ -77,7 +77,7 @@ local bul1={
         self.lastpos={x=pos.x, y=pos.y, z=pos.z}
     end
 }
-minetest.register_entity('lulzpack:bullet1_ent', bul1)
+--minetest.register_entity('lulzpack:bullet1_ent', bul1)
 
 rocket1_shoot=function (item, player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:rocket1") then
@@ -91,7 +91,7 @@ rocket1_shoot=function (item, player, pointed_thing)
 	return
 end
 
-bul1_shoot=function (item, player, pointed_thing)
+--[[bul1_shoot=function (item, player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:bul1") then
 		player:get_inventory():remove_item("main", "lulzpack:bul1")
 			local pgpos=player:getpos()
@@ -101,7 +101,7 @@ bul1_shoot=function (item, player, pointed_thing)
 			obj:setacceleration({x=dir.x*-3, y=-bul1_GRAVITY, z=dir.z*-3})
 	end
 	return
-end
+end]]
 
 minetest.register_craftitem("lulzpack:bazooka", {
 	image = "bazooka.png",
