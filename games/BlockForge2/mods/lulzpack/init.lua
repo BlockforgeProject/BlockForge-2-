@@ -456,7 +456,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'lulzpack:hybrid_plate 6',
 	recipe = {
-		{'lulzpack:obsidian_bucket_meltediron','lulzpack:obsidian_bucket_meltedcelis'},
+		{'lulzpack:obsidian_bucket_meltedlyra','lulzpack:obsidian_bucket_meltedcelis'},
 	}
 })
 minetest.register_craft({
@@ -568,7 +568,7 @@ include("lamps")
 include("machines")
 include("recipes")
 include("materials")
---include("guns") --Guns are actually bugged,i'll fix them later
+include("guns")
 include("abms")
 include("desertores")
 include("furnaces")

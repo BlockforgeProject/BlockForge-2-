@@ -16,130 +16,212 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions
 
---Definitions
-BUL1_DAMAGE=3
-BUL1_GRAVITY=4
-BUL1_VELOCITY=150
---
-BUL2_DAMAGE=6
-BUL2_GRAVITY=2
-BUL2_VELOCITY=120
---Bullet entities
-BUL1_ENT={
-	physical = false,
-	timer=0,
+rocket1_DAMAGE=5
+rocket1_GRAVITY=10
+rocket1_VELOCITY=30
+
+bul1_DAMAGE=3
+bul1_GRAVITY=6
+bul1_VELOCITY=50
+
+local rocket1={
+    physical = false,
+	textures = {"rocket1.png"},
+    lastpos={},
+    plastpos={},
+    collisionbox = {0,0,0,0,0,0},
+    on_step = function(self, dtime)
+        local pos = self.object:getpos()
+        local node = minetest.env:get_node(pos)
+        local exs=true
+        if minetest.get_node_group(node.name, "puts_out_fire")~=0 then
+            exs=false
+            self.object:remove()
+        end
+        if self.lastpos.x~=nil then
+        if node.name ~= "air" and exs then
+            self.object:remove()
+            explode(pos,1.5,destroy,rocket1_DAMAGE)
+        end
+        end
+        checkState(self)
+        self.plastpos=self.lastpos
+        self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+    end
+}
+minetest.register_entity('lulzpack:rocket1_ent', rocket1)
+
+local bul1={
+    physical = false,
 	textures = {"bullet1.png"},
-	lastpos={},
-	collisionbox = {0,0,0,0,0,0},
+    lastpos={},
+    plastpos={},
+    collisionbox = {0,0,0,0,0,0},
+    on_step = function(self, dtime)
+        local pos = self.object:getpos()
+        local node = minetest.env:get_node(pos)
+        local exs=true
+        if minetest.get_node_group(node.name, "puts_out_fire")~=0 then
+            exs=false
+            self.object:remove()
+            shot(pos,1,bul1_DAMAGE)
+        end
+        if self.lastpos.x~=nil then
+        if node.name ~= "air" and exs then
+            self.object:remove()
+            shot(pos,1,bul1_DAMAGE)
+        end
+        end
+        checkState(self)
+        self.plastpos=self.lastpos
+        self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+    end
 }
+minetest.register_entity('lulzpack:bullet1_ent', bul1)
 
-BUL2_ENT={
-	physical = false,
-	timer=0,
-	textures = {"bullet2.png"},
-	lastpos={},
-	collisionbox = {0,0,0,0,0,0},
-}
-
-BUL1_ENT.on_step = function(self, deltat)
-	self.timer=self.timer+deltat
-	local pos = self.object:getpos()
-	local node = minetest.env:get_node(pos)
-	if self.timer>0.4 then
-		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)
-		for k, obj in pairs(objs) do
-			obj:punch(obj, 1.0, {
-            full_punch_interval=1.0,
-            groupcaps = {
-                fleshy={times={[1]=BUL1_DAMAGE/3,[2]=BUL1_DAMAGE/2,[3]=BUL1_DAMAGE}},
-                snappy={times={[1]=BUL1_DAMAGE/3,[2]=BUL1_DAMAGE/2,[3]=BUL1_DAMAGE}}
-                } 
-            })
-			if obj:get_entity_name() ~= "lulzpack:bul1_ent" then
-				if obj:get_hp()<=0 then
-					obj:remove()
-				end
-				self.object:remove()
-			end
-		end
+rocket1_shoot=function (item, player, pointed_thing)
+	if player:get_inventory():contains_item("main", "lulzpack:rocket1") then
+		player:get_inventory():remove_item("main", "lulzpack:rocket1")
+			local pgpos=player:getpos()
+			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:rocket1_ent")
+			local dir=player:get_look_dir()
+			obj:setvelocity({x=dir.x*rocket1_VELOCITY, y=dir.y*rocket1_VELOCITY, z=dir.z*rocket1_VELOCITY})
+			obj:setacceleration({x=dir.x*-3, y=-rocket1_GRAVITY, z=dir.z*-3})
 	end
+	return
 end
 
-BUL2_ENT.on_step = function(self, deltat)
-	self.timer=self.timer+deltat
-	local pos = self.object:getpos()
-	local node = minetest.env:get_node(pos)
-	if self.timer>0.4 then
-		local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)
-		for k, obj in pairs(objs) do
-			obj:set_hp(obj:get_hp()-BUL2_DAMAGE)
-			if obj:get_entity_name() ~= "lulzpack:bul2_ent" then
-				if obj:get_hp()<=0 then
-					obj:remove()
-				end
-				self.object:remove()
-			end
-		end
-	end
-end
-
-
-minetest.register_entity("lulzpack:bul1_ent", BUL1_ENT)
-minetest.register_entity("lulzpack:bul2_ent", BUL2_ENT)
-
---Bullet Shooting
-BUL1_SHOOT=function (item, player, pointed_thing)
+bul1_shoot=function (item, player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:bul1") then
 		player:get_inventory():remove_item("main", "lulzpack:bul1")
 			local pgpos=player:getpos()
-			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:bul1_ent")
+			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:bullet1_ent")
 			local dir=player:get_look_dir()
-			obj:setvelocity({x=dir.x*BUL1_VELOCITY, y=dir.y*BUL1_VELOCITY, z=dir.z*BUL1_VELOCITY})
-			obj:setacceleration({x=dir.x*-3, y=-BUL1_GRAVITY, z=dir.z*-3})
+			obj:setvelocity({x=dir.x*bul1_VELOCITY, y=dir.y*bul1_VELOCITY, z=dir.z*bul1_VELOCITY})
+			obj:setacceleration({x=dir.x*-3, y=-bul1_GRAVITY, z=dir.z*-3})
 	end
 	return
 end
 
-BUL2_SHOOT=function (item, player, pointed_thing)
-	if player:get_inventory():contains_item("main", "lulzpack:bul2") then
-		player:get_inventory():remove_item("main", "lulzpack:bul2")
-			local pgpos=player:getpos()
-			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:bul2_ent")
-			local dir=player:get_look_dir()
-			obj:setvelocity({x=dir.x*BUL2_VELOCITY, y=dir.y*BUL2_VELOCITY, z=dir.z*BUL2_VELOCITY})
-			obj:setacceleration({x=dir.x*-3, y=-BUL2_GRAVITY, z=dir.z*-3})
-	end
-	return
-end
+minetest.register_craftitem("lulzpack:bazooka", {
+	image = "bazooka.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	on_use = rocket1_shoot,
+	description = "Bazooka"
+})
 
---Items
+minetest.register_craftitem("lulzpack:rocket1", {
+	image = "rocket1_inv.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Rockets"
+})
+
 minetest.register_craftitem("lulzpack:ironpistol", {
 	image = "ironpistol.png",
 	on_place_on_ground = minetest.craftitem_place_item,
-	on_use = BUL1_SHOOT,
-	description = "Iron pistol"
+	on_use = bul1_shoot,
+	description = "Iron Pistol"
 })
 
 minetest.register_craftitem("lulzpack:bul1", {
 	image = "bul1_inv.png",
 	on_place_on_ground = minetest.craftitem_place_item,
-	description = "Iron pistol bullets"
+	description = "Iron Pistol bullets"
 })
 
-minetest.register_craftitem("lulzpack:plasmapistol", {
-	image = "plasmapistol.png",
-	on_place_on_ground = minetest.craftitem_place_item,
-	on_use = BUL2_SHOOT,
-	description = "Plasma pistol"
-})
 
-minetest.register_craftitem("lulzpack:bul2", {
-	image = "bul2_inv.png",
-	on_place_on_ground = minetest.craftitem_place_item,
-	description = "Plasma pistol bullets"
-})
+function checkState(ss)
+    minetest.after(2, function(s)
+    if s~=nil and s.plastpos==s.object:getpos() then
+        s.object:remove()
+        explode(s.object:getpos(),2)
+    end
+    end,ss)
+end
 
---Recipes
+function shot(pos,dmwc1,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
+        if checkProtection(pos) then return end
+        --minetest.sound_play("DeathFlash", {pos=pos, gain=1.5, max_hear_distance=2*64})
+		local objects = minetest.env:get_objects_inside_radius(pos, 7)
+		for _,obj in ipairs(objects) do
+			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+				local obj_p = obj:getpos()
+				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+				local damage = dmg
+				obj:punch(obj, 1.0, {
+					full_punch_interval=1.0,
+					groupcaps={
+						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+					}
+				}, nil)
+			end
+		end	
+end
+
+function explode(pos,dmwc1,func,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
+        if checkProtection(pos) then return end
+        --minetest.sound_play("DeathFlash", {pos=pos, gain=1.5, max_hear_distance=2*64})
+		local objects = minetest.env:get_objects_inside_radius(pos, 7)
+		for _,obj in ipairs(objects) do
+			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+				local obj_p = obj:getpos()
+				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+				local damage = dmg
+				obj:punch(obj, 1.0, {
+					full_punch_interval=1.0,
+					groupcaps={
+						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+					}
+				}, nil)
+			end
+		end	
+		local destroyed=0
+		local stop=false
+		for dx=-dmwc1,dmwc1 do
+			for dz=-dmwc1,dmwc1 do
+				for dy=dmwc1,-dmwc1,-1 do
+					pos.x = pos.x+dx
+					pos.y = pos.y+dy
+					pos.z = pos.z+dz
+					local node =  minetest.env:get_node(pos)   
+						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
+					        func(pos)
+							if minetest.get_node_group(node.name, "cracky")==1 or minetest.get_node_group(node.name, "obs")==1 then	destroyed=destroyed+1 end
+						else
+							if math.random(1,5) <= 4 then
+                                func(pos)
+							end
+						end			
+				    if destroyed>dmwc1 then 
+				        stop=true
+				        break
+				    end 
+					pos.x = pos.x-dx
+					pos.y = pos.y-dy
+					pos.z = pos.z-dz
+				end
+				if stop then break end
+			end
+			if stop then break end
+		end
+end
+
+function destroy(pos) -- Based on https://github.com/PilzAdam/TNT
+    if math.random(1,5) <= 4 then
+        --minetest.env:add_entity({x=pos.x+math.random(0,10)/10-0.5, y=pos.y, z=pos.z+math.random(0,10)/10-0.5}, modname..":smoke")
+    end
+    local nodename = minetest.env:get_node(pos).name
+        if minetest.get_node_group(nodename, "puts_out_fire")==0 then
+        minetest.env:remove_node(pos)
+        nodeupdate(pos)
+    end
+end
+
+function checkProtection(pos) end
 
 minetest.register_craft({
     output = 'lulzpack:ironpistol',
@@ -151,7 +233,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = 'lulzpack:bul1 6',
+    output = 'lulzpack:bul1 8',
     recipe = {
     {'','lulzpack:redyz_ingot',''},
     {'lulzpack:industrial_iron','default:coal_lump','lulzpack:industrial_iron'},
@@ -160,22 +242,24 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-    output = 'lulzpack:plasmapistol',
+    output = 'lulzpack:bazooka',
     recipe = {
-    {'lulzpack:industrial_iron','lulzpack:industrial_iron',''},
-    {'','lulzpack:industrial_iron','lulzpack:industrial_iron'},
-    {'','lulzpack:industrial_iron','lulzpack:redyz_block'},
+    {'lulzpack:industrial_iron','lulzpack:iron_plate','lulzpack:industrial_iron'},
+    {'lulzpack:industrial_iron','lulzpack:iron_plate','lulzpack:industrial_iron'},
+    {'lulzpack:industrial_iron','lulzpack:iron_plate','lulzpack:industrial_iron'},
     }
 })
 
 minetest.register_craft({
-    output = 'lulzpack:bul2 6',
+    output = 'lulzpack:bul1 8',
     recipe = {
     {'','lulzpack:redyz_ingot',''},
-    {'lulzpack:industrial_iron','lulzpack:redyz_lump','lulzpack:industrial_iron'},
-    {'lulzpack:industrial_iron','lulzpack:lyra_lump','lulzpack:industrial_iron'},
+    {'lulzpack:iron_plate','default:coal_lump','lulzpack:iron_plate'},
+    {'lulzpack:iron_plate','default:coal_lump','lulzpack:iron_plate'},
     }
 })
+
+
 
 
 
