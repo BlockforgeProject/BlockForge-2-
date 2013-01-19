@@ -141,3 +141,232 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'lulzpack:raw_stone 2',
+	recipe = {
+		{'lulzpack:high_dirt', 'default:cobble', 'lulzpack:high_dirt'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:raw_stone 4',
+	recipe = {
+		{'lulzpack:high_dirt', 'default:stone', 'lulzpack:high_dirt'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:pick_lyra 1',
+	recipe = {
+		{'lulzpack:lyra_ingot', 'lulzpack:lyra_ingot', 'lulzpack:lyra_ingot'},
+		{'', 'default:stick', ''},
+		{'', 'default:stick', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:pick_hybrid',
+	recipe = {
+		{'lulzpack:hybrid_plate', 'lulzpack:hybrid_plate', 'lulzpack:hybrid_plate'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:axe_lyra 1',
+	recipe = {
+		{'lulzpack:lyra_ingot', 'lulzpack:lyra_ingot', ''},
+		{'', 'default:stick', ''},
+		{'', 'default:stick', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:sword_lyra 1',
+	recipe = {
+		{'', 'lulzpack:lyra_ingot', ''},
+		{'', 'lulzpack:lyra_ingot', ''},
+		{'', 'default:stick', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:sword_celis 1',
+	recipe = {
+		{'', 'lulzpack:celis_ingot', ''},
+		{'', 'lulzpack:celis_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:shovel_lyra 1',
+	recipe = {
+		{'', 'lulzpack:lyra_ingot', ''},
+		{'', 'default:stick', ''},
+		{'', 'default:stick', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:lyra_torch 6',
+	recipe = {
+		{'lulzpack:lyra_lump','default:coal_lump','lulzpack:lyra_lump'},
+		{'','default:stick',''},
+		{'','default:stick',''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:lyra_block 1',
+	recipe = {
+		{'lulzpack:lyra_ingot','lulzpack:lyra_ingot','lulzpack:lyra_ingot'},
+		{'lulzpack:lyra_ingot','lulzpack:lyra_ingot','lulzpack:lyra_ingot'},
+		{'lulzpack:lyra_ingot','lulzpack:lyra_ingot','lulzpack:lyra_ingot'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:redyz_block 1',
+	recipe = {
+		{'lulzpack:redyz_ingot','lulzpack:redyz_ingot','lulzpack:redyz_ingot'},
+		{'lulzpack:redyz_ingot','lulzpack:redyz_ingot','lulzpack:redyz_ingot'},
+		{'lulzpack:redyz_ingot','lulzpack:redyz_ingot','lulzpack:redyz_ingot'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:celis_block 1',
+	recipe = {
+		{'lulzpack:celis_ingot','lulzpack:celis_ingot','lulzpack:celis_ingot'},
+		{'lulzpack:celis_ingot','lulzpack:celis_ingot','lulzpack:celis_ingot'},
+		{'lulzpack:celis_ingot','lulzpack:celis_ingot','lulzpack:celis_ingot'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:empty_can 12',
+	recipe = {
+		{'','lulzpack:industrial_iron',''},
+		{'lulzpack:industrial_iron','','lulzpack:industrial_iron'},
+		{'','lulzpack:industrial_iron',''},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:terxbet_can 4',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltedununterx','lulzpack:empty_can 4','lulzpack:obsidian_bucket_meltedununbet'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:senbet_can 4',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltedununsen','lulzpack:empty_can 4','lulzpack:obsidian_bucket_meltedununbet'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:celis_ingot 9',
+	recipe = {
+		{'lulzpack:celis_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:lyra_ingot 9',
+	recipe = {
+		{'lulzpack:lyra_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:redyz_ingot 9',
+	recipe = {
+		{'lulzpack:redyz_block'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:iron_plate 6',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltediron'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:hybrid_plate 6',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltedlyra','lulzpack:obsidian_bucket_meltedcelis'},
+	}
+})
+minetest.register_craft({
+	output = 'default:steel_ingot 3',
+	recipe = {
+		{'lulzpack:iron_plate','','lulzpack:iron_plate'},
+	}
+})
+--Glasses
+minetest.register_craft({
+	output = 'lulzpack:ironglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'default:steel_ingot', 'default:glass'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:redyzglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'lulzpack:redyz_ingot', 'default:glass'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:elementalglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'lulzpack:hotstone', 'default:glass'},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:meseglass 3',
+	recipe = {
+		{'default:glass', 'default:glass', 'default:glass'},
+		{'default:glass', 'default:mese', 'default:glass'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:dintled_steelblock 2',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltediron', 'lulzpack:hotstone'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:dintled_celisblock 2',
+	recipe = {
+		{'lulzpack:obsidian_bucket_meltedcelis', 'lulzpack:hotstone'},
+	}
+})
+	
+
+--Cooking recipes
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:high_dirt",
+	recipe = "default:dirt",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:high_dirt",
+	recipe = "lulzpack:cold_dirt",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:lyra_ingot",
+	recipe = "lulzpack:lyra_lump",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:redyz_ingot",
+	recipe = "lulzpack:redyz_lump",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "lulzpack:celis_ingot",
+	recipe = "lulzpack:celis_lump",
+})
+

@@ -89,10 +89,16 @@ minetest.register_craftitem("lulzpack:obsidian_bucket_empty", {
 registerHotLiquid("meltedcelis","Melted Celis","meltedcelis",120,10,5)
 registerHotLiquid("meltedlyra","Melted Lyra","meltedlyra",80,6,10)
 registerHotLiquid("meltediron","Melted Iron","meltediron",160,4,3)
+registerHotLiquid("meltedununterx","Melted Ununterx","meltedununterx",230,2,1)
+registerHotLiquid("meltedununbet","Melted Ununbet","meltedununbet",230,3,2)
+registerHotLiquid("meltedununsen","Melted Ununsen","meltedununsen",350,5,2)
 --Buckets
 registerObsBucket("lulzpack:meltedcelis_source","lulzpack:meltedcelis_flowing","lulzpack:obsidian_bucket_meltedcelis","obsidian_bucket_meltedcelis.png","Melted Celis Obsidian Bucket")
 registerObsBucket("lulzpack:meltedlyra_source","lulzpack:meltedlyra_flowing","lulzpack:obsidian_bucket_meltedlyra","obsidian_bucket_meltedlyra.png","Melted Lyra Obsidian Bucket")
 registerObsBucket("lulzpack:meltediron_source","lulzpack:meltediron_flowing","lulzpack:obsidian_bucket_meltediron","obsidian_bucket_meltediron.png","Melted Iron Obsidian Bucket")
+registerObsBucket("lulzpack:meltedununterx_source","lulzpack:meltedununterx_flowing","lulzpack:obsidian_bucket_meltedununterx","obsidian_bucket_meltedununterx.png","Melted Ununterx Obsidian Bucket")
+registerObsBucket("lulzpack:meltedununbet_source","lulzpack:meltedununbet_flowing","lulzpack:obsidian_bucket_meltedununbet","obsidian_bucket_meltedununbet.png","Melted Ununbet Obsidian Bucket")
+registerObsBucket("lulzpack:meltedununsen_source","lulzpack:meltedununsen_flowing","lulzpack:obsidian_bucket_meltedununsen","obsidian_bucket_meltedununsen.png","Melted Ununsen Obsidian Bucket")
 
 smithery = function(pos,node)
     if minetest.env:get_node({x=pos.x,y=pos.y-1,z=pos.z}).name == "default:lava_source" then 
@@ -100,6 +106,9 @@ smithery = function(pos,node)
         addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:celis_block", "lulzpack:obsidian_bucket_meltedcelis", "lulzpack:obsidian_bucket_empty", "case")
         addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:lyra_block", "lulzpack:obsidian_bucket_meltedlyra", "lulzpack:obsidian_bucket_empty", "case")
         addSmitheryRecipe(pos, node, "src", "dst", "default:steelblock", "lulzpack:obsidian_bucket_meltediron", "lulzpack:obsidian_bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:ununterx_block", "lulzpack:obsidian_bucket_meltedununterx", "lulzpack:obsidian_bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:ununbet_block", "lulzpack:obsidian_bucket_meltedununbet", "lulzpack:obsidian_bucket_empty", "case")
+        addSmitheryRecipe(pos, node, "src", "dst", "lulzpack:ununsen_block", "lulzpack:obsidian_bucket_meltedununsen", "lulzpack:obsidian_bucket_empty", "case")
         --CONSUMING THE LAVA
         random=math.random(1,12)
         if random >= math.random(9,12) then minetest.env:remove_node({x=pos.x,y=pos.y-1,z=pos.z}) end

@@ -39,6 +39,11 @@ end
 
 simpleminer_energy=function(pos,node)
     add_simpleminer_fuel(pos, node, "fuels", "lulzpack:nyon_ingot", "energy", math.random(60,70), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununterx_ingot", "energy", math.random(120,140), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununbet_ingot", "energy", math.random(210,265), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununsen_ingot", "energy", math.random(305,450), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:terxbet_can", "energy", math.random(1000,1200), "lulzpack:empty_can")
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:senbet_can", "energy", math.random(1500,2700), "lulzpack:empty_can")
     SIMPLEMINERupdate_formspec(pos)
 end
 

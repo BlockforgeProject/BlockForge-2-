@@ -6,31 +6,96 @@ minetest.register_node("lulzpack:little_tnt", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
---[[function explose_litte_tnt(pos,node)
-    local axis={x=pos.x+1,y=pos.y,z=pos.z}
-    for i=-3,3 do
-        minetest.env:set_node( {x=axis.x,y=axis.y,z=axis.z+1},{name="air"})
-    end
-    local axis2={x=pos.x+2,y=pos.y,z=pos.z}
-    for i=-3,3 do
-        minetest.env:set_node( {x=axis2.x,y=axis2.y,z=axis2.z+i},{name="air"})
-    end
-    local axis3={x=pos.x,y=pos.y,z=pos.z}
-    for i=-3,3 do
-        minetest.env:set_node( {x=axis3.x,y=axis3.y,z=axis3.z+i},{name="air"})
-    end
-    local axis4={x=pos.x-1,y=pos.y,z=pos.z}
-    for i=-3,3 do
-        minetest.env:set_node( {x=axis4.x,y=axis4.y,z=axis4.z+i},{name="air"})
-    end
-    local axis5={x=pos.x-2,y=pos.y,z=pos.z}
-    for i=-3,3 do
-        minetest.env:set_node( {x=axis5.x,y=axis5.y,z=axis5.z+i},{name="air"})
-    end
+minetest.register_node("lulzpack:little_tnt_active", {
+	description = "Little TNT (active)",
+	tiles ={"little_tnt_active.png"},
+	is_ground_content = true,
+	groups = {crumbly=3},
+    drop = "lulzpack:little_tnt",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+activate_litte_tnt = function(pos,node)
+    --local firepos={x=pos.x,y=pos.y+1,z=pos.z}
+    --if minetest.env:get_node(firepos).name == 'fire:basic_flame' then
+        --minetest.env:set_node(pos, {name='lulzpack:little_tnt_active'}) 
+    --end
 end
+
+explose_litte_tnt = function(pos, node)
+    minetest.after(3,function(args)
+        tnt_explode(pos,5,4)
+    end,pos)
+end
+
+--[[minetest.register_abm {
+    nodenames = {"lulzpack:little_tnt"},
+    interval=2,
+    chance=1,
+    action=activate_little_tnt 
+}
             
-minetest.register_abm({
-    nodenames={"lulzpack:little_tnt"},
+minetest.register_abm {
+    nodenames = {"lulzpack:little_tnt_active"},
     interval=5,
     chance=1,
-    action=explose_little_tnt, })]]
+    action=explose_little_tnt 
+}]]
+
+function tnt_explode(pos,dmwc1,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
+        if checkProtection(pos) then return end
+        --minetest.sound_play("DeathFlash", {pos=pos, gain=1.5, max_hear_distance=2*64})
+		local objects = minetest.env:get_objects_inside_radius(pos, 7)
+		for _,obj in ipairs(objects) do
+			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+				local obj_p = obj:getpos()
+				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+				local damage = dmg
+				obj:punch(obj, 1.0, {
+					full_punch_interval=1.0,
+					groupcaps={
+						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+					}
+				}, nil)
+			end
+		end	
+		local destroyed=0
+		local stop=false
+		for dx=-dmwc1,dmwc1 do
+			for dz=-dmwc1,dmwc1 do
+				for dy=dmwc1,-dmwc1,-1 do
+					pos.x = pos.x+dx
+					pos.y = pos.y+dy
+					pos.z = pos.z+dz
+					local node =  minetest.env:get_node(pos)   
+						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
+					        destroy(pos)
+							if minetest.get_node_group(node.name, "cracky")==1 or minetest.get_node_group(node.name, "obs")==1 then	destroyed=destroyed+1 end
+						        else
+							if math.random(1,5) <= 4 then
+                                destroy(pos)
+							end
+						end			
+				    if destroyed>dmwc1 then 
+				        stop=true
+				        break
+				    end 
+					pos.x = pos.x-dx
+					pos.y = pos.y-dy
+					pos.z = pos.z-dz
+				end
+				if stop then break end
+			end
+			if stop then break end
+		end
+end
+
+function destroy(pos) -- Based on https://github.com/PilzAdam/TNT
+    local nodename = minetest.env:get_node(pos).name
+        if minetest.get_node_group(nodename, "puts_out_fire")==0 then
+        minetest.env:remove_node(pos)
+        nodeupdate(pos)
+    end
+end
