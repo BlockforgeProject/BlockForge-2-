@@ -245,11 +245,11 @@ function rocket_explode(pos,dmwc1,dmg) -- Based on https://github.com/RickyFF/Ca
 					pos.z = pos.z+dz
 					local node =  minetest.env:get_node(pos)   
 						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
-					        destroy(pos)
+					        guns_destroy(pos)
 							if minetest.get_node_group(node.name, "cracky")==1 or minetest.get_node_group(node.name, "obs")==1 then	destroyed=destroyed+1 end
 						        else
 							if math.random(1,5) <= 4 then
-                                destroy(pos)
+                                guns_destroy(pos)
 							end
 						end			
 				    if destroyed>dmwc1 then 
@@ -295,12 +295,12 @@ function flame_rocket_explode(pos,dmwc1,dmg) -- Based on https://github.com/Rick
 					pos.z = pos.z+dz
 					local node =  minetest.env:get_node(pos)   
 						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
-					        destroy(pos)
+					        guns_destroy(pos)
 					        flamerocket_ignite(pos)
 							if minetest.get_node_group(node.name, "cracky")==1 or minetest.get_node_group(node.name, "obs")==1 then	destroyed=destroyed+1 end
 						        else
 							if math.random(1,5) <= 4 then
-                                destroy(pos)
+                                guns_destroy(pos)
 					            flamerocket_ignite(pos)
 							end
 						end			
@@ -318,7 +318,7 @@ function flame_rocket_explode(pos,dmwc1,dmg) -- Based on https://github.com/Rick
 		end
 end
 
-function destroy(pos) -- Based on https://github.com/PilzAdam/TNT
+function guns_destroy(pos) -- Based on https://github.com/PilzAdam/TNT
     local nodename = minetest.env:get_node(pos).name
         if minetest.get_node_group(nodename, "puts_out_fire")==0 then
         minetest.env:remove_node(pos)
@@ -398,7 +398,6 @@ minetest.register_craft({
     {'lulzpack:obsidian_plate','default:coal_lump','lulzpack:obsidian_plate'},
     }
 })
-
 
 
 
