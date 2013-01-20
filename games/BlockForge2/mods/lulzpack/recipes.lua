@@ -246,14 +246,18 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'lulzpack:terxbet_can 4',
 	recipe = {
-		{'lulzpack:obsidian_bucket_meltedununterx','lulzpack:empty_can 4','lulzpack:obsidian_bucket_meltedununbet'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+		{'lulzpack:obsidian_bucket_meltedununterx','','lulzpack:obsidian_bucket_meltedununbet'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
 	}
 })
 
 minetest.register_craft({
 	output = 'lulzpack:senbet_can 4',
 	recipe = {
-		{'lulzpack:obsidian_bucket_meltedununsen','lulzpack:empty_can 4','lulzpack:obsidian_bucket_meltedununbet'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+		{'lulzpack:obsidian_bucket_meltedununsen','','lulzpack:obsidian_bucket_meltedununbet'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
 	}
 })
 minetest.register_craft({
