@@ -85,6 +85,48 @@ minetest.register_node("lulzpack:hotstone", {
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_node("lulzpack:compressed_cobble", {
+	description = "Compressed Cobble",
+	tiles ={"compressed_cobble.png"},
+	groups = {crumbly=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lulzpack:compressed_gravel", {
+	description = "Compressed Gravel",
+	tiles ={"compressed_gravel.png"},
+	groups = {crumbly=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lulzpack:hotstone_cobble", {
+	description = "Hot Stone Cobble",
+	tiles ={"hotstone_cobble.png"},
+	is_ground_content = true,
+	groups = {hotstone=3},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lulzpack:hotstone_obsidian", {
+	description = "Hot Stone Obsidian",
+	tiles ={"hotstone_obsidian.png"},
+	is_ground_content = true,
+	groups = {hotstone=2},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lulzpack:hotstone_gravel", {
+	description = "Hot Stone Gravel",
+	tiles ={"hotstone_gravel.png"},
+	is_ground_content = true,
+	groups = {hotstone=3},
+	legacy_mineral = false,
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("lulzpack:dintled_steelblock", {
 	description = "Dintled Steel Block",
 	tiles ={"dintled_steelblock.png"},
@@ -331,7 +373,7 @@ minetest.register_tool("lulzpack:pick_lyra", {
 			cracky={times={[1]=3.70, [2]=1.40, [3]=0.80}, uses=30, maxlevel=1},
             forceglass={times={[1]=4.00, [2]=4.30, [3]=5.60, [4]=7.00},uses=25, maxlevel=1},
             obs={times={[1]=2.50},uses=25,maxlevel=1},
-            hotstone={times={[1]=5.00},uses=10,maxlevel=1},
+            hotstone={times={[1]=5.00,[2]=3.50},uses=10,maxlevel=1},
 		}
 	},
 })
@@ -345,7 +387,7 @@ minetest.register_tool("lulzpack:pick_hybrid", {
 			cracky={times={[1]=3.00, [2]=1.00, [3]=0.60}, uses=40, maxlevel=3},
             forceglass={times={[1]=3.50, [2]=4.10, [3]=5.20, [4]=5.00},uses=30, maxlevel=1},
             obs={times={[1]=2.00,[2]=7.50},uses=25,maxlevel=1},
-            hotstone={times={[1]=4.00},uses=20,maxlevel=1},
+            hotstone={times={[1]=4.00,[2]=3.00,[3]=2.00},uses=20,maxlevel=1},
             dintled={times={[1]=7.00,[2]=10.00},uses=15,maxlevel=1},
 		}
 	},

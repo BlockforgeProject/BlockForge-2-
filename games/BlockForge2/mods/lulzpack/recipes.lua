@@ -341,7 +341,48 @@ minetest.register_craft({
 		{'lulzpack:obsidian_bucket_meltedcelis', 'lulzpack:hotstone'},
 	}
 })
+
+minetest.register_craft({
+	output = 'lulzpack:compressed_cobble 2',
+	recipe = {
+		{'default:cobble', 'default:cobble', ''},
+		{'default:cobble', 'default:cobble', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:compressed_gravel 2',
+	recipe = {
+		{'default:gravel', 'default:gravel', ''},
+		{'default:gravel', 'default:gravel', ''},
+	}
+})
+minetest.register_craft({
+	output = 'lulzpack:hotstone_cobble 12',
+	recipe = {
+		{'lulzpack:compressed_cobble', 'lulzpack:compressed_cobble', 'lulzpack:compressed_cobble'},
+		{'lulzpack:compressed_cobble', 'lulzpack:hotstone', 'lulzpack:compressed_cobble'},
+		{'lulzpack:compressed_cobble', 'lulzpack:compressed_cobble', 'lulzpack:compressed_cobble'},
+	}
+})
 	
+minetest.register_craft({
+	output = 'lulzpack:hotstone_obsidian 12',
+	recipe = {
+		{'lulzpack:obsidian', 'lulzpack:obsidian', 'lulzpack:obsidian'},
+		{'lulzpack:obsidian', 'lulzpack:hotstone', 'lulzpack:obsidian'},
+		{'lulzpack:obsidian', 'lulzpack:obsidian', 'lulzpack:obsidian'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:hotstone_gravel 12',
+	recipe = {
+		{'lulzpack:compressed_gravel', 'lulzpack:compressed_gravel', 'lulzpack:compressed_gravel'},
+		{'lulzpack:compressed_gravel', 'lulzpack:hotstone', 'lulzpack:compressed_gravel'},
+		{'lulzpack:compressed_gravel', 'lulzpack:compressed_gravel', 'lulzpack:compressed_gravel'},
+	}
+})
 
 --Cooking recipes
 minetest.register_craft({
