@@ -395,6 +395,57 @@ minetest.register_tool("lulzpack:pick_hybrid", {
 --Craftings
 --Now on recipes.lua
 
+--Stairs
+
+lulzpack.register_stair_and_slab("obsidian", "lulzpack:obsidian",
+		{obs=1},
+		{"obsidian.png"},
+		"Obsidian stair",
+		"Obsidian slab",
+        LIGHT_MAX-5)
+
+lulzpack.register_stair_and_slab("lyra", "lulzpack:lyra_ingot",
+		{cracky=2},
+		{"lyra_block.png"},
+		"Lyra stair",
+		"Lyra slab",
+        0)
+
+lulzpack.register_stair_and_slab("celis", "lulzpack:celis_ingot",
+		{cracky=1},
+		{"celis_block.png"},
+		"Celis stair",
+		"Celis slab",
+        0)
+
+lulzpack.register_stair_and_slab("ununterx", "lulzpack:ununterx_ingot",
+		{cracky=2},
+		{"ununterx_block.png"},
+		"Ununterx stair",
+		"Ununterx slab",
+        LIGHT_MAX-5)
+
+lulzpack.register_stair_and_slab("ununbet", "lulzpack:ununbet_ingot",
+		{cracky=2},
+		{"ununbet_block.png"},
+		"Ununbet stair",
+		"Ununbet slab",
+        LIGHT_MAX-3)
+
+lulzpack.register_stair_and_slab("ununsen", "lulzpack:ununsen_ingot",
+		{cracky=1},
+		{"ununsen_block.png"},
+		"Ununsen stair",
+		"Ununsen slab",
+        LIGHT_MAX-3)
+
+lulzpack.register_stair_and_slab("hotstone", "lulzpack:hotstone",
+		{hotstone=1},
+		{"hotstone.png"},
+		"Hotstone stair",
+		"Hotstone slab",
+        LIGHT_MAX-5)
+
 --Simple ores
 register_lulzpack_ore("nyon","Nyon")
 register_lulzpack_ore("ununterx","Ununterx")

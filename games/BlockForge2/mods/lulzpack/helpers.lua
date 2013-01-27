@@ -1,4 +1,5 @@
 --Functions and helpers
+lulzpack={}
 --Refinery helpers
 function registerRefRecNodeToItem(source,result,energy_needed,genmeta,nodepos,nodedrop)
     if minetest.env:get_node(nodepos).name == source then
@@ -426,4 +427,118 @@ function registerObsBucket(source, flowing, itemname, inventory_image, graphicna
 			end
 		})
 	end
+end
+
+--Stairs helper
+--Forked from core mods
+
+-- Node will be called stairs:stair_<subname>
+function lulzpack.register_stair(subname, recipeitem, groups, images, description,light)
+	minetest.register_node("lulzpack:stair_" .. subname, {
+		description = description,
+		drawtype = "nodebox",
+		tiles = images,
+		paramtype = "light",
+        light_source = light,
+		paramtype2 = "facedir",
+		is_ground_content = true,
+		groups = groups,
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+				{-0.5, 0, 0, 0.5, 0.5, 0.5},
+			},
+		},
+	})
+
+	minetest.register_craft({
+		output = 'lulzpack:stair_' .. subname .. ' 8',
+		recipe = {
+			{recipeitem, "", ""},
+			{recipeitem, recipeitem, ""},
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+
+	-- Flipped recipe for the silly minecrafters
+	minetest.register_craft({
+		output = 'lulzpack:stair_' .. subname .. ' 8',
+		recipe = {
+			{"", "", recipeitem},
+			{"", recipeitem, recipeitem},
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+end
+
+-- Node will be called stairs:slab_<subname>
+function lulzpack.register_slab(subname, recipeitem, groups, images, description, light)
+	minetest.register_node("lulzpack:slab_" .. subname, {
+		description = description,
+		drawtype = "nodebox",
+		tiles = images,
+		paramtype = "light",
+        light_source = light,
+		is_ground_content = true,
+		groups = groups,
+		node_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+		},
+		on_place = function(itemstack, placer, pointed_thing)
+			if pointed_thing.type ~= "node" then
+				return itemstack
+			end
+
+			-- If it's being placed on an another similar one, replace it with
+			-- a full block
+			local slabpos = nil
+			local slabnode = nil
+			local p0 = pointed_thing.under
+			local p1 = pointed_thing.above
+			local n0 = minetest.env:get_node(p0)
+			if n0.name == "lulzpack:slab_" .. subname and
+					p0.y+1 == p1.y then
+				slabpos = p0
+				slabnode = n0
+			end
+			if slabpos then
+				-- Remove the slab at slabpos
+				minetest.env:remove_node(slabpos)
+				-- Make a fake stack of a single item and try to place it
+				local fakestack = ItemStack(recipeitem)
+				pointed_thing.above = slabpos
+				fakestack = minetest.item_place(fakestack, placer, pointed_thing)
+				-- If the item was taken from the fake stack, decrement original
+				if not fakestack or fakestack:is_empty() then
+					itemstack:take_item(1)
+				-- Else put old node back
+				else
+					minetest.env:set_node(slabpos, slabnode)
+				end
+				return itemstack
+			end
+			
+			-- Otherwise place regularly
+			return minetest.item_place(itemstack, placer, pointed_thing)
+		end,
+	})
+
+	minetest.register_craft({
+		output = 'lulzpack:slab_' .. subname .. ' 6',
+		recipe = {
+			{recipeitem, recipeitem, recipeitem},
+		},
+	})
+end
+
+-- Nodes will be called stairs:{stair,slab}_<subname>
+function lulzpack.register_stair_and_slab(subname, recipeitem, groups, images, desc_stair, desc_slab, light)
+	lulzpack.register_stair(subname, recipeitem, groups, images, desc_stair, light)
+	lulzpack.register_slab(subname, recipeitem, groups, images, desc_slab, light)
 end
