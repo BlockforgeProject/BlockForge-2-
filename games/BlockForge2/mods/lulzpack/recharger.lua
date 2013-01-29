@@ -27,6 +27,9 @@ function recharger_recharging(pos, node)
     add_recharger_item(pos,"lulzpack:chainsaw_lyra",1000,100)
     add_recharger_item(pos,"lulzpack:chainsaw_celis",800,80)
     add_recharger_item(pos,"lulzpack:chainsaw_nyon",500,50)
+    add_recharger_item(pos,"lulzpack:electroauger_lyra",2000,110)
+    add_recharger_item(pos,"lulzpack:electroauger_celis",1500,90)
+    add_recharger_item(pos,"lulzpack:electroauger_nyon",1000,70)
     add_recharger_item(pos,"lulzpack:electro_fns",5000,20)
 end
 
