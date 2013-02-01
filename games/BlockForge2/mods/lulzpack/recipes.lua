@@ -218,6 +218,15 @@ minetest.register_craft({
 		{'lulzpack:lyra_ingot','lulzpack:lyra_ingot','lulzpack:lyra_ingot'},
 	}
 })
+
+minetest.register_craft({
+	output = 'lulzpack:corrupted_bretonium_block',
+	recipe = {
+		{'lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot'},
+		{'lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot'},
+		{'lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot','lulzpack:corrupted_bretonium_ingot'},
+	}
+})
 minetest.register_craft({
 	output = 'lulzpack:redyz_block 1',
 	recipe = {
@@ -260,6 +269,16 @@ minetest.register_craft({
         {'lulzpack:empty_can','','lulzpack:empty_can'},
 	}
 })
+
+minetest.register_craft({
+	output = 'lulzpack:bretonbet_can 4',
+	recipe = {
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+		{'lulzpack:bretonium_block','','lulzpack:obsidian_bucket_meltedununbet'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+	}
+})
+
 minetest.register_craft({
 	output = 'lulzpack:celis_ingot 9',
 	recipe = {

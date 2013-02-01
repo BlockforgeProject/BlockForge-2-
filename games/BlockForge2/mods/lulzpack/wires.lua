@@ -35,9 +35,47 @@ minetest.register_node("lulzpack:mill_gen", {
 	groups = {cracky=3}
 })
 
+minetest.register_node("lulzpack:nuclear_gen", {
+    description = "Nuclear Generator",
+	tiles = {{name="nucleargen_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0}},"quarry_side.png"},
+	is_ground_content = false,
+	on_construct = function(pos)
+		local meta = minetest.env:get_meta(pos)
+		meta:set_int("nuc_energy", 0)
+		meta:set_int("heat", 0)
+		meta:set_string("formspec",
+	    "size[8,9]"..
+	    "list[current_name;fuel;2,2;3,3;]"..
+        "label[5,2,energytext]"..
+        "list[current_name;Energy: " .. meta:get_int("nuc_energy") .. "]"..
+        "label[5,3,heattext]"..
+        "list[current_name;Heat: " .. meta:get_int("heat") .. "%]"..
+	    "list[current_player;main;0,5;8,4;]")
+		local inv = meta:get_inventory()
+        inv:set_size("fuel",6)
+	end,
+	groups = {cracky=3}
+})
+
 minetest.register_node("lulzpack:water_mill", {
     description = "Water Mill",
 	tiles = {{name="watermill_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},"electrofurnace_side.png"},
+    drawtype="nodebox",
+    light_source=10,
+	groups = {cracky=2},
+	selection_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5},
+    },
+	node_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
+    }
+})
+
+minetest.register_node("lulzpack:lava_mill", {
+    description = "Water Mill",
+	tiles = {{name="lavamill_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},"electrofurnace_side.png"},
     drawtype="nodebox",
     light_source=10,
 	groups = {cracky=2},
@@ -61,10 +99,28 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'lulzpack:nuclear_gen',
+	recipe = {
+		{'lulzpack:hotstone','lulzpack:hotstone','lulzpack:hotstone'},
+		{'lulzpack:obsidian','lulzpack:intbattery','lulzpack:obsidian'},
+		{'lulzpack:obsidian','lulzpack:controlpanel','lulzpack:obsidian'},
+	}
+})
+
+minetest.register_craft({
 	output = 'lulzpack:water_mill',
 	recipe = {
 		{'','lulzpack:industrial_iron',''},
 		{'lulzpack:industrial_iron','lulzpack:redyz_ingot','lulzpack:industrial_iron'},
+		{'','lulzpack:industrial_iron',''},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:lava_mill',
+	recipe = {
+		{'','lulzpack:industrial_iron',''},
+		{'lulzpack:industrial_iron','lulzpack:obsidian','lulzpack:industrial_iron'},
 		{'','lulzpack:industrial_iron',''},
 	}
 })
@@ -77,6 +133,18 @@ function MILLGENupdate_formspec(pos)
             "label[5,2,energytext]"..
             "list[current_name;Energy: " .. meta:get_int("energy") .. "]"..
 	        "list[current_player;main;0,5;8,4;]")
+end
+
+function NUCLEARGENupdate_formspec(pos)
+		local meta = minetest.env:get_meta(pos)
+		meta:set_string("formspec",
+	    "size[8,9]"..
+	    "list[current_name;fuel;2,2;3,3;]"..
+        "label[5,2,energytext]"..
+        "list[current_name;Energy: " .. meta:get_int("nuc_energy") .. "]"..
+        "label[5,3,heattext]"..
+        "list[current_name;Heat: " .. meta:get_int("heat") .. "%]"..
+	    "list[current_player;main;0,5;8,4;]")
 end
 
 mill_gen_energy = function(pos, node)
@@ -96,14 +164,39 @@ mill_gen_energy = function(pos, node)
         MILLGENupdate_formspec(pos)
 end
 
+nuclear_gen_energy = function(pos, node)
+		local meta = minetest.env:get_meta(pos)
+        local inv = meta:get_inventory()
+        local heat = meta:get_int("heat")
+        if heat < 0 then meta:set_int("heat",0) end
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "nuc_energy", math.random(1500,1800), nil, "heat", math.random(3,6))
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "nuc_energy", math.random(5000,8000), nil, "heat", math.random(20,50))
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "nuc_energy", 0, nil, "heat", math.random(-4,-1))
+        if heat > 100 then
+            if math.random(1,5) == 1 then nuclear_explode(pos,10,20) end
+        end
+        NUCLEARGENupdate_formspec(pos)
+end
+
 water_mill_energy = function(pos, node)
     local mach_pos={x=pos.x,y=pos.y-1,z=pos.z}
     local water_pos={x=pos.x,y=pos.y+1,z=pos.z}
     if minetest.env:get_node(water_pos).name == 'default:water_source' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
-    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(3,7))
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(2,5))
     end end
     if minetest.env:get_node(water_pos).name == 'default:water_flowing' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
-    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(10,15))
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(3,7))
+    end end
+end
+
+lava_mill_energy = function(pos, node)
+    local mach_pos={x=pos.x,y=pos.y-1,z=pos.z}
+    local lava_pos={x=pos.x,y=pos.y+1,z=pos.z}
+    if minetest.env:get_node(lava_pos).name == 'default:lava_source' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(3,9))
+    end end
+    if minetest.env:get_node(lava_pos).name == 'default:lava_flowing' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(7,15))
     end end
 end
 
@@ -115,11 +208,94 @@ minetest.register_abm {
 } 
 
 minetest.register_abm {
+    nodenames = {"lulzpack:nuclear_gen"},
+    interval = 5,
+    chance = 1,
+    action = nuclear_gen_energy,
+} 
+
+minetest.register_abm {
     nodenames = {"lulzpack:water_mill"},
-    interval = 2,
+    interval = 3,
     chance = 1,
     action = water_mill_energy,
 }
+
+minetest.register_abm {
+    nodenames = {"lulzpack:lava_mill"},
+    interval = 5,
+    chance = 1,
+    action = lava_mill_energy,
+}
+
+function nuclear_explode(pos,range,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
+        if checkProtection(pos) then return end
+        --minetest.sound_play("DeathFlash", {pos=pos, gain=1.5, max_hear_distance=2*64})
+		local objects = minetest.env:get_objects_inside_radius(pos, 7)
+		for _,obj in ipairs(objects) do
+			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+				local obj_p = obj:getpos()
+				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+				local damage = dmg
+				obj:punch(obj, 1.0, {
+					full_punch_interval=1.0,
+					groupcaps={
+						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
+					}
+				}, nil)
+			end
+		end	
+		local destroyed=0
+		local stop=false
+		for dx=-range,range do
+			for dz=-range,range do
+				for dy=range,-range,-1 do
+					pos.x = pos.x+dx
+					pos.y = pos.y+dy
+					pos.z = pos.z+dz
+					local node =  minetest.env:get_node(pos)   
+						if math.abs(dx)<2 and math.abs(dy)<2 and math.abs(dz)<2 then
+					        guns_destroy(pos)
+					        nuclear_ignite(pos)
+							if minetest.get_node_group(node.name, "cracky")==1 or minetest.get_node_group(node.name, "obs")==1 then	destroyed=destroyed+1 end
+						        else
+							if math.random(1,5) <= 4 then
+                                guns_destroy(pos)
+					            nuclear_ignite(pos)
+							end
+						end			
+				    if destroyed>range then 
+				        stop=true
+				        break
+				    end 
+					pos.x = pos.x-dx
+					pos.y = pos.y-dy
+					pos.z = pos.z-dz
+				end
+				if stop then break end
+			end
+			if stop then break end
+		end
+end
+
+function nuclear_ignite(pos) -- Based on https://github.com/PilzAdam/TNT
+	local nodename = minetest.env:get_node(pos).name
+    if math.random(1,4) <= 1 then
+	    if minetest.get_node_group(nodename, "puts_out_fire")==0 then
+	    local nodepos = {x=pos.x,y=pos.y+1,z=pos.z}
+		    minetest.env:add_node(nodepos, {name="fire:basic_flame"})
+            if math.random(1,10) == 1 then
+		        minetest.env:add_node(nodepos, {name="lulzpack:meltedbretonium_flowing"})
+            end           
+            if math.random(1,150) == 1 then
+		        minetest.env:add_node(nodepos, {name="lulzpack:meltedbretonium_source"})
+            end          
+		    nodeupdate(pos)
+        end
+	end
+end
 
 --[[WIP
 iron_wire_fix = { -0.5, -0.469, -0.5 , 0.5, -0.47, 0.5 }

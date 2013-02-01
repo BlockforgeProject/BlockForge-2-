@@ -104,6 +104,17 @@ lavaobs = function(pos)
     end
 end
 
+lavabret = function(pos)
+    for _, abmnode in ipairs({"lulzpack:lava_block","default:lava_source"}) do
+        for dist=-1,1 do
+              if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
+              or minetest.env:get_node({x=pos.x+dist,y=pos.y,z=pos.z}).name == abmnode 
+              or minetest.env:get_node({x=pos.x,y=pos.y,z=pos.z+dist}).name == abmnode then 
+              minetest.env:add_node(pos, {name="lulzpack:corrupted_bretonium_block"}) end
+        end
+    end
+end
+
 minetest.register_abm ({
         nodenames = {"default:lava_flowing"},
         interval = 0,
@@ -118,5 +129,11 @@ minetest.register_abm ({
         action = lavaobs, 
 })
 
+minetest.register_abm ({
+        nodenames = {"lulzpack:bretonium_block"},
+        interval = 0,
+        chance = 1,
+        action = lavabret, 
+})
 
 

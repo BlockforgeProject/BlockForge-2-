@@ -24,6 +24,10 @@ rocket2_DAMAGE=4
 rocket2_GRAVITY=12
 rocket2_VELOCITY=30
 
+rocket3_DAMAGE=12
+rocket3_GRAVITY=12
+rocket3_VELOCITY=30
+
 bul1_DAMAGE=3
 bul1_GRAVITY=6
 bul1_VELOCITY=50
@@ -82,6 +86,33 @@ local rocket2={
 }
 minetest.register_entity('lulzpack:rocket2_ent', rocket2)
 
+local rocket3={
+    physical = false,
+	textures = {"rocket1.png"},
+    lastpos={},
+    plastpos={},
+    collisionbox = {0,0,0,0,0,0},
+    on_step = function(self, dtime)
+        local pos = self.object:getpos()
+        local node = minetest.env:get_node(pos)
+        local exs=true
+        if minetest.get_node_group(node.name, "puts_out_fire")~=0 then
+            exs=false
+            self.object:remove()
+        end
+        if self.lastpos.x~=nil then
+        if node.name ~= "air" and exs then
+            self.object:remove()
+            nuclear_explode(pos,4,rocket2_DAMAGE)
+        end
+        end
+        checkState(self)
+        self.plastpos=self.lastpos
+        self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+    end
+}
+minetest.register_entity('lulzpack:rocket3_ent', rocket3)
+
 local bul1={
     physical = false,
 	textures = {"bullet1.png"},
@@ -134,6 +165,18 @@ rocket2_shoot=function (item, player, pointed_thing)
 	return
 end
 
+rocket3_shoot=function (item, player, pointed_thing)
+	if player:get_inventory():contains_item("main", "lulzpack:rocket3") then
+		player:get_inventory():remove_item("main", "lulzpack:rocket3")
+			local pgpos=player:getpos()
+			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:rocket3_ent")
+			local dir=player:get_look_dir()
+			obj:setvelocity({x=dir.x*rocket3_VELOCITY, y=dir.y*rocket3_VELOCITY, z=dir.z*rocket3_VELOCITY})
+			obj:setacceleration({x=dir.x*-3, y=-rocket3_GRAVITY, z=dir.z*-3})
+	end
+	return
+end
+
 --[[bul1_shoot=function (item, player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:bul1") then
 		player:get_inventory():remove_item("main", "lulzpack:bul1")
@@ -163,13 +206,26 @@ minetest.register_craftitem("lulzpack:flame_bazooka", {
 	image = "flame_bazooka.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 	on_use = rocket2_shoot,
-	description = "Flamw thrower Bazooka"
+	description = "Flame thrower Bazooka"
 })
 
 minetest.register_craftitem("lulzpack:rocket2", {
 	image = "rocket2_inv.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 	description = "Fire Rockets"
+})
+
+minetest.register_craftitem("lulzpack:nuclear_bazooka", {
+	image = "bretonium_bazooka.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	on_use = rocket3_shoot,
+	description = "Nuclear Bazooka"
+})
+
+minetest.register_craftitem("lulzpack:rocket3", {
+	image = "rocket3_inv.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Bretonium Rockets"
 })
 
 minetest.register_craftitem("lulzpack:ironpistol", {
@@ -395,6 +451,24 @@ minetest.register_craft({
     recipe = {
     {'','lulzpack:redyz_ingot',''},
     {'lulzpack:obsidian_plate','bucket:bucket_lava','lulzpack:obsidian_plate'},
+    {'lulzpack:obsidian_plate','default:coal_lump','lulzpack:obsidian_plate'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:nuclear_bazooka',
+    recipe = {
+    {'lulzpack:obsidian','lulzpack:obsidian_plate','lulzpack:obsidian'},
+    {'lulzpack:obsidian','lulzpack:obsidian_plate','lulzpack:obsidian'},
+    {'lulzpack:obsidian','lulzpack:obsidian_plate','lulzpack:obsidian'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:rocket3 2',
+    recipe = {
+    {'','lulzpack:redyz_ingot',''},
+    {'lulzpack:obsidian_plate','lulzpack:corrupted_bretonium_block','lulzpack:obsidian_plate'},
     {'lulzpack:obsidian_plate','default:coal_lump','lulzpack:obsidian_plate'},
     }
 })

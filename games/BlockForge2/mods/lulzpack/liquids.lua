@@ -22,6 +22,7 @@ registerSimpleLiquid("oil","Oil","oil",520,0,0,
 registerSimpleLiquid("gasoline","Gasoline","gasoline",320,0,0,
 {liquid=2, not_in_creative_inventory=1, flammable=1, igniter=1},
 {liquid=2, not_in_creative_inventory=1, flammable=1, igniter=1})
+registerHotLiquid("meltedbretonium","Melted Bretonium","meltedbretonium",120,15,LIGHT_MAX)
 --Buckets
 registerObsBucket("lulzpack:oil_source","lulzpack:oil_flowing","lulzpack:obsidian_bucket_oil","obsidian_bucket_oil.png","Oil Obsidian Bucket")
 registerObsBucket("lulzpack:gasoline_source","lulzpack:gasoline_flowing","lulzpack:obsidian_bucket_gasoline","obsidian_bucket_gasoline.png","Gasoline Obsidian Bucket")

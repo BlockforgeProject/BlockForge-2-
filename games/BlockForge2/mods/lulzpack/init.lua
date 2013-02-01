@@ -188,6 +188,19 @@ minetest.register_node("lulzpack:celis_block", {
 	drop = 'lulzpack:celis_block',
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_node("lulzpack:corrupted_bretonium_block", {
+	description = "Corrupted Bretonium Block",
+	tiles ={"corrupted_bretonium_block.png"},
+	groups = {cracky=3},
+	drop = 'lulzpack:corrupted_bretonium_ingot '..math.random(1,5)..'',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_craftitem("lulzpack:corrupted_bretonium_ingot", {
+	description = "Corrupted Bretonium Ingot",
+	inventory_image = "corrupted_bretonium_ingot.png",
+})
 --Items
 minetest.register_craftitem("lulzpack:lyra_lump", {
 	description = "Lyra Lump",
@@ -243,6 +256,11 @@ minetest.register_craftitem("lulzpack:terxbet_can", {
 minetest.register_craftitem("lulzpack:senbet_can", {
 	description = "Senbet Can",
 	inventory_image = "senbet_can.png",
+})
+
+minetest.register_craftitem("lulzpack:bretonbet_can", {
+	description = "Bretonbet Can",
+	inventory_image = "bretonbet_can.png",
 })
 
 --Glasses
@@ -451,9 +469,11 @@ register_lulzpack_ore("nyon","Nyon")
 register_lulzpack_ore("ununterx","Ununterx")
 register_lulzpack_ore("ununbet","Ununbet")
 register_lulzpack_ore("ununsen","Ununsen")
+register_lulzpack_ore("bretonium","Bretonium")
 setLightOnOre("ununterx","Ununterx",LIGHT_MAX-5)
 setLightOnOre("ununbet","Ununbet",LIGHT_MAX-3)
 setLightOnOre("ununsen","Ununsen",LIGHT_MAX-5)
+setLightOnOre("bretonium","Bretonium",LIGHT_MAX)
 --Ore Generations
 minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("lulzpack:stone_with_lyra", "default:stone", minp, maxp, seed+6, 1/24/24/12, 6,32, -31000, -64)
@@ -463,6 +483,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("lulzpack:stone_with_ununterx", "default:stone", minp, maxp, seed+0, 1/12/12/12, 12, 64, -31000, -240)
 	generate_ore("lulzpack:stone_with_ununbet", "default:stone", minp, maxp, seed+0, 1/24/24/24, 12, 128, -31000, -240)
 	generate_ore("lulzpack:stone_with_ununsen", "default:stone", minp, maxp, seed+0, 1/24/32/32, 12, 128, -31000, -320)
+	generate_ore("lulzpack:stone_with_bretonium", "default:stone", minp, maxp, seed+0, 1/24/24/24, 6, 32, -31000, -820)
 end)
 
 include("items")
@@ -486,3 +507,4 @@ include("recharger")
 include("electrotools")
 --include("explosives")
 include("foods")
+include("coins")

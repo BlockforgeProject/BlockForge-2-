@@ -151,6 +151,18 @@ function add_gen_fuel(pos, node, invname, nodename, varname, given_energy, repla
         meta:get_inventory():add_item(invname, replacing_item) end
 end
 
+function add_nucgen_fuel(pos, node, invname, nodename, varname, given_energy, replacing_item, heatvar_name, given_heat)
+    local meta = minetest.env:get_meta(pos)
+    local inv = meta:get_inventory()
+    if meta:get_inventory():contains_item(invname, nodename) then
+        energy=meta:get_int(varname)
+        heat=meta:get_int(heatvar_name)
+        meta:set_int(varname,energy+given_energy)
+        if heat >= 0 then meta:set_int(heatvar_name,heat+given_heat) end
+        meta:get_inventory():remove_item(invname, nodename)
+        meta:get_inventory():add_item(invname, replacing_item) end
+end
+
 --Simple Miner fuel helper
 function add_simpleminer_fuel(pos, node, invname, nodename, varname, given_energy, replacing_item)
     local meta = minetest.env:get_meta(pos)
@@ -160,6 +172,18 @@ function add_simpleminer_fuel(pos, node, invname, nodename, varname, given_energ
         meta:set_int(varname,energy+given_energy)
         meta:get_inventory():remove_item(invname, nodename)
         meta:get_inventory():add_item(invname, replacing_item) end
+end
+
+--Coinerator recipe helper
+function add_coinerator_recipe(pos, srcname, coinname, gen_meta,energy_var, energy_needed)
+    local meta = minetest.env:get_meta(pos)
+    local inv = meta:get_inventory()
+    if meta:get_inventory():contains_item("src", srcname) then
+    if energy_var > energy_needed then
+        gen_meta:set_int(energy_var,energy_var-energy_needed)
+        meta:get_inventory():remove_item("src", srcname)
+        meta:get_inventory():add_item("dst", coinname) end
+    end
 end
 --Simple Miner formspec Update
 function SIMPLEMINERupdate_formspec(pos)
