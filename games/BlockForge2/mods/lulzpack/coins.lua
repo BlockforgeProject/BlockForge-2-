@@ -127,3 +127,11 @@ minetest.register_craft({
             {'lulzpack:steel_coin','lulzpack:steel_coin','lulzpack:steel_coin'} }
 })
 
+minetest.register_craft({
+    output = 'lulzpack:coinerator',
+    recipe ={ 
+            {'default:steel_ingot','lulzpack:electrodrill','default:steel_ingot'},
+            {'default:cobble','default:steel_ingot','default:cobble'},
+            {'default:steel_ingot','default:steel_ingot','default:steel_ingot'},}
+}) 
+
