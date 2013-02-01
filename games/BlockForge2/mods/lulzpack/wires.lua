@@ -41,13 +41,13 @@ minetest.register_node("lulzpack:nuclear_gen", {
 	is_ground_content = false,
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
-		meta:set_int("nuc_energy", 0)
+		meta:set_int("energy", 0)
 		meta:set_int("heat", 0)
 		meta:set_string("formspec",
 	    "size[8,9]"..
 	    "list[current_name;fuel;2,2;3,3;]"..
         "label[5,2,energytext]"..
-        "list[current_name;Energy: " .. meta:get_int("nuc_energy") .. "]"..
+        "list[current_name;Energy: " .. meta:get_int("energy") .. "]"..
         "label[5,3,heattext]"..
         "list[current_name;Heat: " .. meta:get_int("heat") .. "%]"..
 	    "list[current_player;main;0,5;8,4;]")
@@ -141,7 +141,7 @@ function NUCLEARGENupdate_formspec(pos)
 	    "size[8,9]"..
 	    "list[current_name;fuel;2,2;3,3;]"..
         "label[5,2,energytext]"..
-        "list[current_name;Energy: " .. meta:get_int("nuc_energy") .. "]"..
+        "list[current_name;Energy: " .. meta:get_int("energy") .. "]"..
         "label[5,3,heattext]"..
         "list[current_name;Heat: " .. meta:get_int("heat") .. "%]"..
 	    "list[current_player;main;0,5;8,4;]")
@@ -169,9 +169,9 @@ nuclear_gen_energy = function(pos, node)
         local inv = meta:get_inventory()
         local heat = meta:get_int("heat")
         if heat < 0 then meta:set_int("heat",0) end
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "nuc_energy", math.random(1500,1800), nil, "heat", math.random(3,6))
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "nuc_energy", math.random(5000,8000), nil, "heat", math.random(20,50))
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "nuc_energy", 0, nil, "heat", math.random(-4,-1))
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1500,1800), nil, "heat", math.random(3,6))
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "energy", math.random(5000,8000), nil, "heat", math.random(20,50))
+        add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", 0, nil, "heat", math.random(-4,-1))
         if heat > 100 then
             if math.random(1,5) == 1 then nuclear_explode(pos,10,20) end
         end
