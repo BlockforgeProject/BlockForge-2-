@@ -16,7 +16,7 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions
 
-rocket1_DAMAGE=5
+rocket1_DAMAGE=6
 rocket1_GRAVITY=10
 rocket1_VELOCITY=30
 
@@ -27,6 +27,14 @@ rocket2_VELOCITY=30
 rocket3_DAMAGE=12
 rocket3_GRAVITY=12
 rocket3_VELOCITY=30
+
+granade1_DAMAGE=4
+granade1_GRAVITY=25
+granade1_VELOCITY=20
+
+granade2_DAMAGE=4
+granade2_GRAVITY=20
+granade2_VELOCITY=30
 
 bul1_DAMAGE=3
 bul1_GRAVITY=6
@@ -113,9 +121,9 @@ local rocket3={
 }
 minetest.register_entity('lulzpack:rocket3_ent', rocket3)
 
-local bul1={
+local granade1={
     physical = false,
-	textures = {"bullet1.png"},
+	textures = {"granade1.png"},
     lastpos={},
     plastpos={},
     collisionbox = {0,0,0,0,0,0},
@@ -123,15 +131,10 @@ local bul1={
         local pos = self.object:getpos()
         local node = minetest.env:get_node(pos)
         local exs=true
-        if minetest.get_node_group(node.name, "puts_out_fire")~=0 then
-            exs=false
-            self.object:remove()
-            shot(pos,1,bul1_DAMAGE)
-        end
         if self.lastpos.x~=nil then
         if node.name ~= "air" and exs then
             self.object:remove()
-            shot(pos,1,bul1_DAMAGE)
+            rocket_explode(pos,3,granade1_DAMAGE)
         end
         end
         checkState(self)
@@ -139,7 +142,30 @@ local bul1={
         self.lastpos={x=pos.x, y=pos.y, z=pos.z}
     end
 }
---minetest.register_entity('lulzpack:bullet1_ent', bul1)
+minetest.register_entity('lulzpack:granade1_ent', granade1)
+
+local granade2={
+    physical = false,
+	textures = {"granade2.png"},
+    lastpos={},
+    plastpos={},
+    collisionbox = {0,0,0,0,0,0},
+    on_step = function(self, dtime)
+        local pos = self.object:getpos()
+        local node = minetest.env:get_node(pos)
+        local exs=true
+        if self.lastpos.x~=nil then
+        if node.name ~= "air" and exs then
+            self.object:remove()
+            flame_rocket_explode(pos,2,granade2_DAMAGE)
+        end
+        end
+        checkState(self)
+        self.plastpos=self.lastpos
+        self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+    end
+}
+minetest.register_entity('lulzpack:granade2_ent', granade2)
 
 rocket1_shoot=function (item, player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:rocket1") then
@@ -177,17 +203,29 @@ rocket3_shoot=function (item, player, pointed_thing)
 	return
 end
 
---[[bul1_shoot=function (item, player, pointed_thing)
-	if player:get_inventory():contains_item("main", "lulzpack:bul1") then
-		player:get_inventory():remove_item("main", "lulzpack:bul1")
+granade1_shoot=function (item, player, pointed_thing)
+	if player:get_inventory():contains_item("main", "lulzpack:granade") then
+		player:get_inventory():remove_item("main", "lulzpack:granade")
 			local pgpos=player:getpos()
-			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:bullet1_ent")
+			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:granade1_ent")
 			local dir=player:get_look_dir()
-			obj:setvelocity({x=dir.x*bul1_VELOCITY, y=dir.y*bul1_VELOCITY, z=dir.z*bul1_VELOCITY})
-			obj:setacceleration({x=dir.x*-3, y=-bul1_GRAVITY, z=dir.z*-3})
+			obj:setvelocity({x=dir.x*granade1_VELOCITY, y=dir.y*granade1_VELOCITY, z=dir.z*granade1_VELOCITY})
+			obj:setacceleration({x=dir.x*-3, y=-granade1_GRAVITY, z=dir.z*-3})
 	end
 	return
-end]]
+end
+
+granade2_shoot=function (item, player, pointed_thing)	  
+	if player:get_inventory():contains_item("main", "lulzpack:granade2") then
+		player:get_inventory():remove_item("main", "lulzpack:granade2")              	    
+			local pgpos=player:getpos()
+			local obj=minetest.env:add_entity({x=pgpos.x,y=pgpos.y+1.5,z=pgpos.z}, "lulzpack:granade2_ent")
+			local dir=player:get_look_dir()
+			obj:setvelocity({x=dir.x*granade2_VELOCITY, y=dir.y*granade2_VELOCITY, z=dir.z*granade2_VELOCITY})
+			obj:setacceleration({x=dir.x*-3, y=-granade2_GRAVITY, z=dir.z*-3})
+        end
+	return
+end
 
 minetest.register_craftitem("lulzpack:bazooka", {
 	image = "bazooka.png",
@@ -228,17 +266,30 @@ minetest.register_craftitem("lulzpack:rocket3", {
 	description = "Bretonium Rockets"
 })
 
-minetest.register_craftitem("lulzpack:ironpistol", {
-	image = "ironpistol.png",
+minetest.register_craftitem("lulzpack:granade_launcher", {
+	image = "granadelauncher.png",
 	on_place_on_ground = minetest.craftitem_place_item,
-	on_use = bul1_shoot,
-	description = "Iron Pistol"
+	on_use = granade1_shoot,
+	description = "Granade Launcher"
 })
 
-minetest.register_craftitem("lulzpack:bul1", {
-	image = "bul1_inv.png",
+minetest.register_craftitem("lulzpack:granade", {
+	image = "granade1.png",
 	on_place_on_ground = minetest.craftitem_place_item,
-	description = "Iron Pistol bullets"
+	description = "Granade"
+})
+
+minetest.register_craftitem("lulzpack:flamethrower", {
+	image = "flamethrower.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	on_use = granade2_shoot,
+	description = "Flame thrower"
+})
+
+minetest.register_craftitem("lulzpack:granade2", {
+	image = "granade2.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Flame Granade"
 })
 
 
@@ -249,27 +300,6 @@ function checkState(ss)
         explode(s.object:getpos(),2)
     end
     end,ss)
-end
-
-function shot(pos,dmwc1,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
-        if checkProtection(pos) then return end
-        --minetest.sound_play("DeathFlash", {pos=pos, gain=1.5, max_hear_distance=2*64})
-		local objects = minetest.env:get_objects_inside_radius(pos, 7)
-		for _,obj in ipairs(objects) do
-			if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-				local obj_p = obj:getpos()
-				local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-				local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-				local damage = dmg
-				obj:punch(obj, 1.0, {
-					full_punch_interval=1.0,
-					groupcaps={
-						fleshy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
-						snappy={times={[1]=1/damage, [2]=1/damage, [3]=1/damage}},
-					}
-				}, nil)
-			end
-		end	
 end
 
 function rocket_explode(pos,dmwc1,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons
@@ -402,24 +432,6 @@ end
 function checkProtection(pos) end
 
 minetest.register_craft({
-    output = 'lulzpack:ironpistol',
-    recipe = {
-    {'default:steel_ingot','',''},
-    {'','default:steel_ingot','lulzpack:industrial_iron'},
-    {'','default:steel_ingot','default:stick'},
-    }
-})
-
-minetest.register_craft({
-    output = 'lulzpack:bul1 8',
-    recipe = {
-    {'','lulzpack:redyz_ingot',''},
-    {'lulzpack:industrial_iron','default:coal_lump','lulzpack:industrial_iron'},
-    {'lulzpack:industrial_iron','default:coal_lump','lulzpack:industrial_iron'},
-    }
-})
-
-minetest.register_craft({
     output = 'lulzpack:bazooka',
     recipe = {
     {'lulzpack:industrial_iron','lulzpack:iron_plate','lulzpack:industrial_iron'},
@@ -470,6 +482,41 @@ minetest.register_craft({
     {'','lulzpack:redyz_ingot',''},
     {'lulzpack:obsidian_plate','lulzpack:corrupted_bretonium_block','lulzpack:obsidian_plate'},
     {'lulzpack:obsidian_plate','default:coal_lump','lulzpack:obsidian_plate'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:granade_launcher',
+    recipe = {
+    {'lulzpack:iron_plate','lulzpack:obsidian','lulzpack:iron_plate'},
+    {'','lulzpack:iron_plate','lulzpack:iron_plate'},
+    {'','','lulzpack:iron_plate'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:granade 6',
+    recipe = {
+    {'','lulzpack:redyz_ingot',''},
+    {'lulzpack:iron_plate','default:coal_lump','lulzpack:iron_plate'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:flamethrower',
+    recipe = {
+    {'lulzpack:obsidian_plate','lulzpack:obsidian','lulzpack:obsidian_plate'},
+    {'','lulzpack:obsidian_plate','lulzpack:obsidian_plate'},
+    {'','','lulzpack:obsidian_plate'},
+    }
+})
+
+minetest.register_craft({
+    output = 'lulzpack:granade2 4',
+    recipe = {
+    {'','lulzpack:redyz_ingot',''},
+    {'lulzpack:iron_plate','bucket:bucket_lava','lulzpack:iron_plate'},
+    {'','default:coal_lump',''},
     }
 })
 

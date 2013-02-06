@@ -174,6 +174,29 @@ function add_simpleminer_fuel(pos, node, invname, nodename, varname, given_energ
         meta:get_inventory():add_item(invname, replacing_item) end
 end
 
+--BatBox battery helper
+function lulzpack.add_batbox_battery(pos, invname, machpos, mach_varname, batname, capacity, energy_const)
+    local meta = minetest.env:get_meta(pos)
+    local mach_meta = minetest.env:get_meta(machpos)
+    local mach_energy = mach_meta:get_int(mach_varname)
+    local inv = meta:get_inventory()
+    if meta:get_inventory():contains_item(invname, batname) then
+        local energy=mach_meta:get_int(mach_varname)
+        local item_stack= ItemStack(inv:get_stack(invname,1))
+        local wear=item_stack:get_wear()
+        local energy_unit=65535/capacity
+        local energy_per_sec=energy_unit*energy_const*65545
+        if wear >= 0 then
+            if energy > energy_per_sec then
+                item_stack:add_wear(-energy_per_sec)
+                mach_meta:set_int(mach_varname,mach_energy-energy_per_sec)
+                inv:set_stack(invname,1,item_stack)
+                print(energy_per_sec)
+            end
+        end
+    end
+end
+
 --Coinerator recipe helper
 function add_coinerator_recipe(pos, srcname, coinname, gen_meta,energy_var, energy_needed)
     local meta = minetest.env:get_meta(pos)
@@ -566,3 +589,5 @@ function lulzpack.register_stair_and_slab(subname, recipeitem, groups, images, d
 	lulzpack.register_stair(subname, recipeitem, groups, images, desc_stair, light)
 	lulzpack.register_slab(subname, recipeitem, groups, images, desc_slab, light)
 end
+
+

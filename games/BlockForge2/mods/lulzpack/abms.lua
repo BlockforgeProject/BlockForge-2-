@@ -115,25 +115,44 @@ lavabret = function(pos)
     end
 end
 
+water_radioactive = function(pos)
+    for _, abmnode in ipairs({"default:water_source","default:water_flowing"}) do
+        for dist=-1,1 do
+              if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode then minetest.env:add_node({x=pos.x,y=pos.y+dist,z=pos.z}, {name="lulzpack:radioactivewater_source"}) end
+              if minetest.env:get_node({x=pos.x+dist,y=pos.y,z=pos.z}).name == abmnode then minetest.env:add_node({x=pos.x+dist,y=pos.y,z=pos.z}, {name="lulzpack:radioactivewater_source"}) end
+              if minetest.env:get_node({x=pos.x,y=pos.y,z=pos.z+dist}).name == abmnode then minetest.env:add_node({x=pos.x,y=pos.y,z=pos.z+dist}, {name="lulzpack:radioactivewater_source"}) end
+        end
+    end
+end
+
+
 minetest.register_abm ({
         nodenames = {"default:lava_flowing"},
-        interval = 0,
+        interval = 1,
         chance = 1,
         action = lavacobble, 
 })
 
 minetest.register_abm ({
         nodenames = {"default:lava_source"},
-        interval = 0,
+        interval = 1,
         chance = 1,
         action = lavaobs, 
 })
 
 minetest.register_abm ({
         nodenames = {"lulzpack:bretonium_block"},
-        interval = 0,
+        interval = 1,
         chance = 1,
         action = lavabret, 
 })
+
+minetest.register_abm ({
+        nodenames = {"lulzpack:meltedbretonium_source","lulzpack:meltedbretonium_flowing"},
+        interval = 1,
+        chance = 1,
+        action = water_radioactive, 
+})
+
 
 

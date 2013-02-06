@@ -74,7 +74,7 @@ minetest.register_node("lulzpack:water_mill", {
 })
 
 minetest.register_node("lulzpack:lava_mill", {
-    description = "Water Mill",
+    description = "Lava Mill",
 	tiles = {{name="lavamill_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},"electrofurnace_side.png"},
     drawtype="nodebox",
     light_source=10,
@@ -160,7 +160,8 @@ mill_gen_energy = function(pos, node)
         add_gen_fuel(pos, node, "fuel", "lulzpack:obsidian_bucket_oil", "energy", math.random(450,550), "lulzpack:obsidian_bucket_empty")
         add_gen_fuel(pos, node, "fuel", "lulzpack:obsidian_bucket_gasoline", "energy", math.random(2000,2700), "lulzpack:obsidian_bucket_empty")
         add_gen_fuel(pos, node, "fuel", "lulzpack:terxbet_can", "energy", math.random(1000,1200), "lulzpack:empty_can")
-        add_gen_fuel(pos, node, "fuel", "lulzpack:senbet_can", "energy", math.random(1500,2700), "lulzpack:empty_can")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:senbet_can", "energy", math.random(1200,1600), "lulzpack:empty_can")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1300,1500), "lulzpack:empty_can")
         MILLGENupdate_formspec(pos)
 end
 
@@ -169,11 +170,12 @@ nuclear_gen_energy = function(pos, node)
         local inv = meta:get_inventory()
         local heat = meta:get_int("heat")
         if heat < 0 then meta:set_int("heat",0) end
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1500,1800), nil, "heat", math.random(3,6))
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "energy", math.random(5000,8000), nil, "heat", math.random(20,50))
-        add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", 0, nil, "heat", math.random(-4,-1))
+            add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1500,1800), nil, "heat", math.random(2,5))
+            add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "energy", math.random(5000,8000), nil, "heat", math.random(20,50))
+            add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", 0, nil, "heat", math.random(-4,-1))
+            add_nucgen_fuel(pos, node, "fuel", "bucket:bucket_water", "energy", 0, "bucket:bucket_empty", "heat", math.random(-2,-1))
         if heat > 100 then
-            if math.random(1,5) == 1 then nuclear_explode(pos,10,20) end
+            if math.random(1,3) == 1 then nuclear_explode(pos,10,20) end
         end
         NUCLEARGENupdate_formspec(pos)
 end
@@ -209,7 +211,7 @@ minetest.register_abm {
 
 minetest.register_abm {
     nodenames = {"lulzpack:nuclear_gen"},
-    interval = 5,
+    interval = 3,
     chance = 1,
     action = nuclear_gen_energy,
 } 
@@ -296,8 +298,10 @@ function nuclear_ignite(pos) -- Based on https://github.com/PilzAdam/TNT
         end
 	end
 end
-
---[[WIP
+---------------------------------------------------------------------------------------------
+--WIRES--------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+--[[
 iron_wire_fix = { -0.5, -0.469, -0.5 , 0.5, -0.47, 0.5 }
 
 minetest.register_node("lulzpack:iron_wire", {
@@ -346,23 +350,21 @@ energy = function(pos, node)
     local meta4 = minetest.env:get_meta(pos4)   
     local ID = meta:get_int("ID") 
     if meta:get_int("energized") == 1 then
-    if meta:get_int("ID") == 0 and meta:get_int("wire") ~= 1 then
+    if meta:get_int("ID") == 0 and meta:get_int("wire") == 0 then
     if meta1:get_int("ID") <= ID then meta1:set_int("ID",ID+1) meta1:set_int("energized",1) end
     if meta2:get_int("ID") <= ID then meta2:set_int("ID",ID+1) meta2:set_int("energized",1) end
     if meta3:get_int("ID") <= ID then meta3:set_int("ID",ID+1) meta3:set_int("energized",1) end
     if meta4:get_int("ID") <= ID then meta4:set_int("ID",ID+1) meta4:set_int("energized",1) end
     elseif meta:get_int("wire") == 1 then
-    if meta1:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
-    if meta2:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
-    if meta3:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
-    if meta4:get_int("ID")==ID+1 then meta:set_int("ID",ID+1) meta:set_int("energized",1) end
+    if meta1:get_int("energized") == 0 and meta1:get_int("generator") == 0 and meta1:get_int("wire") == 1 then meta1:set_int("ID",ID+1) meta1:set_int("energized",1) end
+    if meta2:get_int("energized") == 0 and meta2:get_int("generator") == 0 and meta2:get_int("wire") == 1 then meta2:set_int("ID",ID+1) meta2:set_int("energized",1) end
+    if meta3:get_int("energized") == 0 and meta3:get_int("generator") == 0 and meta3:get_int("wire") == 1 then meta3:set_int("ID",ID+1) meta3:set_int("energized",1) end
+    if meta4:get_int("energized") == 0 and meta4:get_int("generator") == 0 and meta4:get_int("wire") == 1 then meta4:set_int("ID",ID+1) meta4:set_int("energized",1) end
     end
     end
 end 
 
 unenergy = function(pos, node)
-    --Energizing
-    --minetest.chat_send_all("Energyzing initialized") 
     pos1 = {x=pos.x+1,y=pos.y,z=pos.z}    
     pos2 = {x=pos.x-1,y=pos.y,z=pos.z}
     pos3 = {x=pos.x,y=pos.y,z=pos.z+1}
@@ -372,11 +374,10 @@ unenergy = function(pos, node)
     local meta2 = minetest.env:get_meta(pos2)
     local meta3 = minetest.env:get_meta(pos3)
     local meta4 = minetest.env:get_meta(pos4)    
-    --if meta1:get_int("energized") < meta:get_int("ID") and meta2:get_int("ID") < meta:get_int("ID") and meta3:get_int("ID") < meta:get_int("ID") and meta4:get_int("ID") < meta:get_int("ID") then
-    --meta1:get_int("wire") == 1 or meta2:get_int("wire") == 1 or meta3:get_int("wire") == 1 or meta4:get_int("wire") == 1 then
-    --meta:set_int("energized",0) end
+    if meta1:get_int("energized") == 0 and meta2:get_int("energized") == 0 and meta3:get_int("energized") == 0 and meta4:get_int("energized") == 0 then
+        meta:set_int("energized",0)
+    end
 end
-
 
 minetest.register_abm {
     nodenames = {"lulzpack:stone_generator"},
@@ -389,14 +390,14 @@ minetest.register_abm {
     nodenames = {"lulzpack:iron_wire"},
     interval = 1.0,
     chance = 1,
-    action = unenergy,
-}
+    action = energy,
+} 
 
 minetest.register_abm {
     nodenames = {"lulzpack:iron_wire"},
     interval = 1.0,
     chance = 1,
-    action = energy,
+    action = unenergy,
 } 
 
 minetest.register_node("lulzpack:stone_generator", {
@@ -409,6 +410,7 @@ minetest.register_node("lulzpack:stone_generator", {
     minetest.chat_send_all("Generator placed")
     local meta = minetest.env:get_meta(pos)
     meta:set_int("energized",1)
-    meta:set_int("ID",0)  end,
+    meta:set_int("ID",0)  
+    meta:set_int("generator",1)end,
 	sounds = default.node_sound_stone_defaults(),
 })]]
