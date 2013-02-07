@@ -309,12 +309,6 @@ minetest.register_craft({
 		{'lulzpack:obsidian_bucket_meltedlyra','lulzpack:obsidian_bucket_meltedcelis'},
 	}
 })
-minetest.register_craft({
-	output = 'default:steel_ingot 3',
-	recipe = {
-		{'lulzpack:iron_plate','','lulzpack:iron_plate'},
-	}
-})
 --Glasses
 minetest.register_craft({
 	output = 'lulzpack:ironglass 3',
