@@ -63,7 +63,6 @@ minetest.register_node("lulzpack:quarrydiggerpole", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
 minetest.register_node("lulzpack:raffinery", {
 	tiles = {"raffinery_top.png","bb_side.png",
 		  "bb_side.png","bb_side.png",
@@ -133,6 +132,29 @@ minetest.register_node("lulzpack:minimal_mining", {
                 "list[current_name;Energy="..meta:get_int("energy").."]"..
 				"list[current_player;main;0,5;8,4;]")
 		meta:set_string("infotext", "Minimal Mining Machine")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8)
+		inv:set_size("fuels", 3)
+	end,
+	groups = {cracky=2}
+})
+
+minetest.register_node("lulzpack:lateral_mining", {
+    description = "Lateral Mining Machine",
+	tiles = {"lateralmining_top.png","quarry_side.png",
+		  "quarry_side.png","quarry_side.png",
+		  "quarry_side.png","quarry_side.png"},
+	on_construct = function(pos)
+		local meta = minetest.env:get_meta(pos)
+        meta:set_int("energy",0)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,1;]"..
+			    "list[current_name;fuels;3,3;3,1;]"..
+                "label[1,3,fuelstext]"..
+                "list[current_name;Energy="..meta:get_int("energy").."]"..
+				"list[current_player;main;0,5;8,4;]")
+		meta:set_string("infotext", "Lateral Mining Machine")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8)
 		inv:set_size("fuels", 3)

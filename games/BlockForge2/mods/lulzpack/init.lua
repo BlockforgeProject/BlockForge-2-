@@ -329,7 +329,7 @@ minetest.register_node("lulzpack:lyra_torch", {
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
 		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
 	},
-	groups = {choppy=2,dig_immediate=3,flammable=1},
+	groups = {choppy=2,dig_immediate=3},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 })

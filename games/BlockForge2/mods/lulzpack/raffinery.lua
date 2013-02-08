@@ -63,6 +63,27 @@ local activateraffinery = function( pos, node)
                 MILLGENupdate_formspec(gen_pos) end end                       
             end
 end
-           
+         
+local activate_lyratorch = function (pos,node)
+nodeposs={
+    {x=pos.x,y=pos.y+1,z=pos.z}, 
+    {x=pos.x,y=pos.y-1,z=pos.z}, 
+    {x=pos.x+1,y=pos.y,z=pos.z},
+    {x=pos.x-1,y=pos.y,z=pos.z}, 
+    {x=pos.x,y=pos.y,z=pos.z+1},  
+    {x=pos.x,y=pos.y,z=pos.z-1} }
+nodenames={}
+for i=1,6 do
+    nodenames[i]=minetest.env:get_node(nodeposs[i])
+    if nodenames[i].name == 'lulzpack:raffinery' then activateraffinery( nodeposs[i],nodenames[i]) end
+end
+end
 
 minetest.register_on_punchnode( activateraffinery )
+
+minetest.register_abm ({
+        nodenames = {"lulzpack:lyra_torch"},
+        interval = 2,
+        chance = 1,
+        action = activate_lyratorch
+})

@@ -106,6 +106,16 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'lulzpack:lateral_mining',
+	recipe = {
+		{'', 'lulzpack:electrodrill', '' },
+		{'lulzpack:electrodrill', 'lulzpack:electroblock', 'lulzpack:electrodrill'},
+		{'', 'lulzpack:electrodrill', ''},
+
+	}
+})
+
+minetest.register_craft({
 	output = 'lulzpack:intbattery 1',
 	recipe = {
 		{'lulzpack:industrial_iron', 'lulzpack:industrial_iron', 'lulzpack:industrial_iron'},

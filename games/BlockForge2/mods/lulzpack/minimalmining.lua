@@ -39,28 +39,51 @@ if meta:get_int("energy") > 10 then
     elseif minetest.env:get_node(nodeposs).name == 'lulzpack:quarrydiggerpole' then 
         minetest.env:add_node( nodeposs, { name='air' } )
     end
-    extpos1={x=pos.x+1,y=pos.y,z=pos.z}
-    extpos2={x=pos.x-1,y=pos.y,z=pos.z}
-    extpos3={x=pos.x,y=pos.y,z=pos.z+1}
-    extpos3={x=pos.x,y=pos.y,z=pos.z-1}
-    --[[if minetest.env:get_node(extpos1).name == 'minimal_mining_ext1' then
-        print 'test'
-        local ext_meta=minetest.env:get_meta(extpos1)
-        local ext_inv=ext_meta:get_inv()
-        local block=ext_inv:get_stack("block",1):get_name()
-        local ext_nodepos={x=extpos1.x,y=extpos1.y-1,z=extpos1.z}
-        if minetest.env:get_node(ext_nodepos).name == block then 
-            minetest.env:set_node( ext_nodepos, {name='air'} )
-        elseif minetest.env:get_node(ext_nodepos).name ~= block then 
-            minetest.env:set_node( ext_nodepos, {name=block} )
-        end
-    end]]
     meta:set_int("energy",meta:get_int("energy")-10)
     end
-    --end
+end
+
+local activatelateralminingmachine = function(pos,node)
+local meta = minetest.env:get_meta(pos)
+if meta:get_int("energy") > 10 then 
+    --if meta:get_int("lets_dig") == 1 then
+    nodeposs={
+    {x=pos.x+1,y=pos.y,z=pos.z},
+    {x=pos.x-1,y=pos.y,z=pos.z},
+    {x=pos.x,y=pos.y,z=pos.z+1},
+    {x=pos.x,y=pos.y,z=pos.z-1} }
+    nodenames={
+    minetest.env:get_node(nodeposs[1]),
+    minetest.env:get_node(nodeposs[2]),
+    minetest.env:get_node(nodeposs[3]),
+    minetest.env:get_node(nodeposs[4])}
+    drops={
+    minetest.get_node_drops(nodenames[1].name),
+    minetest.get_node_drops(nodenames[2].name),
+    minetest.get_node_drops(nodenames[3].name),
+    minetest.get_node_drops(nodenames[4].name)}
+    local inv = meta:get_inventory()
+    for i=1,4 do
+        for _, item in ipairs(drops[i]) do
+            if nodenames[i].name ~= 'air' and minetest.get_node_group(nodenames[i].name, "liquid") == 0 and nodenames[i].name ~= 'lulzpack:quarrydiggerpole_lateral' then inv:add_item("main", item) end
+            minetest.env:add_node( nodeposs[i], { name='air' } )
+        end
+    end
+    meta:set_int("energy",meta:get_int("energy")-20)
+    end
 end
 
 minimalminingmachine_energy=function(pos,node)
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:nyon_ingot", "energy", math.random(60,70), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununterx_ingot", "energy", math.random(120,140), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununbet_ingot", "energy", math.random(210,265), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununsen_ingot", "energy", math.random(305,450), nil) 
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:terxbet_can", "energy", math.random(1000,1200), "lulzpack:empty_can")
+    add_simpleminer_fuel(pos, node, "fuels", "lulzpack:senbet_can", "energy", math.random(1500,2700), "lulzpack:empty_can")
+    MINIMALMININGupdate_formspec(pos)
+end
+
+lateralminingmachine_energy=function(pos,node)
     add_simpleminer_fuel(pos, node, "fuels", "lulzpack:nyon_ingot", "energy", math.random(60,70), nil) 
     add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununterx_ingot", "energy", math.random(120,140), nil) 
     add_simpleminer_fuel(pos, node, "fuels", "lulzpack:ununbet_ingot", "energy", math.random(210,265), nil) 
@@ -86,4 +109,18 @@ minetest.register_abm ({
         interval = 4,
         chance = 1,
         action = minimalminingmachine_energy
+})
+
+minetest.register_abm ({
+        nodenames = {"lulzpack:lateral_mining"},
+        interval = 2,
+        chance = 1,
+        action = activatelateralminingmachine
+})
+
+minetest.register_abm ({
+        nodenames = {"lulzpack:lateral_mining"},
+        interval = 4,
+        chance = 1,
+        action = lateralminingmachine_energy
 })
