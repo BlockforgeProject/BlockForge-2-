@@ -81,7 +81,7 @@ minetest.register_node("lulzpack:hotstone", {
 	description = "Hot Stone",
 	tiles ={"hotstone.png"},
 	is_ground_content = true,
-	groups = {hotstone=1},
+	groups = {hotstone=1,puts_out_fire=1},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -104,7 +104,7 @@ minetest.register_node("lulzpack:hotstone_cobble", {
 	description = "Hot Stone Cobble",
 	tiles ={"hotstone_cobble.png"},
 	is_ground_content = true,
-	groups = {hotstone=3},
+	groups = {hotstone=3,puts_out_fire=1},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -113,7 +113,7 @@ minetest.register_node("lulzpack:hotstone_obsidian", {
 	description = "Hot Stone Obsidian",
 	tiles ={"hotstone_obsidian.png"},
 	is_ground_content = true,
-	groups = {hotstone=2},
+	groups = {hotstone=2,puts_out_fire=1},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -131,7 +131,7 @@ minetest.register_node("lulzpack:dintled_steelblock", {
 	description = "Dintled Steel Block",
 	tiles ={"dintled_steelblock.png"},
 	is_ground_content = true,
-	groups = {dintled=1},
+	groups = {dintled=1,puts_out_fire=1},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -139,7 +139,7 @@ minetest.register_node("lulzpack:dintled_celisblock", {
 	description = "Dintled Celis Block",
 	tiles ={"dintled_celisblock.png"},
 	is_ground_content = true,
-	groups = {dintled=2},
+	groups = {dintled=2,puts_out_fire=1},
 	legacy_mineral = false,
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -480,9 +480,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("lulzpack:stone_with_redyz", "default:stone", minp, maxp, seed+6, 1/24/24/12, 6,23, -31000, 0)
 	generate_ore("lulzpack:stone_with_celis", "default:stone", minp, maxp, seed+6, 1/24/24/12, 6, 64, -31000, -120)
 	generate_ore("lulzpack:stone_with_nyon", "default:stone", minp, maxp, seed+0, 1/24/24/24, 12, 64, -31000, 120)
-	generate_ore("lulzpack:stone_with_ununterx", "default:stone", minp, maxp, seed+0, 1/12/12/12, 12, 12, -31000, -240)
-	generate_ore("lulzpack:stone_with_ununbet", "default:stone", minp, maxp, seed+0, 1/24/24/24, 12, 24, -31000, -240)
-	generate_ore("lulzpack:stone_with_ununsen", "default:stone", minp, maxp, seed+0, 1/24/32/32, 12, 24, -31000, -420)
+	generate_ore("lulzpack:stone_with_ununterx", "default:stone", minp, maxp, seed+0, 1/12/12/12, 12, 64, -31000, -240)
+	generate_ore("lulzpack:stone_with_ununbet", "default:stone", minp, maxp, seed+0, 1/24/24/24, 12, 128, -31000, -240)
+	generate_ore("lulzpack:stone_with_ununsen", "default:stone", minp, maxp, seed+0, 1/24/32/32, 12, 128, -31000, -320)
 	generate_ore("lulzpack:stone_with_bretonium", "default:stone", minp, maxp, seed+0, 1/24/24/24, 6, 32, -31000, -820)
 end)
 

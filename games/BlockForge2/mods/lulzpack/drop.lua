@@ -31,8 +31,7 @@ end
 
             execIfProtected(pos,function(args)
                 for _, dropped_item in ipairs(args.drops) do
-                if args.digger ~= nil then
-                    args.digger:get_inventory():remove_item("main",dropped_item) end
+                    args.digger:get_inventory():remove_item("main",dropped_item)
                 end
             end,args)
         
