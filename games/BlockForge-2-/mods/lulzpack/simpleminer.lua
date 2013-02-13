@@ -28,7 +28,7 @@ if meta:get_int("energy") > 30 then
     local drop=minetest.get_node_drops(nodename.name)
     local inv = meta:get_inventory()
     for _, item1 in ipairs(drop) do
-        if nodename.name ~= 'air' then inv:add_item("main", item1) end
+        if nodename.name ~= 'air' and minetest.get_node_group(nodename.name, "liquid") == 0 then inv:add_item("main", item1) end
     end
     simpleminer_mine(nodeposs)
     simpleminer_pos["q"..pos.x.."-"..pos.z]=simpleminer_pos["q"..pos.x.."-"..pos.z]+1

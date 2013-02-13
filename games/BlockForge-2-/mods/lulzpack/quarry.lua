@@ -80,7 +80,7 @@ if meta:get_inventory():contains_item("drill", "lulzpack:quarrydrill") then
             local chestpos={x=pos.x,y=pos.y+2,z=pos.z}
             for i=1,9 do
                 for _, item_pointed in ipairs(drop[i]) do
-                    if nodenames[i].name ~= 'air' then 
+                    if nodenames[i].name ~= 'air' and minetest.get_node_group(nodenames[i].name, "liquid") == 0 then 
                         if minetest.env:get_node(chestpos).name == "default:chest" then
                             chest_inv:add_item("main",item_pointed)
                         else

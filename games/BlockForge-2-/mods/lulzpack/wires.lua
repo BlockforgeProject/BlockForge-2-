@@ -89,6 +89,22 @@ minetest.register_node("lulzpack:lava_mill", {
     }
 })
 
+minetest.register_node("lulzpack:nuclear_mill", {
+    description = "Nuclear Mill",
+	tiles = {{name="nuclearmill_above.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.0}},"electrofurnace_side.png"},
+    drawtype="nodebox",
+    light_source=16,
+	groups = {cracky=2},
+	selection_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5},
+    },
+	node_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5 , 0.5, 0, 0.5}
+    }
+})
+
 minetest.register_craft({
 	output = 'lulzpack:mill_gen',
 	recipe = {
@@ -121,6 +137,15 @@ minetest.register_craft({
 	recipe = {
 		{'','lulzpack:industrial_iron',''},
 		{'lulzpack:industrial_iron','lulzpack:obsidian','lulzpack:industrial_iron'},
+		{'','lulzpack:industrial_iron',''},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:lava_mill',
+	recipe = {
+		{'','lulzpack:industrial_iron',''},
+		{'lulzpack:industrial_iron','lulzpack:bretonium_block','lulzpack:industrial_iron'},
 		{'','lulzpack:industrial_iron',''},
 	}
 })
@@ -202,6 +227,24 @@ lava_mill_energy = function(pos, node)
     end end
 end
 
+
+nuclear_mill_energy = function(pos, node)
+    local mach_pos={x=pos.x,y=pos.y-1,z=pos.z}
+    local liquid_pos={x=pos.x,y=pos.y+1,z=pos.z}
+    if minetest.env:get_node(liquid_pos).name == 'lulzpack:radioactivewater_source' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(5,12))
+    end end
+    if minetest.env:get_node(liquid_pos).name == 'lulzpack:radioactivewater_flowing' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(10,19))
+    end end
+    if minetest.env:get_node(liquid_pos).name == 'lulzpack:meltedbretonium_source' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(20,30))
+    end end
+    if minetest.env:get_node(liquid_pos).name == 'lulzpack:meltedbretonium_flowing' then if minetest.env:get_meta(mach_pos):get_int("energy") >= 0 then
+    minetest.env:get_meta(mach_pos):set_int("energy",minetest.env:get_meta(mach_pos):get_int("energy")+math.random(25,32))
+    end end
+end
+
 minetest.register_abm {
     nodenames = {"lulzpack:mill_gen"},
     interval = 4,
@@ -228,6 +271,13 @@ minetest.register_abm {
     interval = 5,
     chance = 1,
     action = lava_mill_energy,
+}
+
+minetest.register_abm {
+    nodenames = {"lulzpack:nuclear_mill"},
+    interval = 5,
+    chance = 1,
+    action = nuclear_mill_energy,
 }
 
 function nuclear_explode(pos,range,dmg) -- Based on https://github.com/RickyFF/CannonsMod-Minetest/tree/master/games/BlockForge2/mods/cannons

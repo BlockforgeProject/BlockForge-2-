@@ -40,7 +40,6 @@ pwned=function(player, drops)
      pos=player:getpos()
      itempos={x=pos.x,y=pos.y+1,z=pos.z}
      local inv=player:get_inventory()
-     if minetest.env:get_node(pos).name == 'air' then 
      minetest.env:add_node(pos, {name='lulzpack:death_chest'})
      local deathchest_meta=minetest.env:get_meta(pos)
      local chest_inv=deathchest_meta:get_inventory()
@@ -59,7 +58,6 @@ pwned=function(player, drops)
             for i=1,9 do inv:set_stack("craft", i,nil) end
             inv:set_stack("craftpreview", 1,nil)
         end
-     end
      end
 end
 
