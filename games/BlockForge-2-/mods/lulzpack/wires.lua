@@ -142,7 +142,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'lulzpack:lava_mill',
+	output = 'lulzpack:nuclear_mill',
 	recipe = {
 		{'','lulzpack:industrial_iron',''},
 		{'lulzpack:industrial_iron','lulzpack:bretonium_block','lulzpack:industrial_iron'},
