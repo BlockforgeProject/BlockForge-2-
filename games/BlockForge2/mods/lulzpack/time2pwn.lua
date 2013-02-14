@@ -24,13 +24,22 @@ minetest.register_node("lulzpack:death_chest", {
 	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
+    if armors == true then
+		meta:set_string("formspec",
+				"size[9,9]"..
+				"list[current_name;main;0,0;9,4;]"..
+				"list[current_player;main;0,5;8,4;]")
+    else
 		meta:set_string("formspec",
 				"size[8,9]"..
 				"list[current_name;main;0,0;8,4;]"..
 				"list[current_player;main;0,5;8,4;]")
+    end
 		meta:set_string("infotext", "Death Chest")
 		local inv = meta:get_inventory()
-		inv:set_size("main", 8*4)
+        local dim = 8
+        if armors == true then dim = 9 end
+		inv:set_size("main", dim*4)
 	end,
     on_dig = function(pos) minetest.env:remove_node(pos) return end
 })
@@ -59,6 +68,17 @@ pwned=function(player, drops)
             inv:set_stack("craftpreview", 1,nil)
         end
      end
+     if armors == true then
+     spaces = {
+        "armor_head",
+        "armor_torso",
+        "armor_legs",
+        "armor_shield" }
+            for i=1,4 do
+                chest_inv:add_item("main",ItemStack(inv:get_stack(spaces[i],1)):get_name())
+                inv:set_stack(spaces[i],1,"")
+        end
+    end
 end
 
 
