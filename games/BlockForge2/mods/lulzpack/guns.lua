@@ -16,23 +16,23 @@
 -- This project is granted under the zlib license.
 -- You can modify or redistribute it under the zlib conditions
 
-rocket1_DAMAGE=6
+rocket1_DAMAGE=3
 rocket1_GRAVITY=10
 rocket1_VELOCITY=30
 
-rocket2_DAMAGE=4
+rocket2_DAMAGE=2
 rocket2_GRAVITY=12
 rocket2_VELOCITY=30
 
-rocket3_DAMAGE=12
+rocket3_DAMAGE=7
 rocket3_GRAVITY=12
 rocket3_VELOCITY=30
 
-granade1_DAMAGE=4
+granade1_DAMAGE=2
 granade1_GRAVITY=25
 granade1_VELOCITY=20
 
-granade2_DAMAGE=4
+granade2_DAMAGE=2
 granade2_GRAVITY=20
 granade2_VELOCITY=30
 
