@@ -263,6 +263,16 @@ minetest.register_craftitem("lulzpack:bretonbet_can", {
 	inventory_image = "bretonbet_can.png",
 })
 
+minetest.register_craftitem("lulzpack:desert_beagle_can", {
+	description = "Desert Beagle Can",
+	inventory_image = "desert_beagle_can.png",
+})
+
+minetest.register_craftitem("lulzpack:desert_breton_can", {
+	description = "Desert Breton Can",
+	inventory_image = "desert_breton_can.png",
+})
+
 --Glasses
 minetest.register_node("lulzpack:ironglass", {
     tiles = {"iron_glass.png"},

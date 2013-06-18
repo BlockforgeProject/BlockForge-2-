@@ -290,6 +290,24 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'lulzpack:desert_beagle_can 4',
+	recipe = {
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+		{'lulzpack:desert_beagle_ingot','','lulzpack:desert_beagle_ingot'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lulzpack:desert_breton_can 4',
+	recipe = {
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+		{'lulzpack:bretonium_block','','lulzpack:desert_beagle_ingot'},
+        {'lulzpack:empty_can','','lulzpack:empty_can'},
+	}
+})
+
+minetest.register_craft({
 	output = 'lulzpack:celis_ingot 9',
 	recipe = {
 		{'lulzpack:celis_block'},

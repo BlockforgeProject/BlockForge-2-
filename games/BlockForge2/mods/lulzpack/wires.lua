@@ -187,6 +187,8 @@ mill_gen_energy = function(pos, node)
         add_gen_fuel(pos, node, "fuel", "lulzpack:terxbet_can", "energy", math.random(1000,1200), "lulzpack:empty_can")
         add_gen_fuel(pos, node, "fuel", "lulzpack:senbet_can", "energy", math.random(1200,1600), "lulzpack:empty_can")
         add_gen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1300,1500), "lulzpack:empty_can")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:desert_beagle_can", "energy", math.random(200,800), "lulzpack:empty_can")
+        add_gen_fuel(pos, node, "fuel", "lulzpack:desert_breton_can", "energy", math.random(200,2500), "lulzpack:empty_can")
         MILLGENupdate_formspec(pos)
 end
 
@@ -195,7 +197,8 @@ nuclear_gen_energy = function(pos, node)
         local inv = meta:get_inventory()
         local heat = meta:get_int("heat")
         if heat < 0 then meta:set_int("heat",0) end
-            add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1500,1800), nil, "heat", math.random(2,5))
+            add_nucgen_fuel(pos, node, "fuel", "lulzpack:bretonbet_can", "energy", math.random(1500,1800), "lulzpack:empty_can", "heat", math.random(2,5))
+            add_nucgen_fuel(pos, node, "fuel", "lulzpack:desert_breton_can", "energy", math.random(200,3500), "lulzpack:empty_can", "heat", math.random(2,5))
             add_nucgen_fuel(pos, node, "fuel", "lulzpack:corrupted_bretonium_block", "energy", math.random(5000,8000), nil, "heat", math.random(20,50))
             add_nucgen_fuel(pos, node, "fuel", "lulzpack:water_block", "energy", 0, nil, "heat", math.random(-4,-1))
             add_nucgen_fuel(pos, node, "fuel", "bucket:bucket_water", "energy", 0, "bucket:bucket_empty", "heat", math.random(-2,-1))
