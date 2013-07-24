@@ -590,4 +590,17 @@ function lulzpack.register_stair_and_slab(subname, recipeitem, groups, images, d
 	lulzpack.register_slab(subname, recipeitem, groups, images, desc_slab, light)
 end
 
+--Macerator recipe helper
+
+function addMaceratorRecipe(nodepos,energy,energy_needed,nodedrop,genmeta,source,result)
+    if minetest.env:get_node(nodepos).name == source then
+        if energy >= 20 then
+			minetest.env:remove_node(nodepos)
+			--GIVING
+			minetest.env:add_item(nodedrop, result)
+            genmeta:set_int("energy",genmeta:get_int("energy")-energy_needed) 
+        end
+	end
+end
+
 

@@ -317,6 +317,24 @@ minetest.register_node("lulzpack:elementalglass", {
     groups = {forceglass=4},
 	sounds = default.node_sound_glass_defaults(),
 })
+--Dust
+minetest.register_craftitem("lulzpack:lyra_dust", {
+	image = "lyra_dust.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Lyra Dust"
+})
+
+minetest.register_craftitem("lulzpack:redyz_dust", {
+	image = "redyz_dust.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Redyz Dust"
+})
+
+minetest.register_craftitem("lulzpack:hotstone_dust", {
+	image = "hotstone_dust.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Hotstone Dust"
+})
 --Torches
 minetest.register_node("lulzpack:lyra_torch", {
 	description = "Lyra Torch",
@@ -518,3 +536,4 @@ include("electrotools")
 --include("explosives")
 include("foods")
 include("coins")
+include("vehicles")
