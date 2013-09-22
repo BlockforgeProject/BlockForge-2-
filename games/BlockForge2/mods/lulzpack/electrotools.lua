@@ -7,7 +7,8 @@ minetest.register_tool("lulzpack:chainsaw_lyra", {
 			choppy={times={[1]=0.80, [2]=0.50, [3]=0.20}, uses=150, maxlevel=1},
 			fleshy={times={[1]=0.40, [2]=0.60, [3]=0.40}, uses=60, maxlevel=1},
 			snappy={times={[1]=0.10, [2]=0.05, [3]=0.02}, uses=150, maxlevel=1}
-		}
+		},
+        damage_groups={fleshy=8},
 	},
 })
 
@@ -20,7 +21,8 @@ minetest.register_tool("lulzpack:chainsaw_celis", {
 			choppy={times={[1]=0.50, [2]=0.20, [3]=0.10}, uses=170, maxlevel=1},
 			fleshy={times={[1]=0.30, [2]=0.20, [3]=0.08}, uses=60, maxlevel=1},
 			snappy={times={[1]=0.05, [2]=0.02, [3]=0.01}, uses=170, maxlevel=1}
-		}
+		},
+        damage_groups={fleshy=9},
 	},
 })
 
@@ -33,7 +35,8 @@ minetest.register_tool("lulzpack:chainsaw_nyon", {
 			choppy={times={[1]=0.30, [2]=0.10, [3]=0.05}, uses=210, maxlevel=1},
 			fleshy={times={[1]=0.50, [2]=0.30, [3]=0.15}, uses=80, maxlevel=1},
 			snappy={times={[1]=0.02, [2]=0.01, [3]=0.01}, uses=210, maxlevel=1}
-		}
+		},
+        damage_groups={fleshy=13},
 	},
 })
 --Electro FlintNSteel
@@ -60,7 +63,8 @@ minetest.register_tool("lulzpack:electroauger_lyra", {
 			fleshy={times={[1]=1.20, [2]=1.00, [3]=0.90}, uses=60, maxlevel=1},
 			cracky={times={[1]=0.40, [2]=0.20, [3]=0.10}, uses=250, maxlevel=1},
 			crumbly={times={[1]=1.10, [2]=0.90, [3]=0.70}, uses=260, maxlevel=1},
-		}
+		},
+        damage_groups={fleshy=3},
 	},
 })
 
@@ -74,7 +78,8 @@ minetest.register_tool("lulzpack:electroauger_celis", {
 			fleshy={times={[1]=1.20, [2]=1.00, [3]=0.90}, uses=60, maxlevel=1},
 			cracky={times={[1]=0.30, [2]=0.15, [3]=0.08}, uses=280, maxlevel=1},
 			crumbly={times={[1]=1.10, [2]=0.90, [3]=0.70}, uses=260, maxlevel=1},
-		}
+		},
+        damage_groups={fleshy=4},
 	},
 })
 
@@ -92,7 +97,8 @@ minetest.register_tool("lulzpack:electroauger_nyon", {
             obs={times={[1]=1.20,[2]=5.50},uses=150,maxlevel=1},
             hotstone={times={[1]=2.50,[2]=2.80,[3]=1.70},uses=70,maxlevel=1},
             dintled={times={[1]=5.70,[2]=8.00},uses=45,maxlevel=1},
-		}
+		},
+        damage_groups={fleshy=5},
 	},
 })
 

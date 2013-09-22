@@ -372,8 +372,9 @@ minetest.register_tool("lulzpack:sword_lyra", {
 			fleshy={times={[1]=2.00, [2]=1.00, [3]=0.40}, uses=30, maxlevel=1},
 			snappy={times={[2]=0.65, [3]=0.35}, uses=50, maxlevel=1},
 			choppy={times={[3]=0.80}, uses=50, maxlevel=0}
-		}
-	}
+		},
+        damage_groups={fleshy=3}
+    }
 })
 minetest.register_tool("lulzpack:sword_celis", {
 	description = "Celis Sword",
@@ -385,8 +386,9 @@ minetest.register_tool("lulzpack:sword_celis", {
 			fleshy={times={[1]=2.70, [2]=1.20, [3]=0.60}, uses=30, maxlevel=1},
 			snappy={times={[2]=0.50, [3]=0.30}, uses=50, maxlevel=1},
 			choppy={times={[3]=0.70}, uses=50, maxlevel=0}
-		}
-	}
+		},
+        damage_groups={fleshy=4},
+	},
 })
 minetest.register_tool("lulzpack:axe_lyra", {
 	description = "Steel Axe",
@@ -525,7 +527,7 @@ include("guns")
 include("abms")
 include("desertores")
 include("furnaces")
-include("time2pwn")
+--include("time2pwn")
 include("drop")
 include("wires")
 include("smithery")
@@ -536,4 +538,4 @@ include("electrotools")
 --include("explosives")
 include("foods")
 include("coins")
---include("vehicles")
+include("vehicles")

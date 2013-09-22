@@ -30,6 +30,10 @@ registerTools("cryoas","lulzpack:cryoas_ingot","Cryoas",
 },
 --
 {
+    fleshy=4
+},
+--
+{
 	choppy={times={[1]=2.50, [2]=1.70, [3]=1.30}, uses=30, maxlevel=1},
 	fleshy={times={[2]=1.10, [3]=0.80}, uses=40, maxlevel=1}
 },

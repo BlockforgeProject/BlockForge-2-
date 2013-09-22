@@ -82,7 +82,7 @@ minetest.register_craft({
 
 --GROUPS
 
-lavacobble = function(pos)
+default.cool_lava_flowing = function(pos)
     for _, abmnode in ipairs({"default:water_source","default:water_flowing","lulzpack:water_block","lulzpack:hotstone"}) do
         for dist=-1,1 do
               if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
@@ -93,7 +93,7 @@ lavacobble = function(pos)
     end
 end
 
-lavaobs = function(pos)
+default.cool_lava_source = function(pos)
     for _, abmnode in ipairs({"default:water_source","default:water_flowing","lulzpack:water_block","lulzpack:hotstone"}) do
         for dist=-1,1 do
               if minetest.env:get_node({x=pos.x,y=pos.y+dist,z=pos.z}).name == abmnode 
@@ -127,20 +127,6 @@ end
 
 
 minetest.register_abm ({
-        nodenames = {"default:lava_flowing"},
-        interval = 1,
-        chance = 1,
-        action = lavacobble, 
-})
-
-minetest.register_abm ({
-        nodenames = {"default:lava_source"},
-        interval = 1,
-        chance = 1,
-        action = lavaobs, 
-})
-
-minetest.register_abm ({
         nodenames = {"lulzpack:bretonium_block"},
         interval = 1,
         chance = 1,
@@ -152,7 +138,7 @@ minetest.register_abm ({
         interval = 1,
         chance = 1,
         action = water_radioactive, 
-})
+}) 
 
 
 

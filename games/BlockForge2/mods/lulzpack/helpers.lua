@@ -357,7 +357,7 @@ minetest.register_craft({
 
 end
 --Tools registration helper
-function registerTools(toolname, itemname, graphicname, swordgroups, axegroups, shovelgroups, pickgroups)
+function registerTools(toolname, itemname, graphicname, swordgroups, sworddamagegroups, axegroups, shovelgroups, pickgroups)
 
 minetest.register_tool("lulzpack:sword_"..toolname.."", {
 	description = ""..graphicname.." Sword",
@@ -365,7 +365,8 @@ minetest.register_tool("lulzpack:sword_"..toolname.."", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps=swordgroups
+		groupcaps=swordgroups,
+        damage_groups=sworddamagegroups
 	}
 })
 

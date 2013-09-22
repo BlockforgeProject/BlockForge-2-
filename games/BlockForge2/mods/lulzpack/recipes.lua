@@ -348,7 +348,7 @@ minetest.register_craft({
 	output = 'lulzpack:ironglass 3',
 	recipe = {
 		{'default:glass', 'default:glass', 'default:glass'},
-		{'default:glass', 'default:steel_ingot', 'default:glass'},
+		{'default:glass', 'lulzpack:iron_dust', 'default:glass'},
 	}
 })
 
