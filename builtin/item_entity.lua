@@ -121,12 +121,13 @@ minetest.register_entity("__builtin:item", {
                                         item=args[1]
                                         hitter=args[2]
                                         posx=args[3]
-		    			collected_items[item:get_luaentity()] = nil
-                                        if item and hitter and item:get_luaentity().itemstring then
-                                            hitter:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring)) 
-                                            item:remove()
-                                            minetest.sound_play({name="pickup",pos=posx,gain=0.2,max_hear_distance=5},sound_pickup)
-                                        end end, {item,hitter,pos})                    
+                                        if item and item:get_luaentity() then
+                                            collected_items[item:get_luaentity()] = nil
+                                            if hitter and item:get_luaentity().itemstring then
+                                                hitter:get_inventory():add_item("main", ItemStack(item:get_luaentity().itemstring)) 
+                                                item:remove()
+                                                minetest.sound_play({name="pickup",pos=posx,gain=0.2,max_hear_distance=5},sound_pickup)
+                                            end end end, {item,hitter,pos})                    
                 end
             end
         end
