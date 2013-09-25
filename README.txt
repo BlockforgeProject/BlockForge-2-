@@ -25,6 +25,11 @@
 # Warning
 This mods overwrite some core mods and builin mods.If you want to deactivate the corehack,put "lulzpack_deactivate_corehack = true" in your minetest.conf (you can find this file in the root folder) and don't install the "builtin" folder in this repository.
 
+# Credits
+*LorenzoVulcan/aegroto - Lead developer 
+*Ricky - Developer of Blockforge,Snippets on Blockforge 2#
+*ElectricSolstice - Snippets for item_entity.lua on Blockforge 2#
+
                                                 
                                                 -LorenzoVulcan-
 
