@@ -26,10 +26,10 @@ CAMO_GRAVBIKE_SPEED=6
 local gb_camo = {
     physical = true,
     visual = "mesh",
-    mesh = "inceptor.obj",
+    mesh = "astro3.obj",
     textures = {"redyz.png"},
     pilot=nil,
-	collisionbox = {-3,-.5,-.5, 2,1,1}
+	collisionbox = {-1, -.5, -2, 1, .5, 2}
 }
 
 function gb_camo:on_rightclick (wanker) 
@@ -46,7 +46,7 @@ end
 function gb_camo:on_punch (puncher)
 	self.object:remove()
 	if puncher and puncher:is_player() then
-		puncher:get_inventory():add_item("main", "lulzpack:gravbike_camo")
+		puncher:get_inventory():add_item("main", "lulzpack:inceptor_redyz")
 	end
 end
 
@@ -66,10 +66,10 @@ function gb_camo:on_step(dtime)
         if key.down then
             acc.x = -vel.x*2
             acc.z = -vel.z*2
-            vel.y = -0.5
+            vel.y = -2
         end
         if key.jump then
-            vel.y = 1
+            vel.y = 2
         end
         self.object:setyaw(ly-1.5)
     end
@@ -79,20 +79,20 @@ function gb_camo:on_step(dtime)
 end
 
 
-minetest.register_entity("lulzpack:gravbike_camo_ent",gb_camo)
+minetest.register_entity("lulzpack:inceptor_redyz",gb_camo)
 
 --ITEMS
 
-minetest.register_craftitem("lulzpack:gravbike_camo", {
-    description = "Camo Gravbike",
-    inventory_image = "gravbike_inv.png",
-    wield_image = "gravbike_inv.png",
+minetest.register_craftitem("lulzpack:inceptor_redyz", {
+    description = "Redyz Inceptor",
+    inventory_image = "inceptorredyz_inv.png",
+    wield_image = "inceptorredyz_inv.png",
     
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type ~= "node" then
 			return
 		end
-		minetest.env:add_entity(pointed_thing.above, "lulzpack:gravbike_camo_ent")
+		minetest.env:add_entity(pointed_thing.above, "lulzpack:inceptor_redyz")
 		itemstack:take_item()
 		return itemstack
 	end,

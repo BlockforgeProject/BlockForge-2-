@@ -48,3 +48,8 @@ minetest.register_craftitem("lulzpack:basic_ai", {
 	description = "Simple AI"
 })
 
+minetest.register_craftitem("lulzpack:basic_pilotsystem", {
+	image = "basic_ps.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+	description = "Basic Pilot System"
+})
