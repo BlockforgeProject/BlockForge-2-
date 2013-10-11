@@ -22,6 +22,7 @@ local function include(filename) dofile(minetest.get_modpath("lulzpack") .."/"..
 
 include("helpers") --Including Helpers
 include("config") --Including Configurations
+include("functions_default") --Including default functions
 
 minetest.register_node("lulzpack:cold_dirt", {
 	description = "cold Dirt",
@@ -539,3 +540,4 @@ include("electrotools")
 include("foods")
 include("coins")
 include("vehicles")
+
