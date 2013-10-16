@@ -439,16 +439,6 @@ minetest.register_craft({
 	}
 })
 
---Astros
-
-minetest.register_craft({
-    output = 'lulzpack:inceptor_redyz',
- 	recipe = {
-		{'', 'lulzpack:redyz_block', ''},
-		{'lulzpack:iron_plate', 'lulzpack:electroblock', 'lulzpack:iron_plate'},
-		{'lulzpack:iron_plate', 'lulzpack:basic_pilotsystem', 'lulzpack:iron_plate'},
-	}   
-})
 --Cooking recipes
 minetest.register_craft({
 	type = "cooking",

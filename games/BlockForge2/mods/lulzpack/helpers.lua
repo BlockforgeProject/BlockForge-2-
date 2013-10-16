@@ -623,4 +623,68 @@ function addMaceratorRecipe(nodepos,energy,energy_needed,nodedrop,genmeta,source
 	end
 end
 
+--Astroships registration helper
+function registerInceptor(entity_var,mesh,textures,inventory_item,speed_const,gravity_const,atc_const,armors,shot_func)
+    local entity_var= {
+        physical = true,
+        visual = "mesh",
+        mesh = mesh,
+        textures = textures,
+        pilot=nil,
+        shot_time=0,
+	    collisionbox = {-1, -.5, -2, 1, .5, 2}
+    }   
+
+    function entity_var:on_rightclick (wanker) 
+        if not wanker:is_player() or not wanker then return end
+        if self.pilot==wanker then
+            self.pilot=nil
+            wanker:set_detach()
+        elseif self.pilot==nil then
+            self.pilot=wanker
+            wanker:set_attach(self.object,"",atc_const,atc_const)
+        end
+    end 
+    
+    function entity_var:on_punch (puncher)
+    	if puncher and puncher:is_player() and puncher==self.pilot then
+    	    self.object:remove()
+    		puncher:get_inventory():add_item("main", inventory_item)
+    	end
+    end
+
+    function entity_var:on_step(dtime)
+        self.object:set_armor_groups(armors)
+        local vel=self.object:getvelocity()
+        local acc=self.object:getacceleration()
+        if self.pilot then
+            local key=self.pilot:get_player_control()
+            local ly=self.pilot:get_look_yaw()+161.7
+            if key.up then 			
+                acc.x = math.cos(ly+math.pi/2)*speed_const
+	    		acc.z = math.sin(ly+math.pi/2)*speed_const
+            else 
+                acc.x = -vel.x/2
+                acc.z = -vel.z/2
+            end
+            if key.down then
+                acc.x = -vel.x*2
+                acc.z = -vel.z*2
+                vel.y = -2
+            end
+            if key.jump then
+                vel.y = 2
+            end
+            if key.sneak then
+                if shot_func then shot_func(entity_var,self.pilot,pointed_thing) end
+            end
+            self.object:setyaw(ly-1.5)
+        end
+        acc.y=acc.y-gravity_const
+        self.object:setvelocity(vel)
+        self.object:setacceleration(acc)    
+    end
+    minetest.register_entity(inventory_item,entity_var)
+end
+
 

@@ -167,7 +167,7 @@ local granade2={
 }
 minetest.register_entity('lulzpack:granade2_ent', granade2)
 
-rocket1_shoot=function (item, player, pointed_thing)
+rocket1_shoot=function (item,player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:rocket1") then
 		player:get_inventory():remove_item("main", "lulzpack:rocket1")
 			local pgpos=player:getpos()
@@ -191,7 +191,7 @@ rocket2_shoot=function (item, player, pointed_thing)
 	return
 end
 
-rocket3_shoot=function (item, player, pointed_thing)
+rocket3_shoot=function (item,player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:rocket3") then
 		player:get_inventory():remove_item("main", "lulzpack:rocket3")
 			local pgpos=player:getpos()
@@ -203,7 +203,7 @@ rocket3_shoot=function (item, player, pointed_thing)
 	return
 end
 
-granade1_shoot=function (item, player, pointed_thing)
+granade1_shoot=function (item,player, pointed_thing)
 	if player:get_inventory():contains_item("main", "lulzpack:granade") then
 		player:get_inventory():remove_item("main", "lulzpack:granade")
 			local pgpos=player:getpos()
@@ -215,7 +215,7 @@ granade1_shoot=function (item, player, pointed_thing)
 	return
 end
 
-granade2_shoot=function (item, player, pointed_thing)	  
+granade2_shoot=function (player, pointed_thing)	  
 	if player:get_inventory():contains_item("main", "lulzpack:granade2") then
 		player:get_inventory():remove_item("main", "lulzpack:granade2")              	    
 			local pgpos=player:getpos()
