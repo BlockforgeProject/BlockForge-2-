@@ -26,6 +26,15 @@ electrofurnace_inactive_formspec =
 	"list[current_name;dst;5,1;3,2;]"..
 	"list[current_player;main;0,5;8,4;]"
 
+local function swap_node(pos,name)
+	local node = minetest.get_node(pos)
+	if node.name == name then
+		return
+	end
+	node.name = name
+	minetest.swap_node(pos,node)
+end
+
 minetest.register_node("lulzpack:electrofurnace", {
 	description = "Electro Furnace",
 	tiles = {"electrofurnace_top.png", "electrofurnace_bottom.png", "electrofurnace_side.png",
@@ -142,7 +151,7 @@ minetest.register_abm({
 			local percent = math.floor(meta:get_float("fuel_time") /
 					meta:get_float("fuel_totaltime") *100)
 			meta:set_string("infotext","Electro Furnace active: "..percent.."%")
-			hacky_swap_node(pos,"lulzpack:electrofurnace_active")
+			swap_node(pos,"lulzpack:electrofurnace_active")
 			meta:set_string("formspec",
 				"size[8,9]"..
 				"image[2,2;1,1;default_furnace_fire_bg.png^[lowpart:"..
@@ -168,7 +177,7 @@ minetest.register_abm({
 
 		if fuel.time <= 0 then
 			meta:set_string("infotext","Furnace out of fuel")
-			hacky_swap_node(pos,"lulzpack:electrofurnace")
+			swap_node(pos,"lulzpack:electrofurnace")
 			meta:set_string("formspec", electrofurnace_inactive_formspec)
 			return
 		end
@@ -176,7 +185,7 @@ minetest.register_abm({
 		if cooked.item:is_empty() then
 			if was_active then
 				meta:set_string("infotext","Electro Furnace is empty")
-				hacky_swap_node(pos,"lulzpack:electrofurnace")
+				swap_node(pos,"lulzpack:electrofurnace")
 				meta:set_string("formspec", electrofurnace_inactive_formspec)
 			end
 			return
@@ -318,7 +327,7 @@ minetest.register_abm({
 			local percent = math.floor(meta:get_float("fuel_time") /
 					meta:get_float("fuel_totaltime") *100)
 			meta:set_string("infotext","Industrial Furnace active: "..percent.."%")
-			hacky_swap_node(pos,"lulzpack:industrialfurnace_active")
+			swap_node(pos,"lulzpack:industrialfurnace_active")
 			meta:set_string("formspec",
 				"size[8,9]"..
 				"image[2,2;1,1;default_furnace_fire_bg.png^[lowpart:"..
@@ -344,7 +353,7 @@ minetest.register_abm({
 
 		if fuel.time <= 0 then
 			meta:set_string("infotext","Industrial Furnace out of fuel")
-			hacky_swap_node(pos,"lulzpack:industrialfurnace")
+			swap_node(pos,"lulzpack:industrialfurnace")
 			meta:set_string("formspec", industrialfurnace_inactive_formspec)
 			return
 		end
@@ -352,7 +361,7 @@ minetest.register_abm({
 		if cooked.item:is_empty() then
 			if was_active then
 				meta:set_string("infotext","Industrial Furnace is empty")
-				hacky_swap_node(pos,"lulzpack:industrialfurnace")
+				swap_node(pos,"lulzpack:industrialfurnace")
 				meta:set_string("formspec", industrialfurnace_inactive_formspec)
 			end
 			return
